@@ -254,12 +254,12 @@ nav ul li a {
 }
 
 .transaction-card h3 {
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
 }
 
 .transaction-card p {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--SECONDARY-TEXT-COLOR);
 }
 .transaction-left {
@@ -275,10 +275,14 @@ nav ul li a {
   row-gap: 8px;
 }
 
+.transaction-right h3 {
+  font-size: 20px;
+}
+
 .transaction-right span {
   border: var(--BORDER);
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 12px;
   padding: 0 6px;
 }
 
@@ -333,4 +337,17 @@ nav ul li a {
 }
 .add-transaction-btn span {
   padding-right: 12px;
+}
+
+
+/* FOOTER STYLES */
+
+footer {
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  border-top: var(--BORDER);
+  margin-top: 20px;
+  padding: 12px 0;
+  color: var(--SECONDARY-TEXT-COLOR);
 }
