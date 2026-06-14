@@ -23,6 +23,10 @@ html {
   background-color: var(--BACKGROUND);
 }
 
+select {
+  appearance: none;
+}
+
 .nav-top {
   display: flex;
   align-items: center;
@@ -223,7 +227,7 @@ nav ul li a {
   position: relative;
 }
 
-.dropdown button {
+.dropdown select {
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
@@ -265,6 +269,7 @@ nav ul li a {
 .transaction-left {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   row-gap: 8px;
 }
 
@@ -315,7 +320,7 @@ nav ul li a {
 }
 
 .form-input-container input,
-.form-input-container button,
+.form-input-container select,
 .add-transaction-btn {
   border: var(--BORDER);
   font-size: 14px;
@@ -338,7 +343,6 @@ nav ul li a {
 .add-transaction-btn span {
   padding-right: 12px;
 }
-
 
 /* FOOTER STYLES */
 

@@ -63,19 +63,19 @@
         <div class="cards-container">
           <div class="stat-cards">
             <p>Total income:</p>
-            <h3 class="income">$4,250.00</h3>
+            <h3 class="js-income-value income"></h3>
           </div>
           <div class="stat-cards">
             <p>Total expense:</p>
-            <h3 class="expense">$2,180.50</h3>
+            <h3 class="js-expense-value expense"></h3>
           </div>
           <div class="stat-cards">
             <p>New balance:</p>
-            <h3 class="balance">$2,069.50</h3>
+            <h3 class="js-balance-value balance"></h3>
           </div>
           <div class="stat-cards">
             <p>Trasactions:</p>
-            <h3 class="transactions">14</h3>
+            <h3 class="js-transaction-count transactions"></h3>
           </div>
         </div>
       </div>
@@ -103,7 +103,13 @@
         </div>
         <div class="dropdown">
           <i class="ph ph-arrow-down arrow"></i>
-          <button>Newest</button>
+          <select name="filter-dropdown">
+            <option value="default">Filter</option>
+            <option value="newest-first">Newest first</option>
+            <option value="oldest-first">Oldest first</option>
+            <option value="highest-amount">Highest first</option>
+            <option value="lowest-amount">Lowest first</option>
+          </select>
         </div>
       </div>
     </section>
@@ -111,9 +117,8 @@
     <!-- TRANSACTION LIST SECTION -->
     <section class="transaction-section">
       <div class="transaction-list-container">
-        <div class="transaction-card tr">
+        <div class="transaction-card">
           <div class="transaction-left">
-            <i class="ph ph-currency-circle-dollar"></i>
             <h3>Monthly Salary</h3>
             <p>June 1, 2026</p>
           </div>
@@ -125,19 +130,16 @@
         </div>
         <div class="transaction-card">
           <div class="transaction-left">
-            <i class="ph ph-shopping-cart"></i>
             <h3>Grocery shopping</h3>
             <p>May 15, 2026</p>
           </div>
           <div class="transaction-right">
             <span>Food</span>
             <h3 class="expense">-$86.40</h3>
-            <i class="ph ph-trash"></i>
           </div>
         </div>
         <div class="transaction-card">
           <div class="transaction-left">
-            <i class="ph ph-lightning"></i>
             <h3>Electricity bill</h3>
             <p>May 12, 2026</p>
           </div>
@@ -149,7 +151,6 @@
         </div>
         <div class="transaction-card">
           <div class="transaction-left">
-            <i class="ph ph-van"></i>
             <h3>Bus pass top-up</h3>
             <p>June 1, 2026</p>
           </div>
@@ -169,14 +170,26 @@
       <h2>Add transaction</h2>
       <form action="" class="transaction-form">
         <div class="form-input-container">
-          <input type="text" placeholder="Description" />
-          <input type="text" placeholder="Amount" />
-          <button class="expense-dropdown">Expense</button>
-          <button class="food-dropdown">Food</button>
-          <input type="date" class="date-input" />
+          <input type="text" placeholder="Description" class="js-description-input" />
+          <input type="text" placeholder="Amount" class="js-amount-input" />
+          <select class="js-transaction-dropdown expense-dropdown">
+            <option value="default">Transaction</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+
+          <select class="js-category-dropdown food-dropdown">
+            <option value="default">Category</option>
+            <option value="food">Food</option>
+            <option value="transport">Transport</option>
+            <option value="bills">Bills</option>
+            <option value="salary">Salary</option>
+            <option value="other">Other</option>
+          </select>
+          <input type="date" class="js-date-input date-input" />
         </div>
         <div class="button-end">
-          <button class="add-transaction-btn">
+          <button class="js-add-transaction add-transaction-btn">
             <span>+</span>Add transaction
           </button>
         </div>
@@ -187,6 +200,6 @@
       <p>© 2026 Core, Inc. All rights reserved.</p>
     </footer>
 
-    <script src="scripts/dashboard.js"></script>
+    <script type="module" src="scripts/dashboard.js"></script>
   </body>
 </html>
