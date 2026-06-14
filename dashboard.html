@@ -114,7 +114,7 @@
         <div class="transaction-card tr">
           <div class="transaction-left">
             <i class="ph ph-currency-circle-dollar"></i>
-            <h2>Monthly Salary</h2>
+            <h3>Monthly Salary</h3>
             <p>June 1, 2026</p>
           </div>
           <div class="transaction-right">
@@ -126,7 +126,7 @@
         <div class="transaction-card">
           <div class="transaction-left">
             <i class="ph ph-shopping-cart"></i>
-            <h2>Grocery shopping</h2>
+            <h3>Grocery shopping</h3>
             <p>May 15, 2026</p>
           </div>
           <div class="transaction-right">
@@ -138,7 +138,7 @@
         <div class="transaction-card">
           <div class="transaction-left">
             <i class="ph ph-lightning"></i>
-            <h2>Electricity bill</h2>
+            <h3>Electricity bill</h3>
             <p>May 12, 2026</p>
           </div>
           <div class="transaction-right">
@@ -150,7 +150,7 @@
         <div class="transaction-card">
           <div class="transaction-left">
             <i class="ph ph-van"></i>
-            <h2>Bus pass top-up</h2>
+            <h3>Bus pass top-up</h3>
             <p>June 1, 2026</p>
           </div>
           <div class="transaction-right">
@@ -160,6 +160,27 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- TRANSACTION FORM SECTION -->
+    <section class="transaction-form-section">
+      <h2>Add transaction</h2>
+      <form action="" class="transaction-form">
+        <div class="form-input-container">
+          <input type="text" placeholder="Description" />
+          <input type="text" placeholder="Amount" />
+          <button class="expense-dropdown">Expense</button>
+          <button class="food-dropdown">Food</button>
+          <input type="date" class="date-input" />
+        </div>
+        <div class="button-end">
+          <button class="add-transaction-btn">
+            <span>+</span>Add transaction
+          </button>
+        </div>
+      </form>
     </section>
 
     <script src="scripts/dashboard.js"></script>

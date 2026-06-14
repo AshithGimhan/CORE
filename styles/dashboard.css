@@ -239,14 +239,10 @@ nav ul li a {
 }
 
 /* TRANSACTION LIST STYLES */
-.transaction-section {
-  margin-top: 20px;
-}
-
 .transaction-list-container {
   display: flex;
   flex-direction: column;
-  padding: 8px;
+  padding: 12px;
 }
 
 .transaction-card {
@@ -257,7 +253,7 @@ nav ul li a {
   padding: 12px;
 }
 
-.transaction-card h2 {
+.transaction-card h3 {
   font-size: 13px;
   text-transform: uppercase;
 }
@@ -293,4 +289,48 @@ nav ul li a {
 
 .transaction-right i {
   color: var(--RED);
+}
+
+/* TRANSACTION FORM SECTION STYLES */
+.transaction-form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.transaction-form-section h2 {
+  font-size: 22px;
+}
+
+.form-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.form-input-container input,
+.form-input-container button,
+.add-transaction-btn {
+  border: var(--BORDER);
+  font-size: 14px;
+  padding: 12px;
+  background-color: var(--CARD-PANELS);
+  text-align: start;
+  width: 250px;
+}
+
+.button-end {
+  display: flex;
+  justify-content: end;
+}
+
+.add-transaction-btn {
+  margin-top: 12px;
+  width: 150px;
+  color: var(--PRIMARY-ACCENT);
+}
+.add-transaction-btn span {
+  padding-right: 12px;
 }
