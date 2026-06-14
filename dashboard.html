@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORE</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Audiowide&family=Cutive+Mono&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+  </head>
+  <body>
+    <!-- SIDE BAR NAV -->
+    <section class="sidebar-navigation">
+      <div class="nav-top">
+        <div class="main-title">
+          <i class="ph ph-wallet"></i>
+          <h1>Core</h1>
+        </div>
+        <div class="js-hamburger-btn hamburger">
+          <i class="ph ph-list"></i>
+        </div>
+      </div>
+
+      <nav>
+        <div class="js-hamburger-display hamburger-menu-hidden">
+          <div class="js-ham-close-btn hamburger">
+            <i class="ph ph-x"></i>
+          </div>
+          <ul>
+            <li><i class="ph ph-squares-four"></i><a href="#">Dashboard</a></li>
+            <li><i class="ph ph-coins"></i><a href="#">Transaction</a></li>
+            <li>
+              <i class="ph ph-chart-pie-slice"></i><a href="#">Reports</a>
+            </li>
+            <li><i class="ph ph-tabs"></i><a href="#">Categories</a></li>
+            <li><i class="ph ph-gear"></i><a href="#">Settings</a></li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-top">
+        <h2>Dashboard</h2>
+        <p>June 2026 overview</p>
+      </div>
+      <div class="cards-section">
+        <div class="cards-container">
+          <div class="stat-cards">
+            <p>Total income:</p>
+            <h3 class="income">$4,250.00</h3>
+          </div>
+          <div class="stat-cards">
+            <p>Total expense:</p>
+            <h3 class="expense">$2,180.50</h3>
+          </div>
+          <div class="stat-cards">
+            <p>New balance:</p>
+            <h3 class="balance">$2,069.50</h3>
+          </div>
+          <div class="stat-cards">
+            <p>Trasactions:</p>
+            <h3 class="transactions">14</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <hr class="divider" />
+
+    <!-- LIST SECTION -->
+    <section class="list-section">
+      <div class="filter-options">
+        <button>All</button>
+        <button>Income</button>
+        <button>Expense</button>
+        <button>Categories</button>
+      </div>
+      <div class="filter-search">
+        <div class="search">
+          <i class="ph ph-magnifying-glass magnifying-glass"></i>
+          <input
+            type="text"
+            class="filter-search-input"
+            placeholder="Search transactions"
+          />
+        </div>
+        <div class="dropdown">
+          <i class="ph ph-arrow-down arrow"></i>
+          <button>Newest</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRANSACTION LIST SECTION -->
+    <section class="transaction-section">
+      <div class="transaction-list-container">
+        <div class="transaction-card tr">
+          <div class="transaction-left">
+            <i class="ph ph-currency-circle-dollar"></i>
+            <h2>Monthly Salary</h2>
+            <p>June 1, 2026</p>
+          </div>
+          <div class="transaction-right">
+            <span class="green">Salary</span>
+            <h3 class="income">+$4,000.00</h3>
+            <i class="ph ph-trash"></i>
+          </div>
+        </div>
+        <div class="transaction-card">
+          <div class="transaction-left">
+            <i class="ph ph-shopping-cart"></i>
+            <h2>Grocery shopping</h2>
+            <p>May 15, 2026</p>
+          </div>
+          <div class="transaction-right">
+            <span>Food</span>
+            <h3 class="expense">-$86.40</h3>
+            <i class="ph ph-trash"></i>
+          </div>
+        </div>
+        <div class="transaction-card">
+          <div class="transaction-left">
+            <i class="ph ph-lightning"></i>
+            <h2>Electricity bill</h2>
+            <p>May 12, 2026</p>
+          </div>
+          <div class="transaction-right">
+            <span>Bills</span>
+            <h3 class="expense">-$120.00</h3>
+            <i class="ph ph-trash"></i>
+          </div>
+        </div>
+        <div class="transaction-card">
+          <div class="transaction-left">
+            <i class="ph ph-van"></i>
+            <h2>Bus pass top-up</h2>
+            <p>June 1, 2026</p>
+          </div>
+          <div class="transaction-right">
+            <span>Transport</span>
+            <h3 class="expense">-$25.00</h3>
+            <i class="ph ph-trash"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="scripts/dashboard.js"></script>
+  </body>
+</html>
