@@ -18,6 +18,10 @@ const totalExpenseDisplay = document.querySelector('.js-expense-value')
 const newBalanceDisplay = document.querySelector('.js-balance-value')
 const transactionCountDisplay = document.querySelector('.js-transaction-count');
 
+//TRANSACTION LIST VARIABLE
+const transactionListDisplay = document.querySelector('.js-transaction-list');
+
+
 
 //EVENTS
 hamburgerBtn.addEventListener('click', () => {
@@ -43,6 +47,13 @@ updateDashboard();
 
 //FUNCTIONS
 function getTransactionData() {
+
+    const formattedDate = new Date(dateInput.value).toLocaleDateString('en-us', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+
     return {
         id: Date.now() + Math.random(),
         description: descriptionInput.value,
@@ -51,6 +62,8 @@ function getTransactionData() {
         categoryType: categoryDropdown.value,
         date: dateInput.value
     };
+
+
 }
 
 
@@ -62,8 +75,18 @@ function addTransaction() {
     localStorage.setItem("transaction", JSON.stringify(transaction));
 
     updateDashboard();
+
 }
 
+function formatDate(date) {
+    const formattedDate = new Date(date).toLocaleDateString('en-us', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    })
+
+    return formattedDate;
+}
 
 
 function getTotalIncome() {
@@ -100,9 +123,74 @@ function getTransactionCount() {
 
 //UI RENDER
 function updateDashboard() {
+    transactionListDisplay.innerHTML = renderTransactions();
     totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
     totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
     newBalanceDisplay.innerHTML = `$${getNewBalance()}`
     transactionCountDisplay.innerHTML = `${getTransactionCount()}`
 }
 
+
+//RENDER TRANSACTION LIST
+function renderTransactions() {
+    let transactionsHTML = '';
+
+    transaction.forEach(transactions => {
+
+        const className = transactions.transactionType === 'income' ? 'income' : 'expense'
+        const sign = transactions.transactionType === 'income' ? '+' : '-'
+
+        transactionsHTML += `<div class="transaction-card">
+          <div class="transaction-left">
+            <h3>${transactions.description}</h3>
+            <p>${formatDate(transactions.date)}</p>
+          </div>
+          <div class="js-transaction-id transaction-right" data-transaction-id="${transactions.id}">
+            <span class="category-tag">${transactions.categoryType}</span>
+            <h3 class="${className}">${sign}$${transactions.amount}</h3>
+            <i class="js-delete-btn ph ph-trash delete-btn" ></i>
+          </div>
+        </div>`
+    });
+
+
+    return transactionsHTML;
+}
+
+
+const transactionDisplay = document.querySelector('.js-transaction-list');
+
+transactionDisplay.addEventListener('click', (event) => {
+    handleDelete(event)
+})
+
+
+
+function handleDelete(event) {
+    if (!event.target.classList.contains('js-delete-btn')) {
+        return
+    }
+
+    const card = event.target.closest('.js-transaction-id');
+
+    if (!card) return
+
+    const transactionId = card.dataset.transactionId
+
+    deleteTransaction(transactionId)
+}
+
+function deleteTransaction(transactionId) {
+    const index = transaction.findIndex(t => t.id == transactionId)
+
+    if (index === -1) {
+        return
+    }
+
+    transaction.splice(index, 1);
+
+    localStorage.setItem('transaction', JSON.stringify(transaction))
+
+    updateDashboard();
+
+}

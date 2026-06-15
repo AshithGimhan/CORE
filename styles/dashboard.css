@@ -300,6 +300,16 @@ nav ul li a {
   color: var(--RED);
 }
 
+.transaction-right .category-tag {
+  color: var(--PRIMARY-ACCENT);
+  border-color: var(--PRIMARY-ACCENT);
+}
+
+.delete-btn {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
 /* TRANSACTION FORM SECTION STYLES */
 .transaction-form-section {
   display: flex;
@@ -345,7 +355,6 @@ nav ul li a {
 }
 
 /* FOOTER STYLES */
-
 footer {
   font-size: 13px;
   display: flex;
@@ -354,4 +363,12 @@ footer {
   margin-top: 20px;
   padding: 12px 0;
   color: var(--SECONDARY-TEXT-COLOR);
+}
+
+/* REUSABLE STYLES */
+.income {
+  color: var(--GREEN);
+}
+.expense {
+  color: var(--RED);
 }
