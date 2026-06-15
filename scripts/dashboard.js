@@ -1,4 +1,4 @@
-//DOM
+//DOM ELEMENTS
 /* HAMBURGER VARIABLES */
 const hamburgerBtn = document.querySelector('.js-hamburger-btn');
 const hamburgerDisplay = document.querySelector('.js-hamburger-display');
@@ -12,6 +12,13 @@ const transactionDropdown = document.querySelector('.js-transaction-dropdown');
 const categoryDropdown = document.querySelector('.js-category-dropdown');
 const dateInput = document.querySelector('.js-date-input');
 
+//ERROR ELEMENTS
+const descriptionErrorMsg = document.querySelector('.js-description-error');
+const amountErrorMsg = document.querySelector('.js-amount-error');
+const transactionTypeErrorMsg = document.querySelector('.js-transaction-type-error');
+const categoryErrorMsg = document.querySelector('.js-category-error');
+const dateErrorMsg = document.querySelector('.js-date-error');
+
 /* DISPLAY VARIABLES */
 const totalIncomeDisplay = document.querySelector('.js-income-value');
 const totalExpenseDisplay = document.querySelector('.js-expense-value')
@@ -19,11 +26,15 @@ const newBalanceDisplay = document.querySelector('.js-balance-value')
 const transactionCountDisplay = document.querySelector('.js-transaction-count');
 
 //TRANSACTION LIST VARIABLE
-const transactionListDisplay = document.querySelector('.js-transaction-list');
+const transactionDisplay = document.querySelector('.js-transaction-list');
+
+
+//PAGINATION VARIABLES
+const pageNumberDisplay = document.querySelector('.js-page-numbers');
 
 
 
-//EVENTS
+//EVENT LISTENERS
 hamburgerBtn.addEventListener('click', () => {
     hamburgerDisplay.classList.add('hamburger-menu-visible');
 })
@@ -36,24 +47,30 @@ addTransactionBtn.addEventListener('click', () => {
     addTransaction();
 })
 
+transactionDisplay.addEventListener('click', (event) => {
+    handleDelete(event)
+})
+
+pageNumberDisplay.addEventListener('click', (event) => {
+    handlePage(event);
+});
+
+
+
 //STATE
 const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
+let currentPage = 1;
+
+
+
 
 //INITIALIZE RENDER
 updateDashboard();
 
 
 
-
-//FUNCTIONS
+//FORM FUNCTIONS
 function getTransactionData() {
-
-    const formattedDate = new Date(dateInput.value).toLocaleDateString('en-us', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-
     return {
         id: Date.now() + Math.random(),
         description: descriptionInput.value,
@@ -63,12 +80,29 @@ function getTransactionData() {
         date: dateInput.value
     };
 
+}
 
+function clearForm() {
+    descriptionInput.value = '',
+
+        amountInput.value = '',
+
+        transactionDropdown.value = 'default',
+
+        categoryDropdown.value = 'default',
+
+        dateInput.value = ''
 }
 
 
 function addTransaction() {
     const transactionData = getTransactionData();
+
+    const errors = validateForm(transactionData);
+
+    showErrors(errors);
+
+    if (hasErrors(errors)) return;
 
     transaction.push(transactionData)
 
@@ -76,8 +110,41 @@ function addTransaction() {
 
     updateDashboard();
 
+    clearForm();
 }
 
+function validateForm(data) {
+    const errors = {
+        description: '',
+        amount: '',
+        transactionType: '',
+        categoryType: '',
+        date: '',
+    }
+
+    if (data.description.trim() === '') {
+        errors.description = 'Description is required'
+    }
+    if (data.amount <= 0) {
+        errors.amount = 'Amount must be greater than 0'
+    }
+    if (data.transactionType === 'default') {
+        errors.transactionType = 'Select a transaction Type'
+    }
+    if (data.categoryType === 'default') {
+        errors.categoryType = 'Select a category'
+    }
+    if (data.date === '') {
+        errors.date = 'Enter a valid date'
+    }
+
+    return errors;
+
+}
+
+
+
+//HELPER FUNCTIONS
 function formatDate(date) {
     const formattedDate = new Date(date).toLocaleDateString('en-us', {
         year: 'numeric',
@@ -88,7 +155,15 @@ function formatDate(date) {
     return formattedDate;
 }
 
+function hasErrors(errors) {
+    return Object.values(errors).some(error => {
+        return error !== ''
+    })
+}
 
+
+
+//CALCULATION FUNCTIONS
 function getTotalIncome() {
     let totalIncome = 0
     transaction.forEach(t => {
@@ -121,59 +196,15 @@ function getTransactionCount() {
     return transaction.length
 }
 
-//UI RENDER
-function updateDashboard() {
-    transactionListDisplay.innerHTML = renderTransactions();
-    totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
-    totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
-    newBalanceDisplay.innerHTML = `$${getNewBalance()}`
-    transactionCountDisplay.innerHTML = `${getTransactionCount()}`
-}
 
 
-//RENDER TRANSACTION LIST
-function renderTransactions() {
-    let transactionsHTML = '';
-
-    transaction.forEach(transactions => {
-
-        const className = transactions.transactionType === 'income' ? 'income' : 'expense'
-        const sign = transactions.transactionType === 'income' ? '+' : '-'
-
-        transactionsHTML += `<div class="transaction-card">
-          <div class="transaction-left">
-            <h3>${transactions.description}</h3>
-            <p>${formatDate(transactions.date)}</p>
-          </div>
-          <div class="js-transaction-id transaction-right" data-transaction-id="${transactions.id}">
-            <span class="category-tag">${transactions.categoryType}</span>
-            <h3 class="${className}">${sign}$${transactions.amount}</h3>
-            <i class="js-delete-btn ph ph-trash delete-btn" ></i>
-          </div>
-        </div>`
-    });
-
-
-    return transactionsHTML;
-}
-
-
-const transactionDisplay = document.querySelector('.js-transaction-list');
-
-transactionDisplay.addEventListener('click', (event) => {
-    handleDelete(event)
-})
-
-
-
+//DELETE FUNCTIONS
 function handleDelete(event) {
     if (!event.target.classList.contains('js-delete-btn')) {
         return
     }
 
     const card = event.target.closest('.js-transaction-id');
-
-    if (!card) return
 
     const transactionId = card.dataset.transactionId
 
@@ -194,3 +225,108 @@ function deleteTransaction(transactionId) {
     updateDashboard();
 
 }
+
+
+//PAGINATION FUNCTIONS
+function handlePage(event) {
+    if (!event.target.classList.contains('js-page-number-btn')) {
+        return
+    }
+
+    const card = event.target.closest('.js-page-number-btn')
+    const pageId = Number(card.dataset.pageId)
+
+    updatePage(pageId)
+
+    updateDashboard();
+
+}
+
+function updatePage(pageId) {
+    currentPage = pageId;
+}
+
+
+//VALIDATION FUNCTIONS
+function showErrors(errors) {
+    descriptionErrorMsg.innerText = errors.description;
+    amountErrorMsg.innerText = errors.amount;
+    transactionTypeErrorMsg.innerText = errors.transactionType;
+    categoryErrorMsg.innerText = errors.categoryType;
+    dateErrorMsg.innerText = errors.date;
+
+    removeMsgs();
+}
+
+function removeMsgs() {
+    setTimeout(() => {
+        descriptionErrorMsg.innerText = '';
+        amountErrorMsg.innerText = '';
+        transactionTypeErrorMsg.innerText = '';
+        categoryErrorMsg.innerText = '';
+        dateErrorMsg.innerText = '';
+    }, 5000);
+}
+
+
+
+//RENDER FUNCTIONS
+function updateDashboard() {
+    transactionDisplay.innerHTML = renderTransactions();
+    totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
+    totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
+    newBalanceDisplay.innerHTML = `$${getNewBalance()}`
+    transactionCountDisplay.innerHTML = `${getTransactionCount()}`
+    pageNumberDisplay.innerHTML = generatePageButtons()
+}
+
+function renderTransactions() {
+    let transactionsHTML = '';
+    const visibleTransaction = transactionPagination();
+
+
+    visibleTransaction.forEach(t => {
+        const className = t.transactionType === 'income' ? 'income' : 'expense'
+        const sign = t.transactionType === 'income' ? '+' : '-'
+
+
+        transactionsHTML += `<div class="transaction-card">
+          <div class="transaction-left">
+            <h3>${t.description}</h3>
+            <p>${formatDate(t.date)}</p>
+          </div>
+          <div class="js-transaction-id transaction-right" data-transaction-id="${t.id}">
+            <span class="category-tag">${t.categoryType}</span>
+            <h3 class="${className}">${sign}$${t.amount}</h3>
+            <i class="js-delete-btn ph ph-trash delete-btn" ></i>
+          </div>
+        </div>`
+    });
+
+    return transactionsHTML;
+}
+
+function transactionPagination() {
+    const transactionPerPage = 5;
+    const start = (currentPage - 1) * transactionPerPage
+    const end = start + transactionPerPage
+
+    return transaction.slice(start, end)
+}
+
+function generatePageButtons() {
+    let pageNumbers = transaction.length / 5
+    pageNumbers = Math.ceil(pageNumbers)
+
+    let PageNumberHTML = ''
+
+    for (let i = 1; i <= pageNumbers; i++) {
+        PageNumberHTML += `<button class="js-page-number-btn page-number-btn" data-page-id="${i}">${i}</button>`
+    }
+
+    return PageNumberHTML
+}
+
+
+
+

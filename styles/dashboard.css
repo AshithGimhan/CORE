@@ -306,8 +306,22 @@ nav ul li a {
 }
 
 .delete-btn {
-  pointer-events: auto;
   cursor: pointer;
+}
+
+.page-numbers {
+  display: flex;
+  justify-content: end;
+  padding: 12px;
+  gap: 6px;
+}
+
+.page-number-btn {
+  border: var(--BORDER);
+  font-size: 14px;
+  padding: 8px;
+  background-color: var(--CARD-PANELS);
+  text-align: start;
 }
 
 /* TRANSACTION FORM SECTION STYLES */
@@ -325,7 +339,7 @@ nav ul li a {
 .form-input-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   margin-top: 12px;
 }
 
@@ -352,6 +366,11 @@ nav ul li a {
 }
 .add-transaction-btn span {
   padding-right: 12px;
+}
+
+.error {
+  color: var(--RED);
+  font-size: 13px;
 }
 
 /* FOOTER STYLES */

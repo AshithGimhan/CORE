@@ -117,7 +117,10 @@
     <!-- TRANSACTION LIST SECTION -->
     <section class="transaction-section">
       <div class="js-transaction-list transaction-list-container">
-        
+ 
+      </div>
+      <div class="js-page-numbers page-numbers">
+
       </div>
     </section>
 
@@ -128,13 +131,21 @@
       <h2>Add transaction</h2>
       <form action="" class="transaction-form">
         <div class="form-input-container">
-          <input type="text" placeholder="Description" class="js-description-input" />
+          <input
+            type="text"
+            placeholder="Description"
+            class="js-description-input"
+          />
+          <p class="js-description-error error"></p>
           <input type="text" placeholder="Amount" class="js-amount-input" />
+          <p class="js-amount-error error"></p>
+
           <select class="js-transaction-dropdown expense-dropdown">
             <option value="default">Transaction</option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
           </select>
+          <p class="js-transaction-type-error error"></p>
 
           <select class="js-category-dropdown food-dropdown">
             <option value="default">Category</option>
@@ -144,10 +155,13 @@
             <option value="salary">Salary</option>
             <option value="other">Other</option>
           </select>
+          <p class="js-category-error error"></p>
+
           <input type="date" class="js-date-input date-input" />
+          <p class="js-date-error error"></p>
         </div>
         <div class="button-end">
-          <button class="js-add-transaction add-transaction-btn">
+          <button type="button" class="js-add-transaction add-transaction-btn">
             <span>+</span>Add transaction
           </button>
         </div>
