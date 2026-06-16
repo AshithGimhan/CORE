@@ -236,10 +236,14 @@ nav ul li a {
   text-align: start;
 }
 
-.arrow {
+.position {
   position: absolute;
   right: 0;
   transform: translateY(11px) translateX(-6px);
+}
+
+.position.hidden {
+  display: none;
 }
 
 /* TRANSACTION LIST STYLES */

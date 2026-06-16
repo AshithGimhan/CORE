@@ -36,6 +36,12 @@ const pageNumberDisplay = document.querySelector('.js-page-numbers');
 //POP UP DOM
 const popUpDisplay = document.querySelector('.js-pop-up')
 
+
+//FILTER DOM
+const filterOption = document.querySelector('.js-filter');
+
+
+
 //EVENT LISTENERS
 hamburgerBtn.addEventListener('click', () => {
     hamburgerDisplay.classList.add('hamburger-menu-visible');
@@ -57,11 +63,23 @@ pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
 });
 
+filterOption.addEventListener('change', (option) => {
+    currentSort = option.target.value;
+    updateDashboard();
+})
+
+document.querySelector('.js-close').addEventListener('click', () => {
+    currentSort = 'default'
+    filterOption.value = 'default'
+    updateDashboard();
+});
+
 
 
 //STATE
 const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
 let currentPage = 1;
+let currentSort = 'default'
 
 
 //INITIALIZE RENDER
@@ -282,10 +300,51 @@ function removeMsgs() {
 }
 
 
+//FILTER FUNCTIONS
+function getSortedTransactions(data) {
+    const copy = [...data]
+
+
+    if (currentSort === 'newest-first') {
+        return copy.sort((a, b) => new Date(b.date) - new Date(a.date))
+    }
+
+    if (currentSort === 'oldest-first') {
+        return copy.sort((a, b) => new Date(a.date) - new Date(b.date))
+    }
+
+    if (currentSort === 'highest-amount') {
+        return copy.sort((a, b) => b.amount - a.amount)
+    }
+
+    if (currentSort === 'lowest-amount') {
+        return copy.sort((a, b) => a.amount - b.amount)
+    }
+
+
+    return copy
+
+
+}
+
+function removeFilter() {
+    if (currentSort === 'default') {
+        document.querySelector('.js-arrow').classList.remove('hidden')
+        document.querySelector('.js-close').classList.add('hidden')
+    } else {
+        document.querySelector('.js-arrow').classList.add('hidden')
+        document.querySelector('.js-close').classList.remove('hidden')
+    }
+
+
+}
 
 //RENDER FUNCTIONS
 function updateDashboard() {
-    transactionDisplay.innerHTML = renderTransactions();
+
+    const sorted = getSortedTransactions(transaction);
+    removeFilter()
+    transactionDisplay.innerHTML = renderTransactions(sorted);
     totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
     totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
     newBalanceDisplay.innerHTML = `$${getNewBalance()}`
@@ -293,9 +352,9 @@ function updateDashboard() {
     pageNumberDisplay.innerHTML = generatePageNumbers()
 }
 
-function renderTransactions() {
+function renderTransactions(data) {
     let transactionsHTML = '';
-    const visibleTransaction = transactionPagination();
+    const visibleTransaction = transactionPagination(data);
 
 
     visibleTransaction.forEach(t => {
@@ -319,7 +378,8 @@ function renderTransactions() {
     return transactionsHTML;
 }
 
-function transactionPagination() {
+
+function transactionPagination(transaction) {
     const transactionPerPage = 5;
     const start = (currentPage - 1) * transactionPerPage
     const end = start + transactionPerPage
