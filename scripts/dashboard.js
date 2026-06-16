@@ -1,10 +1,10 @@
 //DOM ELEMENTS
-/* HAMBURGER VARIABLES */
+//HAMBURGER DOM 
 const hamburgerBtn = document.querySelector('.js-hamburger-btn');
 const hamburgerDisplay = document.querySelector('.js-hamburger-display');
 const hamburgerCloseBtn = document.querySelector('.js-ham-close-btn');
 
-/* FORM VARIABLES */
+//FORM DOM 
 const addTransactionBtn = document.querySelector('.js-add-transaction');
 const descriptionInput = document.querySelector('.js-description-input');
 const amountInput = document.querySelector('.js-amount-input');
@@ -12,27 +12,29 @@ const transactionDropdown = document.querySelector('.js-transaction-dropdown');
 const categoryDropdown = document.querySelector('.js-category-dropdown');
 const dateInput = document.querySelector('.js-date-input');
 
-//ERROR ELEMENTS
+//ERROR DOM
 const descriptionErrorMsg = document.querySelector('.js-description-error');
 const amountErrorMsg = document.querySelector('.js-amount-error');
 const transactionTypeErrorMsg = document.querySelector('.js-transaction-type-error');
 const categoryErrorMsg = document.querySelector('.js-category-error');
 const dateErrorMsg = document.querySelector('.js-date-error');
 
-/* DISPLAY VARIABLES */
+/* DISPLAY DOM */
 const totalIncomeDisplay = document.querySelector('.js-income-value');
 const totalExpenseDisplay = document.querySelector('.js-expense-value')
 const newBalanceDisplay = document.querySelector('.js-balance-value')
 const transactionCountDisplay = document.querySelector('.js-transaction-count');
 
-//TRANSACTION LIST VARIABLE
+//TRANSACTION DOM
 const transactionDisplay = document.querySelector('.js-transaction-list');
 
 
-//PAGINATION VARIABLES
+//PAGINATION DOM
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 
 
+//POP UP DOM
+const popUpDisplay = document.querySelector('.js-pop-up')
 
 //EVENT LISTENERS
 hamburgerBtn.addEventListener('click', () => {
@@ -60,8 +62,6 @@ pageNumberDisplay.addEventListener('click', (event) => {
 //STATE
 const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
 let currentPage = 1;
-
-
 
 
 //INITIALIZE RENDER
@@ -208,7 +208,20 @@ function handleDelete(event) {
 
     const transactionId = card.dataset.transactionId
 
-    deleteTransaction(transactionId)
+    popUpDisplay.classList.add('active')
+
+    confirmDelete(transactionId);
+
+}
+
+function confirmDelete(transactionId) {
+    document.querySelector('.js-btn-confirm').addEventListener('click', () => {
+        deleteTransaction(transactionId)
+        popUpDisplay.classList.remove('active')
+    })
+    document.querySelector('.js-btn-cancel').addEventListener('click', () => {
+        popUpDisplay.classList.remove('active')
+    })
 }
 
 function deleteTransaction(transactionId) {
@@ -277,7 +290,7 @@ function updateDashboard() {
     totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
     newBalanceDisplay.innerHTML = `$${getNewBalance()}`
     transactionCountDisplay.innerHTML = `${getTransactionCount()}`
-    pageNumberDisplay.innerHTML = generatePageButtons()
+    pageNumberDisplay.innerHTML = generatePageNumbers()
 }
 
 function renderTransactions() {
@@ -314,14 +327,14 @@ function transactionPagination() {
     return transaction.slice(start, end)
 }
 
-function generatePageButtons() {
+function generatePageNumbers() {
     let pageNumbers = transaction.length / 5
     pageNumbers = Math.ceil(pageNumbers)
 
     let PageNumberHTML = ''
 
     for (let i = 1; i <= pageNumbers; i++) {
-        PageNumberHTML += `<button class="js-page-number-btn page-number-btn" data-page-id="${i}">${i}</button>`
+        PageNumberHTML += `<button class="js-page-number-btn page-number-btn ${i === currentPage ? 'active' : ''} " data-page-id="${i}">${i}</button>`
     }
 
     return PageNumberHTML

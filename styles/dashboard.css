@@ -324,6 +324,11 @@ nav ul li a {
   text-align: start;
 }
 
+.page-number-btn.active {
+  border-color: var(--PRIMARY-ACCENT);
+  color: var(--PRIMARY-ACCENT);
+}
+
 /* TRANSACTION FORM SECTION STYLES */
 .transaction-form-section {
   display: flex;
@@ -371,6 +376,69 @@ nav ul li a {
 .error {
   color: var(--RED);
   font-size: 13px;
+}
+
+.pop-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+
+  background-color: #ff060613;
+  height: 100%;
+}
+
+.pop-up.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pop-up-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 18px;
+  padding: 24px;
+
+  width: 250px;
+  height: fit-content;
+
+  border-radius: 8px;
+  background-color: var(--CARD-PANELS);
+}
+
+.pop-up h3 {
+  text-transform: uppercase;
+  font-size: 15px;
+  color: var(--RED);
+}
+
+.pop-up-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pop-up-buttons button {
+  border: var(--BORDER);
+  font-size: 14px;
+  padding: 12px;
+  text-transform: uppercase;
+  background-color: var(--CARD-PANELS);
+}
+
+.pop-up-buttons button:hover:first-child {
+  color: var(--RED);
+  border-color: var(--RED);
+}
+.pop-up-buttons button:hover:last-child {
+  color: var(--PRIMARY-ACCENT);
+  border-color: var(--PRIMARY-ACCENT);
 }
 
 /* FOOTER STYLES */
