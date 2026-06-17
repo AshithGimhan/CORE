@@ -430,7 +430,7 @@ function renderPageTransactions() {
     const data = getProcessedTransactions();
 
     if (data.length === 0) {
-        transactionDisplay.innerHTML = `<div class="empty-state">No transactions found</div>`;
+        transactionDisplay.innerHTML = `<div class="empty-state">No transactions found.</div>`;
         pageNumberDisplay.innerHTML = '';
         return;
     }
