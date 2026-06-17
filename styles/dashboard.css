@@ -120,6 +120,7 @@ nav ul li a {
 
 .hero-top h2 {
   font-size: 22px;
+  text-transform: uppercase;
 }
 
 .hero-top p {
@@ -180,18 +181,17 @@ nav ul li a {
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   padding: 12px;
-  
 }
 
 .filter-options button,
-.filter-options select, .clear-filter-btn  {
+.filter-options select,
+.clear-filter-btn {
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
   padding: 8px;
   text-align: center;
   outline: none;
-  
 }
 
 .clear-filter-container {
@@ -214,8 +214,7 @@ nav ul li a {
 }
 
 .filter-options select:focus {
-  border-color: var(--PRIMARY-ACCENT) ;
-
+  border-color: var(--PRIMARY-ACCENT);
 }
 
 .filter-search {
@@ -251,7 +250,7 @@ nav ul li a {
   position: relative;
 }
 
-.dropdown select{
+.dropdown select {
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
@@ -373,6 +372,7 @@ nav ul li a {
 
 .transaction-form-section h2 {
   font-size: 22px;
+  text-transform: uppercase;
 }
 
 .form-input-container {
@@ -433,6 +433,8 @@ nav ul li a {
 }
 
 .pop-up-container {
+  border: var(--BORDER);
+
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -442,7 +444,6 @@ nav ul li a {
   width: 250px;
   height: fit-content;
 
-  border-radius: 8px;
   background-color: var(--CARD-PANELS);
 }
 
@@ -492,4 +493,130 @@ footer {
 }
 .expense {
   color: var(--RED);
+}
+
+/* TABLET SIZE STYLING */
+@media (min-width: 768px) {
+  .main-title h1 {
+    font-size: 36px;
+  }
+
+  .main-title i {
+    font-size: 40px;
+  }
+
+  .hamburger i {
+    font-size: 24px;
+  }
+
+  .hero-top h2 {
+    font-size: 26px;
+  }
+
+  .hero-top p {
+    font-size: 20px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-cards p {
+    font-size: 20px;
+  }
+
+  .stat-cards h3 {
+    font-size: 28px;
+  }
+
+  .filter-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .filter-options button,
+  .filter-options select,
+  .clear-filter-btn {
+    font-size: 18px;
+  }
+
+  .clear-filter-btn {
+    padding: 12px;
+  }
+
+  .filter-search {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search input,
+  .dropdown select {
+    height: 40px;
+    font-size: 18px;
+  }
+
+  nav ul li i,
+  nav ul li a {
+    font-size: 20px;
+  }
+
+  .hamburger-menu-hidden {
+    width: 300px;
+  }
+
+  .transaction-left h3 {
+    font-size: 18px;
+  }
+  .transaction-left p {
+    font-size: 16px;
+  }
+
+  .transaction-left .category-tag {
+    font-size: 16px;
+  }
+
+  .transaction-right span {
+    font-size: 16px;
+  }
+  .transaction-right h3 {
+    font-size: 24px;
+  }
+
+  .delete-btn {
+    font-size: 24px;
+  }
+
+  .page-number-btn {
+    font-size: 18px;
+  }
+
+  .pop-up-container {
+    width: 300px;
+    height: fit-content;
+  }
+
+  .pop-up h3 {
+    font-size: 16px;
+  }
+
+  .empty-state {
+    font-size: 18px;
+  }
+
+  .transaction-form-section h2 {
+    font-size: 26px;
+  }
+
+  .form-input-container input,
+  .form-input-container select {
+    font-size: 16px;
+    width: 320px;
+  }
+
+  .add-transaction-btn {
+    font-size: 16px;
+    width: fit-content;
+  }
+
+  footer p {
+    font-size: 16px;
+  }
 }
