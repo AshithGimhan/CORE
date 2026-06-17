@@ -182,16 +182,23 @@ nav ul li a {
   padding: 12px;
 }
 
-.filter-options button {
+.filter-options button,
+.filter-options select {
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
   padding: 8px;
+  text-align: center;
+  outline: none;
 }
 
 .filter-options button:hover {
   border-color: var(--PRIMARY-ACCENT);
   color: var(--PRIMARY-ACCENT);
+}
+
+.filter-options select:focus {
+  border-color: var(--PRIMARY-ACCENT) ;
 }
 
 .filter-search {

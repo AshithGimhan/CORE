@@ -38,8 +38,8 @@ const popUpDisplay = document.querySelector('.js-pop-up')
 
 
 //FILTER DOM
-const filterOption = document.querySelector('.js-filter');
-
+const sortOption = document.querySelector('.js-sort');
+const filterOption = document.querySelectorAll('.js-filter-btn');
 
 
 //EVENT LISTENERS
@@ -63,7 +63,7 @@ pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
 });
 
-filterOption.addEventListener('change', (option) => {
+sortOption.addEventListener('change', (option) => {
     currentSort = option.target.value;
     updateDashboard();
 })
@@ -74,12 +74,18 @@ document.querySelector('.js-close').addEventListener('click', () => {
     updateDashboard();
 });
 
+filterOption.forEach((button) => {
+    button.addEventListener('click', () => {
+
+    })
+});
 
 
 //STATE
 const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
 let currentPage = 1;
 let currentSort = 'default'
+let currentFilter = 'Expense';
 
 
 //INITIALIZE RENDER
@@ -145,7 +151,10 @@ function validateForm(data) {
     }
     if (data.amount <= 0) {
         errors.amount = 'Amount must be greater than 0'
+    } else if (isNaN(data.amount)) {
+        errors.amount = 'Amount must be a number'
     }
+
     if (data.transactionType === 'default') {
         errors.transactionType = 'Select a transaction Type'
     }
@@ -158,9 +167,8 @@ function validateForm(data) {
 
     return errors;
 
+
 }
-
-
 
 //HELPER FUNCTIONS
 function formatDate(date) {
@@ -300,7 +308,7 @@ function removeMsgs() {
 }
 
 
-//FILTER FUNCTIONS
+//SORT FUNCTIONS
 function getSortedTransactions(data) {
     const copy = [...data]
 
@@ -338,6 +346,27 @@ function removeFilter() {
 
 
 }
+
+
+//FILTER FUNCTIONS
+function getFilteredTransactions(data) {
+    const copy = [...data]
+
+    if (currentFilter === 'All') {
+        return copy
+    }
+    if (currentFilter === 'Income') {
+        return copy.filter(data => data.transactionType === 'income')
+    }
+    if (currentFilter === 'Expense') {
+        return copy.filter(data => data.transactionType === 'expense')
+    }
+
+
+
+}
+
+console.log(getFilteredTransactions(transaction))
 
 //RENDER FUNCTIONS
 function updateDashboard() {

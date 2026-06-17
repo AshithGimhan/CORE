@@ -87,10 +87,17 @@
     <!-- LIST SECTION -->
     <section class="list-section">
       <div class="filter-options">
-        <button>All</button>
-        <button>Income</button>
-        <button>Expense</button>
-        <button>Categories</button>
+        <button class="js-filter-btn">All</button>
+        <button class="js-filter-btn">Income</button>
+        <button class="js-filter-btn">Expense</button>
+        <select class="js-filter-select">
+          Categories
+          <option value="default">Category</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="bills">Bills</option>
+          <option value="salary">Salary</option>
+        </select>
       </div>
       <div class="filter-search">
         <div class="search">
@@ -104,7 +111,7 @@
         <div class="dropdown">
           <i class="ph ph-arrow-down position js-arrow"></i>
           <i class="ph ph-x position hidden js-close"></i>
-          <select name="filter-dropdown" class="js-filter">
+          <select name="filter-dropdown" class="js-sort">
             <option value="default">Filter</option>
             <option value="newest-first">Newest first</option>
             <option value="oldest-first">Oldest first</option>
