@@ -91,7 +91,6 @@
         <button class="js-filter-btn">Income</button>
         <button class="js-filter-btn">Expense</button>
         <select class="js-filter-select">
-          Categories
           <option value="default">Category</option>
           <option value="food">Food</option>
           <option value="transport">Transport</option>
@@ -110,7 +109,6 @@
         </div>
         <div class="dropdown">
           <i class="ph ph-arrow-down position js-arrow"></i>
-          <i class="ph ph-x position hidden js-close"></i>
           <select name="filter-dropdown" class="js-sort">
             <option value="default">Filter</option>
             <option value="newest-first">Newest first</option>
@@ -118,6 +116,11 @@
             <option value="highest-amount">Highest first</option>
             <option value="lowest-amount">Lowest first</option>
           </select>
+          <div class="clear-filter-container">
+            <button class="js-clear-filter-sort clear-filter-btn">
+              Clear filter
+            </button>
+          </div>
         </div>
       </div>
     </section>

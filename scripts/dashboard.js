@@ -40,6 +40,10 @@ const popUpDisplay = document.querySelector('.js-pop-up')
 //FILTER DOM
 const sortOption = document.querySelector('.js-sort');
 const filterOption = document.querySelectorAll('.js-filter-btn');
+const filterSelect = document.querySelector('.js-filter-select');
+const arrowElement = document.querySelector('.js-arrow');
+const closeElement = document.querySelector('.js-close')
+const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
 
 
 //EVENT LISTENERS
@@ -56,7 +60,15 @@ addTransactionBtn.addEventListener('click', () => {
 })
 
 transactionDisplay.addEventListener('click', (event) => {
-    handleDelete(event)
+    pendingDeleteId = handleDelete(event)
+
+})
+
+document.querySelector('.js-btn-confirm').addEventListener('click', () => {
+    confirmDelete();
+})
+document.querySelector('.js-btn-cancel').addEventListener('click', () => {
+    cancelDelete();
 })
 
 pageNumberDisplay.addEventListener('click', (event) => {
@@ -65,27 +77,45 @@ pageNumberDisplay.addEventListener('click', (event) => {
 
 sortOption.addEventListener('change', (option) => {
     currentSort = option.target.value;
+    currentPage = 1
+    clearFilterBtn.classList.add('visible')
     updateDashboard();
 })
 
-document.querySelector('.js-close').addEventListener('click', () => {
+clearFilterBtn.addEventListener('click', () => {
     currentSort = 'default'
-    filterOption.value = 'default'
+    currentFilter = 'All'
+    sortOption.value = 'default'
+    filterSelect.value = 'default'
+    clearFilterBtn.classList.remove('visible')
+
     updateDashboard();
 });
 
 filterOption.forEach((button) => {
     button.addEventListener('click', () => {
-
+        currentFilter = button.innerHTML;
+        currentPage = 1;
+        clearFilterBtn.classList.add('visible')
+        updateDashboard();
     })
 });
+
+filterSelect.addEventListener('change', (option) => {
+    currentFilter = option.target.value;
+    currentPage = 1;
+    clearFilterBtn.classList.add('visible')
+    updateDashboard();
+})
+
 
 
 //STATE
 const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
 let currentPage = 1;
 let currentSort = 'default'
-let currentFilter = 'Expense';
+let currentFilter = 'All';
+let pendingDeleteId = null;
 
 
 //INITIALIZE RENDER
@@ -96,7 +126,7 @@ updateDashboard();
 //FORM FUNCTIONS
 function getTransactionData() {
     return {
-        id: Date.now() + Math.random(),
+        id: crypto.randomUUID(),
         description: descriptionInput.value,
         amount: Number(amountInput.value),
         transactionType: transactionDropdown.value,
@@ -105,6 +135,7 @@ function getTransactionData() {
     };
 
 }
+
 
 function clearForm() {
     descriptionInput.value = '',
@@ -149,10 +180,11 @@ function validateForm(data) {
     if (data.description.trim() === '') {
         errors.description = 'Description is required'
     }
+    if (isNaN(data.amount)) {
+        errors.amount = 'Amount must be a number'
+    }
     if (data.amount <= 0) {
         errors.amount = 'Amount must be greater than 0'
-    } else if (isNaN(data.amount)) {
-        errors.amount = 'Amount must be a number'
     }
 
     if (data.transactionType === 'default') {
@@ -236,18 +268,22 @@ function handleDelete(event) {
 
     popUpDisplay.classList.add('active')
 
-    confirmDelete(transactionId);
+    return transactionId
 
 }
 
-function confirmDelete(transactionId) {
-    document.querySelector('.js-btn-confirm').addEventListener('click', () => {
-        deleteTransaction(transactionId)
-        popUpDisplay.classList.remove('active')
-    })
-    document.querySelector('.js-btn-cancel').addEventListener('click', () => {
-        popUpDisplay.classList.remove('active')
-    })
+function confirmDelete() {
+    if (!pendingDeleteId) return;
+
+    deleteTransaction(pendingDeleteId);
+    pendingDeleteId = null;
+    popUpDisplay.classList.remove('active');
+}
+
+function cancelDelete() {
+    pendingDeleteId = null;
+    popUpDisplay.classList.remove('active')
+
 }
 
 function deleteTransaction(transactionId) {
@@ -268,11 +304,10 @@ function deleteTransaction(transactionId) {
 
 //PAGINATION FUNCTIONS
 function handlePage(event) {
-    if (!event.target.classList.contains('js-page-number-btn')) {
-        return
-    }
-
     const card = event.target.closest('.js-page-number-btn')
+
+    if (!card) return
+
     const pageId = Number(card.dataset.pageId)
 
     updatePage(pageId)
@@ -335,17 +370,7 @@ function getSortedTransactions(data) {
 
 }
 
-function removeFilter() {
-    if (currentSort === 'default') {
-        document.querySelector('.js-arrow').classList.remove('hidden')
-        document.querySelector('.js-close').classList.add('hidden')
-    } else {
-        document.querySelector('.js-arrow').classList.add('hidden')
-        document.querySelector('.js-close').classList.remove('hidden')
-    }
 
-
-}
 
 
 //FILTER FUNCTIONS
@@ -361,32 +386,67 @@ function getFilteredTransactions(data) {
     if (currentFilter === 'Expense') {
         return copy.filter(data => data.transactionType === 'expense')
     }
+    if (currentFilter === 'food') {
+        return copy.filter(data => data.categoryType === 'food')
+    }
+    if (currentFilter === 'transport') {
+        return copy.filter(data => data.categoryType === 'transport')
+    }
+    if (currentFilter === 'bills') {
+        return copy.filter(data => data.categoryType === 'bills')
+    }
+    if (currentFilter === 'salary') {
+        return copy.filter(data => data.categoryType === 'salary')
+    }
 
-
-
+    return copy;
 }
 
-console.log(getFilteredTransactions(transaction))
 
 //RENDER FUNCTIONS
 function updateDashboard() {
 
-    const sorted = getSortedTransactions(transaction);
-    removeFilter()
-    transactionDisplay.innerHTML = renderTransactions(sorted);
+    renderPageTransactions();
     totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
     totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
     newBalanceDisplay.innerHTML = `$${getNewBalance()}`
     transactionCountDisplay.innerHTML = `${getTransactionCount()}`
-    pageNumberDisplay.innerHTML = generatePageNumbers()
+
+}
+
+function getProcessedTransactions() {
+    let data = [...transaction]
+
+    data = getFilteredTransactions(data);
+
+    data = getSortedTransactions(data);
+
+
+
+    return data
+}
+
+function renderPageTransactions() {
+    const data = getProcessedTransactions();
+
+    if (data.length === 0) {
+        transactionDisplay.innerHTML = `<div class="empty-state">No transactions found</div>`;
+        pageNumberDisplay.innerHTML = '';
+        return;
+    }
+
+    const paginated = transactionPagination(data);
+
+    transactionDisplay.innerHTML = renderTransactions(paginated)
+
+    pageNumberDisplay.innerHTML = generatePageNumbers(data);
+
 }
 
 function renderTransactions(data) {
     let transactionsHTML = '';
-    const visibleTransaction = transactionPagination(data);
 
-
-    visibleTransaction.forEach(t => {
+    data.forEach(t => {
         const className = t.transactionType === 'income' ? 'income' : 'expense'
         const sign = t.transactionType === 'income' ? '+' : '-'
 
@@ -408,17 +468,19 @@ function renderTransactions(data) {
 }
 
 
-function transactionPagination(transaction) {
+function transactionPagination(data) {
     const transactionPerPage = 5;
     const start = (currentPage - 1) * transactionPerPage
     const end = start + transactionPerPage
 
-    return transaction.slice(start, end)
+    return data.slice(start, end)
 }
 
-function generatePageNumbers() {
-    let pageNumbers = transaction.length / 5
+function generatePageNumbers(data) {
+    let pageNumbers = data.length / 5
     pageNumbers = Math.ceil(pageNumbers)
+
+    if (data.length === 0) return;
 
     let PageNumberHTML = ''
 

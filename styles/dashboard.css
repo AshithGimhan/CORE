@@ -180,16 +180,32 @@ nav ul li a {
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   padding: 12px;
+  
 }
 
 .filter-options button,
-.filter-options select {
+.filter-options select, .clear-filter-btn  {
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
   padding: 8px;
   text-align: center;
   outline: none;
+  
+}
+
+.clear-filter-container {
+  display: flex;
+  justify-content: end;
+}
+
+.clear-filter-btn {
+  margin-top: 12px;
+  display: none;
+}
+
+.visible {
+  display: flex;
 }
 
 .filter-options button:hover {
@@ -199,6 +215,7 @@ nav ul li a {
 
 .filter-options select:focus {
   border-color: var(--PRIMARY-ACCENT) ;
+
 }
 
 .filter-search {
@@ -234,7 +251,7 @@ nav ul li a {
   position: relative;
 }
 
-.dropdown select {
+.dropdown select{
   font-size: 14px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
@@ -250,7 +267,7 @@ nav ul li a {
 }
 
 .position.hidden {
-  display: none;
+  visibility: hidden;
 }
 
 /* TRANSACTION LIST STYLES */
@@ -338,6 +355,12 @@ nav ul li a {
 .page-number-btn.active {
   border-color: var(--PRIMARY-ACCENT);
   color: var(--PRIMARY-ACCENT);
+}
+
+.empty-state {
+  text-align: center;
+  padding-top: 12px;
+  color: var(--SECONDARY-TEXT-COLOR);
 }
 
 /* TRANSACTION FORM SECTION STYLES */
