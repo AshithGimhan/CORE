@@ -4,191 +4,235 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CORE</title>
+
     <link rel="icon" type="image/png" href="images/favicon.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Audiowide&family=Cutive+Mono&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="styles/dashboard.css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
     <link
       rel="stylesheet"
-      type="text/css"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
     />
   </head>
+
   <body>
-    <!-- SIDE BAR NAV -->
-    <section class="sidebar-navigation">
-      <div class="nav-top">
-        <div class="main-title">
-          <i class="ph ph-wallet"></i>
-          <h1>Core</h1>
-        </div>
-        <div class="js-hamburger-btn hamburger">
-          <i class="ph ph-list"></i>
-        </div>
-      </div>
+    <div class="app-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar-navigation">
+        <div class="nav-top">
+          <div class="main-title">
+            <i class="ph ph-wallet"></i>
+            <h1>Core</h1>
+          </div>
 
-      <nav>
-        <div class="js-hamburger-display hamburger-menu-hidden">
-          <div class="js-ham-close-btn hamburger">
-            <i class="ph ph-x"></i>
-          </div>
-          <ul>
-            <li><i class="ph ph-squares-four"></i><a href="#">Dashboard</a></li>
-            <li><i class="ph ph-coins"></i><a href="#">Transaction</a></li>
-            <li>
-              <i class="ph ph-chart-pie-slice"></i><a href="#">Reports</a>
-            </li>
-            <li><i class="ph ph-tabs"></i><a href="#">Categories</a></li>
-            <li><i class="ph ph-gear"></i><a href="#">Settings</a></li>
-          </ul>
-        </div>
-      </nav>
-    </section>
-
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-      <div class="hero-top">
-        <h2>Dashboard</h2>
-        <p>June 2026 overview</p>
-      </div>
-      <div class="cards-section">
-        <div class="cards-container">
-          <div class="stat-cards">
-            <p>Total income:</p>
-            <h3 class="js-income-value income"></h3>
-          </div>
-          <div class="stat-cards">
-            <p>Total expense:</p>
-            <h3 class="js-expense-value expense"></h3>
-          </div>
-          <div class="stat-cards">
-            <p>New balance:</p>
-            <h3 class="js-balance-value balance"></h3>
-          </div>
-          <div class="stat-cards">
-            <p>Trasactions:</p>
-            <h3 class="js-transaction-count transactions"></h3>
+          <div class="icons">
+            <i class="ph ph-bell"></i>
+            <i class="ph ph-moon"></i>
+            <div class="js-hamburger-btn hamburger">
+              <i class="ph ph-list"></i>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- DIVIDER -->
-    <hr class="divider" />
+        <nav>
+          <div class="js-hamburger-display hamburger-menu-hidden">
+            <div class="hamburger-icons">
+              <div class="js-ham-close-btn hamburger">
+                <i class="ph ph-x"></i>
+              </div>
+              <span>GK</span>
+            </div>
 
-    <!-- LIST SECTION -->
-    <section class="list-section">
-      <div class="filter-options">
-        <button class="js-filter-btn">All</button>
-        <button class="js-filter-btn">Income</button>
-        <button class="js-filter-btn">Expense</button>
-        <select class="js-filter-select">
-          <option value="default">Category</option>
-          <option value="food">Food</option>
-          <option value="transport">Transport</option>
-          <option value="bills">Bills</option>
-          <option value="salary">Salary</option>
-        </select>
-      </div>
-      <div class="filter-search">
-        <div class="search">
-          <i class="ph ph-magnifying-glass magnifying-glass"></i>
-          <input
-            type="text"
-            class="filter-search-input"
-            placeholder="Search transactions"
-          />
+            <ul>
+              <li>
+                <i class="ph ph-squares-four"></i><a href="#">Dashboard</a>
+              </li>
+              <li><i class="ph ph-coins"></i><a href="#">Transaction</a></li>
+              <li>
+                <i class="ph ph-chart-pie-slice"></i><a href="#">Reports</a>
+              </li>
+              <li><i class="ph ph-tabs"></i><a href="#">Categories</a></li>
+              <li><i class="ph ph-gear"></i><a href="#">Settings</a></li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="desktop-section">
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+          <div class="hero-top">
+            <h2>Dashboard</h2>
+            <p>June 2026 overview</p>
+          </div>
+
+          <div class="cards-section">
+            <div class="cards-container">
+              <div class="stat-cards">
+                <p>Total income:</p>
+                <h3 class="js-income-value income"></h3>
+              </div>
+
+              <div class="stat-cards">
+                <p>Total expense:</p>
+                <h3 class="js-expense-value expense"></h3>
+              </div>
+
+              <div class="stat-cards">
+                <p>New balance:</p>
+                <h3 class="js-balance-value balance"></h3>
+              </div>
+
+              <div class="stat-cards">
+                <p>Trasactions:</p>
+                <h3 class="js-transaction-count transactions"></h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <hr class="divider" />
+
+        <!-- LIST SECTION -->
+        <section class="list-section">
+          <div class="filter-options">
+            <button class="js-filter-btn">All</button>
+            <button class="js-filter-btn">Income</button>
+            <button class="js-filter-btn">Expense</button>
+
+            <select class="js-filter-select">
+              <option value="default">Category</option>
+              <option value="food">Food</option>
+              <option value="transport">Transport</option>
+              <option value="bills">Bills</option>
+              <option value="salary">Salary</option>
+            </select>
+          </div>
+
+          <div class="filter-search">
+            <div class="search">
+              <i class="ph ph-magnifying-glass magnifying-glass"></i>
+              <input
+                type="text"
+                class="filter-search-input"
+                placeholder="Search transactions"
+              />
+            </div>
+
+            <div class="dropdown">
+              <i class="ph ph-arrow-down position js-arrow"></i>
+
+              <select name="filter-dropdown" class="js-sort">
+                <option value="default">Filter</option>
+                <option value="newest-first">Newest first</option>
+                <option value="oldest-first">Oldest first</option>
+                <option value="highest-amount">Highest first</option>
+                <option value="lowest-amount">Lowest first</option>
+              </select>
+
+              <div class="clear-filter-container">
+                <button class="js-clear-filter-sort clear-filter-btn">
+                  Clear filter
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="divider" />
+
+        <!-- TRANSACTION + FORM -->
+        <div class="side-by-side">
+          <!-- TRANSACTION LIST -->
+          <section class="transaction-section">
+            <div class="js-transaction-list transaction-list-container"></div>
+            <div class="js-page-numbers page-numbers"></div>
+          </section>
+
+          <!-- FORM -->
+          <section class="transaction-form-section">
+            <h2>Add transaction</h2>
+
+            <form action="" class="transaction-form">
+              <div class="form-input-container">
+                <input
+                  type="text"
+                  placeholder="Description"
+                  class="js-description-input"
+                />
+                <p class="js-description-error error"></p>
+
+                <input
+                  type="text"
+                  placeholder="Amount"
+                  class="js-amount-input"
+                />
+                <p class="js-amount-error error"></p>
+
+                <select class="js-transaction-dropdown expense-dropdown">
+                  <option value="default">Transaction</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+                <p class="js-transaction-type-error error"></p>
+
+                <select class="js-category-dropdown food-dropdown">
+                  <option value="default">Category</option>
+                  <option value="food">Food</option>
+                  <option value="transport">Transport</option>
+                  <option value="bills">Bills</option>
+                  <option value="salary">Salary</option>
+                  <option value="other">Other</option>
+                </select>
+                <p class="js-category-error error"></p>
+
+                <input type="date" class="js-date-input date-input" />
+                <p class="js-date-error error"></p>
+              </div>
+
+              <div class="button-end">
+                <button
+                  type="button"
+                  class="js-add-transaction add-transaction-btn"
+                >
+                  <span>+</span>Add transaction
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
-        <div class="dropdown">
-          <i class="ph ph-arrow-down position js-arrow"></i>
-          <select name="filter-dropdown" class="js-sort">
-            <option value="default">Filter</option>
-            <option value="newest-first">Newest first</option>
-            <option value="oldest-first">Oldest first</option>
-            <option value="highest-amount">Highest first</option>
-            <option value="lowest-amount">Lowest first</option>
-          </select>
-          <div class="clear-filter-container">
-            <button class="js-clear-filter-sort clear-filter-btn">
-              Clear filter
-            </button>
+
+        <!-- POP UP -->
+        <div class="js-pop-up pop-up">
+          <div class="pop-up-container">
+            <h3>Confirm deletion of transaction</h3>
+
+            <div class="pop-up-buttons">
+              <button class="js-btn-confirm">Confirm</button>
+              <button class="js-btn-cancel">Exit</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- TRANSACTION LIST SECTION -->
-    <section class="transaction-section">
-      <div class="js-transaction-list transaction-list-container"></div>
-      <div class="js-page-numbers page-numbers"></div>
-    </section>
-
-    <hr class="divider" />
-
-    <!-- TRANSACTION FORM SECTION -->
-    <section class="transaction-form-section">
-      <h2>Add transaction</h2>
-      <form action="" class="transaction-form">
-        <div class="form-input-container">
-          <input
-            type="text"
-            placeholder="Description"
-            class="js-description-input"
-          />
-          <p class="js-description-error error"></p>
-          <input type="text" placeholder="Amount" class="js-amount-input" />
-          <p class="js-amount-error error"></p>
-
-          <select class="js-transaction-dropdown expense-dropdown">
-            <option value="default">Transaction</option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-          </select>
-          <p class="js-transaction-type-error error"></p>
-
-          <select class="js-category-dropdown food-dropdown">
-            <option value="default">Category</option>
-            <option value="food">Food</option>
-            <option value="transport">Transport</option>
-            <option value="bills">Bills</option>
-            <option value="salary">Salary</option>
-            <option value="other">Other</option>
-          </select>
-          <p class="js-category-error error"></p>
-
-          <input type="date" class="js-date-input date-input" />
-          <p class="js-date-error error"></p>
-        </div>
-        <div class="button-end">
-          <button type="button" class="js-add-transaction add-transaction-btn">
-            <span>+</span>Add transaction
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <!-- POP UP -->
-    <div class="js-pop-up pop-up">
-      <div class="pop-up-container">
-        <h3>Confirm deletion of transaction</h3>
-        <div class="pop-up-buttons">
-          <button class="js-btn-confirm">Confirm</button>
-          <button class="js-btn-cancel">Exit</button>
-        </div>
-      </div>
+        <!-- FOOTER -->
+        <footer>
+          <p>© 2026 Core, Inc. All rights reserved.</p>
+        </footer>
+      </main>
     </div>
-
-    <footer>
-      <p>© 2026 Core, Inc. All rights reserved.</p>
-    </footer>
 
     <script type="module" src="scripts/dashboard.js"></script>
   </body>

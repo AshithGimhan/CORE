@@ -469,7 +469,7 @@ function renderTransactions(data) {
 
 
 function transactionPagination(data) {
-    const transactionPerPage = 5;
+    const transactionPerPage = 4;
     const start = (currentPage - 1) * transactionPerPage
     const end = start + transactionPerPage
 
@@ -477,7 +477,7 @@ function transactionPagination(data) {
 }
 
 function generatePageNumbers(data) {
-    let pageNumbers = data.length / 5
+    let pageNumbers = data.length / 4
     pageNumbers = Math.ceil(pageNumbers)
 
     if (data.length === 0) return;
