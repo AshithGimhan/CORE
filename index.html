@@ -10,12 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Outfit:wght@100..900&display=swap"
       rel="stylesheet"
     />
 
+    <!-- STYLES -->
     <link rel="stylesheet" href="styles/dashboard.css" />
 
+    <!-- ICONS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -27,8 +29,8 @@
   </head>
 
   <body>
-    <div class="app-layout">
-      <!-- SIDEBAR -->
+    <div class="top-layout">
+      <!-- HAMBURGER ON MOBILE -->
       <aside class="sidebar-navigation">
         <div class="nav-top">
           <div class="main-title">
@@ -47,94 +49,89 @@
 
         <nav>
           <div class="js-hamburger-display hamburger-menu-hidden">
+            <!-- CLOSE BUTTON -->
             <div class="hamburger-icons">
               <div class="js-ham-close-btn hamburger">
                 <i class="ph ph-x"></i>
               </div>
-              <span>GK</span>
             </div>
 
+            <!-- NAV LINKS -->
             <ul>
               <li>
-                <i class="ph ph-squares-four"></i><a href="#">Dashboard</a>
+                <a href="#">Dashboard</a>
               </li>
-              <li><i class="ph ph-coins"></i><a href="#">Transaction</a></li>
               <li>
-                <i class="ph ph-chart-pie-slice"></i><a href="#">Reports</a>
+                <a href="#">Transaction</a>
               </li>
-              <li><i class="ph ph-tabs"></i><a href="#">Categories</a></li>
-              <li><i class="ph ph-gear"></i><a href="#">Settings</a></li>
+              <li>
+                <a href="#">Reports</a>
+              </li>
+              <li>
+                <a href="#">Categories</a>
+              </li>
+              <li>
+                <a href="#">Settings</a>
+              </li>
             </ul>
           </div>
         </nav>
       </aside>
 
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <div class="hero-top">
+          <!-- NET BALANCE -->
+          <div class="net-balance">
+            <h2>Net balance</h2>
+            <p class="js-balance-value balance"></p>
+          </div>
+
+          <!-- DATE AND TRANSACTION COUNT -->
+          <div class="date-count-stats">
+            <div class="date-stats">
+              <span></span>
+              <p>June 2026</p>
+            </div>
+
+            <div class="count-stats">
+              <span></span>
+              <p class="js-transaction-count transactions"></p>
+              <p>Transactions</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="cards-section">
+          <div class="cards-container">
+            <div class="stat-cards">
+              <p>Total income</p>
+              <span class="js-income-value income"></span>
+            </div>
+
+            <div class="stat-cards">
+              <p>Total expense</p>
+              <span class="js-expense-value expense"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- MAIN CONTENT -->
       <main class="desktop-section">
-        <!-- HERO SECTION -->
-        <section class="hero-section">
-          <div class="hero-top">
-            <h2>Dashboard</h2>
-            <p>June 2026 overview</p>
-          </div>
-
-          <div class="cards-section">
-            <div class="cards-container">
-              <div class="stat-cards">
-                <p>Total income:</p>
-                <h3 class="js-income-value income"></h3>
-              </div>
-
-              <div class="stat-cards">
-                <p>Total expense:</p>
-                <h3 class="js-expense-value expense"></h3>
-              </div>
-
-              <div class="stat-cards">
-                <p>New balance:</p>
-                <h3 class="js-balance-value balance"></h3>
-              </div>
-
-              <div class="stat-cards">
-                <p>Trasactions:</p>
-                <h3 class="js-transaction-count transactions"></h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- DIVIDER -->
-        <hr class="divider" />
-
-        <!-- LIST SECTION -->
-        <section class="list-section">
-          <div class="filter-options">
-            <button class="js-filter-btn">All</button>
-            <button class="js-filter-btn">Income</button>
-            <button class="js-filter-btn">Expense</button>
-
-            <select class="js-filter-select">
-              <option value="default">Category</option>
-              <option value="food">Food</option>
-              <option value="transport">Transport</option>
-              <option value="bills">Bills</option>
-              <option value="salary">Salary</option>
-            </select>
-          </div>
-
-          <div class="filter-search">
-            <div class="search">
-              <i class="ph ph-magnifying-glass magnifying-glass"></i>
-              <input
-                type="text"
-                class="filter-search-input"
-                placeholder="Search transactions"
-              />
+        <!-- TRANSACTION LIST -->
+        <section class="transaction-list-section">
+          <div class="transaction-list-top">
+            <!-- FILTER OPTIONS -->
+            <div class="filter-options">
+              <span class="js-filter-btn">All</span>
+              <span class="js-filter-btn">Income</span>
+              <span class="js-filter-btn">Expense</span>
             </div>
 
+            <!-- SORT DROPDOWN -->
             <div class="dropdown">
-              <i class="ph ph-arrow-down position js-arrow"></i>
-
               <select name="filter-dropdown" class="js-sort">
                 <option value="default">Filter</option>
                 <option value="newest-first">Newest first</option>
@@ -142,97 +139,111 @@
                 <option value="highest-amount">Highest first</option>
                 <option value="lowest-amount">Lowest first</option>
               </select>
-
-              <div class="clear-filter-container">
-                <button class="js-clear-filter-sort clear-filter-btn">
-                  Clear filter
-                </button>
-              </div>
             </div>
+          </div>
+
+          <!-- CLEAR FILTER -->
+          <div class="clear-filter-container">
+            <button class="js-clear-filter-sort clear-filter-btn">
+              Clear filter
+            </button>
+          </div>
+
+          <!-- LIST AND PAGINATION -->
+          <div class="transaction-list">
+            <h2>Transactions</h2>
+            <div class="js-transaction-list transaction-list-container"></div>
+            <div class="js-page-numbers page-numbers"></div>
           </div>
         </section>
 
-        <hr class="divider" />
+        <!-- FORM -->
+        <section class="transaction-form-section">
+          <h2>Add transaction</h2>
 
-        <!-- TRANSACTION + FORM -->
-        <div class="side-by-side">
-          <!-- TRANSACTION LIST -->
-          <section class="transaction-section">
-            <div class="js-transaction-list transaction-list-container"></div>
-            <div class="js-page-numbers page-numbers"></div>
-          </section>
+          <form action="" class="transaction-form">
+            <div class="form-input-container">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                placeholder="Description"
+                class="js-description-input"
+                id="description"
+              />
+              <p class="js-description-error error"></p>
 
-          <!-- FORM -->
-          <section class="transaction-form-section">
-            <h2>Add transaction</h2>
+              <label for="amount">Amount</label>
+              <input
+                type="text"
+                placeholder="Amount"
+                class="js-amount-input"
+                id="amount"
+              />
+              <p class="js-amount-error error"></p>
 
-            <form action="" class="transaction-form">
-              <div class="form-input-container">
-                <input
-                  type="text"
-                  placeholder="Description"
-                  class="js-description-input"
-                />
-                <p class="js-description-error error"></p>
-
-                <input
-                  type="text"
-                  placeholder="Amount"
-                  class="js-amount-input"
-                />
-                <p class="js-amount-error error"></p>
-
-                <select class="js-transaction-dropdown expense-dropdown">
-                  <option value="default">Transaction</option>
-                  <option value="income">Income</option>
-                  <option value="expense">Expense</option>
-                </select>
-                <p class="js-transaction-type-error error"></p>
-
-                <select class="js-category-dropdown food-dropdown">
-                  <option value="default">Category</option>
-                  <option value="food">Food</option>
-                  <option value="transport">Transport</option>
-                  <option value="bills">Bills</option>
-                  <option value="salary">Salary</option>
-                  <option value="other">Other</option>
-                </select>
-                <p class="js-category-error error"></p>
-
-                <input type="date" class="js-date-input date-input" />
-                <p class="js-date-error error"></p>
+              <div class="side-by-side">
+                <div>
+                  <label for="transaction-type">Type</label>
+                  <select
+                    class="js-transaction-dropdown expense-dropdown"
+                    id="transaction-type"
+                  >
+                    <option value="default">Transaction</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                  <p class="js-transaction-type-error error"></p>
+                </div>
+                <div>
+                  <label for="category-type">Category</label>
+                  <select
+                    class="js-category-dropdown food-dropdown"
+                    id="category-type"
+                  >
+                    <option value="default">Category</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="bills">Bills</option>
+                    <option value="salary">Salary</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <p class="js-category-error error"></p>
+                </div>
               </div>
 
-              <div class="button-end">
-                <button
-                  type="button"
-                  class="js-add-transaction add-transaction-btn"
-                >
-                  <span>+</span>Add transaction
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <!-- POP UP -->
-        <div class="js-pop-up pop-up">
-          <div class="pop-up-container">
-            <h3>Confirm deletion of transaction</h3>
-
-            <div class="pop-up-buttons">
-              <button class="js-btn-confirm">Confirm</button>
-              <button class="js-btn-cancel">Exit</button>
+              <label for="date">Date</label>
+              <input type="date" class="js-date-input date-input" id="date" />
+              <p class="js-date-error error"></p>
             </div>
+
+            <div>
+              <button
+                type="button"
+                class="js-add-transaction add-transaction-btn"
+              >
+                Add transaction
+              </button>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <!-- POP UP -->
+      <div class="js-pop-up pop-up">
+        <div class="pop-up-container">
+          <h3>Confirm deletion of transaction</h3>
+
+          <div class="pop-up-buttons">
+            <button class="js-btn-confirm">Confirm</button>
+            <button class="js-btn-cancel">Exit</button>
           </div>
         </div>
-
-        <!-- FOOTER -->
-        <footer>
-          <p>© 2026 Core, Inc. All rights reserved.</p>
-        </footer>
-      </main>
+      </div>
     </div>
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Core, Inc. All rights reserved.</p>
+    </footer>
 
     <script type="module" src="scripts/dashboard.js"></script>
   </body>

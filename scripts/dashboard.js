@@ -40,7 +40,6 @@ const popUpDisplay = document.querySelector('.js-pop-up')
 //FILTER DOM
 const sortOption = document.querySelector('.js-sort');
 const filterOption = document.querySelectorAll('.js-filter-btn');
-const filterSelect = document.querySelector('.js-filter-select');
 const arrowElement = document.querySelector('.js-arrow');
 const closeElement = document.querySelector('.js-close')
 const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
@@ -86,7 +85,6 @@ clearFilterBtn.addEventListener('click', () => {
     currentSort = 'default'
     currentFilter = 'All'
     sortOption.value = 'default'
-    filterSelect.value = 'default'
     clearFilterBtn.classList.remove('visible')
 
     updateDashboard();
@@ -100,13 +98,6 @@ filterOption.forEach((button) => {
         updateDashboard();
     })
 });
-
-filterSelect.addEventListener('change', (option) => {
-    currentFilter = option.target.value;
-    currentPage = 1;
-    clearFilterBtn.classList.add('visible')
-    updateDashboard();
-})
 
 
 
@@ -386,18 +377,6 @@ function getFilteredTransactions(data) {
     if (currentFilter === 'Expense') {
         return copy.filter(data => data.transactionType === 'expense')
     }
-    if (currentFilter === 'food') {
-        return copy.filter(data => data.categoryType === 'food')
-    }
-    if (currentFilter === 'transport') {
-        return copy.filter(data => data.categoryType === 'transport')
-    }
-    if (currentFilter === 'bills') {
-        return copy.filter(data => data.categoryType === 'bills')
-    }
-    if (currentFilter === 'salary') {
-        return copy.filter(data => data.categoryType === 'salary')
-    }
 
     return copy;
 }
@@ -409,7 +388,7 @@ function updateDashboard() {
     renderPageTransactions();
     totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
     totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
-    newBalanceDisplay.innerHTML = `$${getNewBalance()}`
+    newBalanceDisplay.innerHTML = `<span class="dollar-tag">$</span>${getNewBalance()}`
     transactionCountDisplay.innerHTML = `${getTransactionCount()}`
 
 }
@@ -454,10 +433,14 @@ function renderTransactions(data) {
         transactionsHTML += `<div class="transaction-card">
           <div class="transaction-left">
             <h3>${t.description}</h3>
-            <p>${formatDate(t.date)}</p>
+            <div class="date-section">
+                <p>${formatDate(t.date)}</p>
+                <span class="divide-tag"></span>
+                <p>${t.categoryType}</p>
+            </div>
           </div>
           <div class="js-transaction-id transaction-right" data-transaction-id="${t.id}">
-            <span class="category-tag">${t.categoryType}</span>
+            
             <h3 class="${className}">${sign}$${t.amount}</h3>
             <i class="js-delete-btn ph ph-trash delete-btn" ></i>
           </div>
@@ -469,7 +452,7 @@ function renderTransactions(data) {
 
 
 function transactionPagination(data) {
-    const transactionPerPage = 4;
+    const transactionPerPage = 5;
     const start = (currentPage - 1) * transactionPerPage
     const end = start + transactionPerPage
 
@@ -477,7 +460,7 @@ function transactionPagination(data) {
 }
 
 function generatePageNumbers(data) {
-    let pageNumbers = data.length / 4
+    let pageNumbers = data.length / 5
     pageNumbers = Math.ceil(pageNumbers)
 
     if (data.length === 0) return;
@@ -485,7 +468,7 @@ function generatePageNumbers(data) {
     let PageNumberHTML = ''
 
     for (let i = 1; i <= pageNumbers; i++) {
-        PageNumberHTML += `<button class="js-page-number-btn page-number-btn ${i === currentPage ? 'active' : ''} " data-page-id="${i}">${i}</button>`
+        PageNumberHTML += `<button class="js-page-number-btn page-number-btn ${i === currentPage ? 'active-page-number' : ''} " data-page-id="${i}">${i}</button>`
     }
 
     return PageNumberHTML
