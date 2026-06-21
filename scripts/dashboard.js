@@ -348,11 +348,19 @@ function getSortedTransactions(data) {
     }
 
     if (currentSort === 'highest-amount') {
-        return copy.sort((a, b) => b.amount - a.amount)
+        return copy.sort((a, b) => {
+            const sa = a.transactionType === 'expense' ? -Number(a.amount) : Number(a.amount);
+            const sb = b.transactionType === 'expense' ? -Number(b.amount) : Number(b.amount);
+            return sb - sa;
+        })
     }
 
     if (currentSort === 'lowest-amount') {
-        return copy.sort((a, b) => a.amount - b.amount)
+        return copy.sort((a, b) => {
+            const sa = a.transactionType === 'expense' ? -Number(a.amount) : Number(a.amount);
+            const sb = b.transactionType === 'expense' ? -Number(b.amount) : Number(b.amount);
+            return sa - sb;
+        })
     }
 
 

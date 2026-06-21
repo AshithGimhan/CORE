@@ -114,11 +114,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  background: #2564ebd8;
-  border-radius: 9px;
-
-  color: white;
-  padding: 0 12px;
+  color: var(--PRIMARY-ACCENT);
 }
 
 /* HERO SECTION STYLES */
@@ -241,6 +237,7 @@ nav ul li a:hover {
   font-size: 12px;
   border: var(--BORDER);
   border-radius: 100px;
+  background-color: #fff;
 }
 
 .filter-options span:hover {
@@ -508,7 +505,7 @@ footer p {
 @media (min-width: 768px) {
   .top-layout {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 250px 1fr;
     grid-template-rows: auto 1fr;
     min-height: 100vh;
     margin-bottom: 0;
@@ -572,9 +569,7 @@ footer p {
   }
 
   nav ul li a:hover {
-    background: var(--PRIMARY-ACCENT);
-    color: white;
-    padding: 12px;
+    color: var(--PRIMARY-ACCENT);
   }
 
   .hero-section {
@@ -625,13 +620,21 @@ footer p {
     border: none;
   }
 
+  .stat-cards {
+    max-width: 250px;
+  }
+
   .desktop-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    
+    grid-template-columns: 1.6fr 1.4fr;
   }
 
   .transaction-list-section {
     border: none;
   }
+
+  .transaction-list-top {
+    justify-content: space-between;
+  }
 }
+
