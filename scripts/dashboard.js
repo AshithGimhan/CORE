@@ -54,14 +54,16 @@ hamburgerCloseBtn.addEventListener('click', () => {
     hamburgerDisplay.classList.remove('hamburger-menu-visible');
 })
 
-addTransactionBtn.addEventListener('click', () => {
-    addTransaction();
-})
-
-transactionDisplay.addEventListener('click', (event) => {
-    pendingDeleteId = handleDelete(event)
-
-})
+if (addTransactionBtn) {
+    addTransactionBtn.addEventListener('click', () => {
+        addTransaction();
+    })
+}
+if (transactionDisplay) {
+    transactionDisplay.addEventListener('click', (event) => {
+        pendingDeleteId = handleDelete(event)
+    })
+}
 
 document.querySelector('.js-btn-confirm').addEventListener('click', () => {
     confirmDelete();
@@ -108,10 +110,12 @@ let currentSort = 'default'
 let currentFilter = 'All';
 let pendingDeleteId = null;
 
+const dashboardPage = Boolean(addTransactionBtn)
 
 //INITIALIZE RENDER
-updateDashboard();
-
+if (dashboardPage) {
+    updateDashboard();
+}
 
 
 //FORM FUNCTIONS
@@ -458,6 +462,10 @@ function renderTransactions(data) {
     return transactionsHTML;
 }
 
+function transactionList() {
+    return getProcessedTransactions()
+}
+
 
 function transactionPagination(data) {
     const transactionPerPage = 5;
@@ -483,5 +491,5 @@ function generatePageNumbers(data) {
 }
 
 
-
+export {transactionList}
 

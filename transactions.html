@@ -79,9 +79,91 @@
         </nav>
       </aside>
 
-      <main>
-        <!-- TRANSACTIONS LIST SECTION -->
-        <section>
+      <main class="desktop-section">
+        <section class="transaction-list-options">
+          <div class="transaction-filter-options">
+            <header class="transaction-filter-options-top">
+              <div>
+                <h2>Transactions</h2>
+                <p>14 records found</p>
+              </div>
+              <div class="download-button">
+                <i class="ph ph-export"></i>
+                <a type="button">Export</a>
+              </div>
+            </header>
+
+            <div class="transaction-filter-options-middle filter-options">
+              <span class="js-filter-btn">All</span>
+              <span class="js-filter-btn">Income</span>
+              <span class="js-filter-btn">Expense</span>
+            </div>
+
+            <form
+              class="transaction-filter-form"
+              aria-label="Transaction filters"
+            >
+              <select
+                class="js-category-dropdown food-dropdown"
+                id="category-type"
+                name="category-type"
+              >
+                <option value="default">Category</option>
+                <option value="food">Food</option>
+                <option value="transport">Transport</option>
+                <option value="bills">Bills</option>
+                <option value="salary">Salary</option>
+                <option value="other">Other</option>
+              </select>
+              <input
+                type="date"
+                class="js-date-input date-input"
+                id="date"
+                name="date"
+              />
+              <input
+                type="text"
+                class="js-search-input search-input"
+                id="search"
+                name="search"
+                placeholder="Search"
+              />
+              <select
+                name="filter-dropdown"
+                id="filter-dropdown"
+                class="js-sort"
+                aria-label="Sort transactions"
+              >
+                <option value="default">Filter</option>
+                <option value="newest-first">Newest first</option>
+                <option value="oldest-first">Oldest first</option>
+                <option value="highest-amount">Highest first</option>
+                <option value="lowest-amount">Lowest first</option>
+              </select>
+            </form>
+          </div>
+          <!-- CLEAR FILTER -->
+          <div class="clear-filter-container">
+            <button class="js-clear-filter-sort clear-filter-btn">
+              Clear filter
+            </button>
+          </div>
+        </section>
+
+        <section class="transaction-list-view">
+          <table>
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Food</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+
+            <tbody class="js-transactions-list-view"></tbody>
+          </table>
+          <div class="js-page-numbers"></div>
         </section>
       </main>
 
@@ -103,6 +185,6 @@
       </footer>
     </div>
 
-    <script type="module" src="scripts/dashboard.js"></script>
+    <script type="module" src="scripts/transactions.js"></script>
   </body>
 </html>
