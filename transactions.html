@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORE</title>
+
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="styles/dashboard.css" />
+    <link rel="stylesheet" href="styles/transactions.css" />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+  </head>
+
+  <body>
+    <div class="top-layout">
+      <!-- HAMBURGER ON MOBILE -->
+      <aside class="sidebar-navigation">
+        <div class="nav-top">
+          <div class="main-title">
+            <i class="ph ph-wallet"></i>
+            <h1>Core</h1>
+          </div>
+
+          <div class="icons">
+            <i class="ph ph-bell"></i>
+            <i class="ph ph-moon"></i>
+            <div class="js-hamburger-btn hamburger">
+              <i class="ph ph-list"></i>
+            </div>
+          </div>
+        </div>
+
+        <nav>
+          <div class="js-hamburger-display hamburger-menu-hidden">
+            <!-- CLOSE BUTTON -->
+            <div class="hamburger-icons">
+              <div class="js-ham-close-btn hamburger">
+                <i class="ph ph-x"></i>
+              </div>
+            </div>
+
+            <!-- NAV LINKS -->
+            <ul>
+              <li>
+                <a href="index.html">Dashboard</a>
+              </li>
+              <li>
+                <a href="transactions.html">Transaction</a>
+              </li>
+              <li>
+                <a href="#">Reports</a>
+              </li>
+              <li>
+                <a href="#">Categories</a>
+              </li>
+              <li>
+                <a href="#">Settings</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <main>
+        <!-- TRANSACTIONS LIST SECTION -->
+        <section>
+        </section>
+      </main>
+
+      <!-- POP UP -->
+      <div class="js-pop-up pop-up">
+        <div class="pop-up-container">
+          <h3>Confirm deletion of transaction</h3>
+
+          <div class="pop-up-buttons">
+            <button class="js-btn-confirm">Confirm</button>
+            <button class="js-btn-cancel">Exit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>© 2026 Core, Inc. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script type="module" src="scripts/dashboard.js"></script>
+  </body>
+</html>
