@@ -204,7 +204,7 @@ nav ul li a:hover {
 
 .stat-cards span {
   color: var(--MAIN-TEXT-COLOR);
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .stat-cards .income {
@@ -243,7 +243,7 @@ nav ul li a:hover {
 
 .transaction-list-section h2,
 .transaction-form-section h2 {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--MAIN-TEXT-COLOR);
 }
 
@@ -314,7 +314,7 @@ nav ul li a:hover {
 }
 
 .transaction-left h3 {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .date-section {
