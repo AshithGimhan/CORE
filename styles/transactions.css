@@ -69,6 +69,11 @@
 }
 
 /* TRANSACTION LIST VIEW STYLES */
+.table-wrapper{
+  width: 100%;
+  overflow-x: auto;
+}
+
 .transaction-list-view table {
   width: 100%;
   border-collapse: collapse;
@@ -90,6 +95,7 @@
   text-align: left;
   border-bottom: var(--BORDER);
   line-height: 1.5rem;
+  
 }
 
 .transaction-list-view td {
