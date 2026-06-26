@@ -2,8 +2,25 @@
 import { getTransactions, getProcessedTransactions, transactionPagination } from './transactions.js';
 import { handlePage, getCurrentPage, generatePageNumbers } from './pagination.js';
 
+
+
+const hamburgerBtn = document.querySelector('.js-hamburger-btn');
+const hamburgerDisplay = document.querySelector('.js-hamburger-display');
+const hamburgerCloseBtn = document.querySelector('.js-ham-close-btn');
 const transactionDisplay = document.querySelector('.js-transactions-list-view');
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
+const currentPageNoDisplay = document.querySelector('.js-page-number-display')
+
+
+hamburgerBtn.addEventListener('click', () => {
+    hamburgerDisplay.classList.add('hamburger-menu-visible');
+})
+
+hamburgerCloseBtn.addEventListener('click', () => {
+    hamburgerDisplay.classList.remove('hamburger-menu-visible');
+})
+
+
 
 pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
@@ -16,13 +33,17 @@ function renderTransactions(data) {
     let transactionHTML = '';
 
     if (data) {
+
         data.forEach((t) => {
+
+            let className = t.transactionType === 'income' ? 'income' : 'expense'
+
             transactionHTML += `
             <tr>
-              <td>${t.description}</td>
-              <td>${t.categoryType}</td>
+              <td class="desc-color">${t.description}</td>
+              <td >${t.categoryType}</td>
               <td>${formatDate(t.date)}</td>
-              <td>${t.amount}</td>
+              <td class="${className}">$${t.amount}</td>
               <td><i class="js-delete-btn ph ph-trash delete-btn"></i></td>
             </tr>
           `;
@@ -41,6 +62,34 @@ function displayPageNumbers() {
     pageNumberDisplay.innerHTML = generatePageNumbers(processedTransactions);
 }
 
+function currentPageNumber() {
+    let pageCurrentPageDisplay = ''
+    const currentPage = getCurrentPage()
+    const pageSize = 5;
+    let firstNumber = (currentPage - 1) * pageSize + 1;
+    let lastNumber = currentPage * pageSize
+    const allTransactions = getTransactions()
+
+
+    if (lastNumber > allTransactions.length) {
+        lastNumber = allTransactions.length
+    }
+
+
+
+    const displayedTransaction = transactionPagination(allTransactions, getCurrentPage())
+
+
+    pageCurrentPageDisplay = `<p>Showing ${firstNumber} to ${lastNumber} of ${allTransactions.length}</p>`
+
+    return pageCurrentPageDisplay;
+}
+
+
+
 function updateTransactionPage() {
     displayPageNumbers();
+    currentPageNoDisplay.innerHTML = currentPageNumber();
+
 }
+

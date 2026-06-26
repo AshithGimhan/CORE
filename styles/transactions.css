@@ -76,6 +76,7 @@
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 2px 14px rgba(15, 23, 42, 0.05);
+  margin-bottom: 12px;
 }
 
 .transaction-list-view thead {
@@ -103,4 +104,9 @@
 
 .transaction-list-view tbody tr:last-child td {
   border-bottom: none;
+}
+
+.desc-color {
+  color: var(--MAIN-TEXT-COLOR);
+  text-transform: capitalize;
 }

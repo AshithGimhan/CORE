@@ -20,6 +20,8 @@ export function resetPage() {
     currentPage = 1;
 }
 
+
+
 export function generatePageNumbers(data) {
     if (!data || data.length === 0) return '';
 
