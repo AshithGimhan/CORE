@@ -67,3 +67,40 @@
 .transaction-filter-form input:focus {
   outline-color: var(--PRIMARY-ACCENT);
 }
+
+/* TRANSACTION LIST VIEW STYLES */
+.transaction-list-view table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--CARD-PANELS);
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.05);
+}
+
+.transaction-list-view thead {
+  background: #f8fafc;
+  padding: 0 12px;
+}
+
+.transaction-list-view th,
+.transaction-list-view td {
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: var(--BORDER);
+  line-height: 1.5rem;
+}
+
+.transaction-list-view td {
+  font-size: 12px;
+}
+
+.transaction-list-view th {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--SECONDARY-TEXT-COLOR);
+}
+
+.transaction-list-view tbody tr:last-child td {
+  border-bottom: none;
+}

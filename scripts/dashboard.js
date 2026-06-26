@@ -1,3 +1,19 @@
+﻿import { formatDate, hasErrors } from "./utils.js";
+import {
+    getTransactions,
+    addTransaction,
+    deleteTransactionById,
+    getProcessedTransactions,
+    transactionPagination,
+    getTotalIncome,
+    getTotalExpense,
+    getNewBalance,
+    getTransactionCount
+} from "./transactions.js";
+import { handlePage, resetPage, getCurrentPage, generatePageNumbers } from "./pagination.js";
+
+
+
 //DOM ELEMENTS
 //HAMBURGER DOM 
 const hamburgerBtn = document.querySelector('.js-hamburger-btn');
@@ -56,7 +72,7 @@ hamburgerCloseBtn.addEventListener('click', () => {
 
 if (addTransactionBtn) {
     addTransactionBtn.addEventListener('click', () => {
-        addTransaction();
+        handleAddTransaction();
     })
 }
 if (transactionDisplay) {
@@ -74,29 +90,30 @@ document.querySelector('.js-btn-cancel').addEventListener('click', () => {
 
 pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
+    updateDashboard();
 });
 
 sortOption.addEventListener('change', (option) => {
     currentSort = option.target.value;
-    currentPage = 1
-    clearFilterBtn.classList.add('visible')
+    resetPage();
+    clearFilterBtn.classList.add('visible');
     updateDashboard();
 })
 
 clearFilterBtn.addEventListener('click', () => {
-    currentSort = 'default'
-    currentFilter = 'All'
-    sortOption.value = 'default'
-    clearFilterBtn.classList.remove('visible')
-
+    currentSort = 'default';
+    currentFilter = 'All';
+    sortOption.value = 'default';
+    clearFilterBtn.classList.remove('visible');
+    resetPage();
     updateDashboard();
 });
 
 filterOption.forEach((button) => {
     button.addEventListener('click', () => {
         currentFilter = button.innerHTML;
-        currentPage = 1;
-        clearFilterBtn.classList.add('visible')
+        resetPage();
+        clearFilterBtn.classList.add('visible');
         updateDashboard();
     })
 });
@@ -104,9 +121,7 @@ filterOption.forEach((button) => {
 
 
 //STATE
-const transaction = JSON.parse(localStorage.getItem('transaction')) || [];
-let currentPage = 1;
-let currentSort = 'default'
+let currentSort = 'default';
 let currentFilter = 'All';
 let pendingDeleteId = null;
 
@@ -145,7 +160,7 @@ function clearForm() {
 }
 
 
-function addTransaction() {
+function handleAddTransaction() {
     const transactionData = getTransactionData();
 
     const errors = validateForm(transactionData);
@@ -154,9 +169,7 @@ function addTransaction() {
 
     if (hasErrors(errors)) return;
 
-    transaction.push(transactionData)
-
-    localStorage.setItem("transaction", JSON.stringify(transaction));
+    addTransaction(transactionData);
 
     updateDashboard();
 
@@ -197,57 +210,6 @@ function validateForm(data) {
 
 }
 
-//HELPER FUNCTIONS
-function formatDate(date) {
-    const formattedDate = new Date(date).toLocaleDateString('en-us', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    })
-
-    return formattedDate;
-}
-
-function hasErrors(errors) {
-    return Object.values(errors).some(error => {
-        return error !== ''
-    })
-}
-
-
-
-//CALCULATION FUNCTIONS
-function getTotalIncome() {
-    let totalIncome = 0
-    transaction.forEach(t => {
-        if (t.transactionType === 'income') {
-            totalIncome += Number(t.amount)
-        }
-    });
-
-    return totalIncome;
-}
-
-function getTotalExpense() {
-    let totalExpense = 0;
-
-    transaction.forEach(t => {
-        if (t.transactionType === 'expense') {
-            totalExpense += Number(t.amount);
-        }
-    })
-
-    return totalExpense;
-}
-
-
-function getNewBalance() {
-    return getTotalIncome() - getTotalExpense();
-}
-
-function getTransactionCount() {
-    return transaction.length
-}
 
 
 
@@ -282,37 +244,8 @@ function cancelDelete() {
 }
 
 function deleteTransaction(transactionId) {
-    const index = transaction.findIndex(t => t.id == transactionId)
-
-    if (index === -1) {
-        return
-    }
-
-    transaction.splice(index, 1);
-
-    localStorage.setItem('transaction', JSON.stringify(transaction))
-
+    deleteTransactionById(transactionId);
     updateDashboard();
-
-}
-
-
-//PAGINATION FUNCTIONS
-function handlePage(event) {
-    const card = event.target.closest('.js-page-number-btn')
-
-    if (!card) return
-
-    const pageId = Number(card.dataset.pageId)
-
-    updatePage(pageId)
-
-    updateDashboard();
-
-}
-
-function updatePage(pageId) {
-    currentPage = pageId;
 }
 
 
@@ -338,100 +271,37 @@ function removeMsgs() {
 }
 
 
-//SORT FUNCTIONS
-function getSortedTransactions(data) {
-    const copy = [...data]
-
-
-    if (currentSort === 'newest-first') {
-        return copy.sort((a, b) => new Date(b.date) - new Date(a.date))
-    }
-
-    if (currentSort === 'oldest-first') {
-        return copy.sort((a, b) => new Date(a.date) - new Date(b.date))
-    }
-
-    if (currentSort === 'highest-amount') {
-        return copy.sort((a, b) => {
-            const sa = a.transactionType === 'expense' ? -Number(a.amount) : Number(a.amount);
-            const sb = b.transactionType === 'expense' ? -Number(b.amount) : Number(b.amount);
-            return sb - sa;
-        })
-    }
-
-    if (currentSort === 'lowest-amount') {
-        return copy.sort((a, b) => {
-            const sa = a.transactionType === 'expense' ? -Number(a.amount) : Number(a.amount);
-            const sb = b.transactionType === 'expense' ? -Number(b.amount) : Number(b.amount);
-            return sa - sb;
-        })
-    }
-
-
-    return copy
-
-
-}
 
 
 
-
-//FILTER FUNCTIONS
-function getFilteredTransactions(data) {
-    const copy = [...data]
-
-    if (currentFilter === 'All') {
-        return copy
-    }
-    if (currentFilter === 'Income') {
-        return copy.filter(data => data.transactionType === 'income')
-    }
-    if (currentFilter === 'Expense') {
-        return copy.filter(data => data.transactionType === 'expense')
-    }
-
-    return copy;
-}
 
 
 //RENDER FUNCTIONS
 function updateDashboard() {
+    const transactions = getTransactions();
+    const processedTransactions = getProcessedTransactions({
+        transactions,
+        filter: currentFilter,
+        sort: currentSort
+    });
 
-    renderPageTransactions();
-    totalIncomeDisplay.innerHTML = `$${getTotalIncome()}`
-    totalExpenseDisplay.innerHTML = `$${getTotalExpense()}`
-    newBalanceDisplay.innerHTML = `<span class="dollar-tag">$</span>${getNewBalance()}`
-    transactionCountDisplay.innerHTML = `${getTransactionCount()}`
-
+    renderPageTransactions(processedTransactions);
+    totalIncomeDisplay.innerHTML = `$${getTotalIncome(transactions)}`;
+    totalExpenseDisplay.innerHTML = `$${getTotalExpense(transactions)}`;
+    newBalanceDisplay.innerHTML = `<span class="dollar-tag">$</span>${getNewBalance(transactions)}`;
+    transactionCountDisplay.innerHTML = `${getTransactionCount(transactions)}`;
 }
 
-function getProcessedTransactions() {
-    let data = [...transaction]
-
-    data = getFilteredTransactions(data);
-
-    data = getSortedTransactions(data);
-
-
-
-    return data
-}
-
-function renderPageTransactions() {
-    const data = getProcessedTransactions();
-
+function renderPageTransactions(data) {
     if (data.length === 0) {
         transactionDisplay.innerHTML = `<div class="empty-state">No transactions found.</div>`;
         pageNumberDisplay.innerHTML = '';
         return;
     }
 
-    const paginated = transactionPagination(data);
-
-    transactionDisplay.innerHTML = renderTransactions(paginated)
-
+    const paginated = transactionPagination(data, getCurrentPage());
+    transactionDisplay.innerHTML = renderTransactions(paginated);
     pageNumberDisplay.innerHTML = generatePageNumbers(data);
-
 }
 
 function renderTransactions(data) {
@@ -462,34 +332,6 @@ function renderTransactions(data) {
     return transactionsHTML;
 }
 
-function transactionList() {
-    return getProcessedTransactions()
-}
 
 
-function transactionPagination(data) {
-    const transactionPerPage = 5;
-    const start = (currentPage - 1) * transactionPerPage
-    const end = start + transactionPerPage
-
-    return data.slice(start, end)
-}
-
-function generatePageNumbers(data) {
-    let pageNumbers = data.length / 5
-    pageNumbers = Math.ceil(pageNumbers)
-
-    if (data.length === 0) return;
-
-    let PageNumberHTML = ''
-
-    for (let i = 1; i <= pageNumbers; i++) {
-        PageNumberHTML += `<button class="js-page-number-btn page-number-btn ${i === currentPage ? 'active-page-number' : ''} " data-page-id="${i}">${i}</button>`
-    }
-
-    return PageNumberHTML
-}
-
-
-export {transactionList}
 
