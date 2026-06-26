@@ -110,3 +110,14 @@
   color: var(--MAIN-TEXT-COLOR);
   text-transform: capitalize;
 }
+
+.page-numbers-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.display-page-numbers {
+  font-size: 13px;
+}

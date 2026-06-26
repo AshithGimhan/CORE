@@ -1,24 +1,11 @@
 ﻿import { formatDate } from './utils.js';
 import { getTransactions, getProcessedTransactions, transactionPagination } from './transactions.js';
 import { handlePage, getCurrentPage, generatePageNumbers } from './pagination.js';
+import '../scripts/hamburger.js'
 
-
-
-const hamburgerBtn = document.querySelector('.js-hamburger-btn');
-const hamburgerDisplay = document.querySelector('.js-hamburger-display');
-const hamburgerCloseBtn = document.querySelector('.js-ham-close-btn');
 const transactionDisplay = document.querySelector('.js-transactions-list-view');
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 const currentPageNoDisplay = document.querySelector('.js-page-number-display')
-
-
-hamburgerBtn.addEventListener('click', () => {
-    hamburgerDisplay.classList.add('hamburger-menu-visible');
-})
-
-hamburgerCloseBtn.addEventListener('click', () => {
-    hamburgerDisplay.classList.remove('hamburger-menu-visible');
-})
 
 
 
@@ -26,6 +13,13 @@ pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
     updateTransactionPage();
 });
+
+if (transactionDisplay) {
+    transactionDisplay.addEventListener('click', (event) => {
+        pendingDeleteId = handleDelete(event)
+    })
+}
+
 
 updateTransactionPage();
 

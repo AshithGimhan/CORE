@@ -11,6 +11,7 @@ import {
     getTransactionCount
 } from "./transactions.js";
 import { handlePage, resetPage, getCurrentPage, generatePageNumbers } from "./pagination.js";
+import '../scripts/hamburger.js'
 
 
 
@@ -75,6 +76,7 @@ if (addTransactionBtn) {
         handleAddTransaction();
     })
 }
+
 if (transactionDisplay) {
     transactionDisplay.addEventListener('click', (event) => {
         pendingDeleteId = handleDelete(event)
