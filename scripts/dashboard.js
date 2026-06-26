@@ -12,6 +12,7 @@ import {
 } from "./transactions.js";
 import { handlePage, resetPage, getCurrentPage, generatePageNumbers } from "./pagination.js";
 import '../scripts/hamburger.js'
+import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js'
 
 
 
@@ -50,8 +51,7 @@ const transactionDisplay = document.querySelector('.js-transaction-list');
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 
 
-//POP UP DOM
-const popUpDisplay = document.querySelector('.js-pop-up')
+
 
 
 //FILTER DOM
@@ -84,7 +84,9 @@ if (transactionDisplay) {
 }
 
 document.querySelector('.js-btn-confirm').addEventListener('click', () => {
-    confirmDelete();
+    confirmDelete(pendingDeleteId);
+    updateDashboard();
+
 })
 document.querySelector('.js-btn-cancel').addEventListener('click', () => {
     cancelDelete();
@@ -126,6 +128,7 @@ filterOption.forEach((button) => {
 let currentSort = 'default';
 let currentFilter = 'All';
 let pendingDeleteId = null;
+
 
 const dashboardPage = Boolean(addTransactionBtn)
 
@@ -210,44 +213,6 @@ function validateForm(data) {
     return errors;
 
 
-}
-
-
-
-
-//DELETE FUNCTIONS
-function handleDelete(event) {
-    if (!event.target.classList.contains('js-delete-btn')) {
-        return
-    }
-
-    const card = event.target.closest('.js-transaction-id');
-
-    const transactionId = card.dataset.transactionId
-
-    popUpDisplay.classList.add('active')
-
-    return transactionId
-
-}
-
-function confirmDelete() {
-    if (!pendingDeleteId) return;
-
-    deleteTransaction(pendingDeleteId);
-    pendingDeleteId = null;
-    popUpDisplay.classList.remove('active');
-}
-
-function cancelDelete() {
-    pendingDeleteId = null;
-    popUpDisplay.classList.remove('active')
-
-}
-
-function deleteTransaction(transactionId) {
-    deleteTransactionById(transactionId);
-    updateDashboard();
 }
 
 

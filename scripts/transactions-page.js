@@ -2,12 +2,13 @@
 import { getTransactions, getProcessedTransactions, transactionPagination } from './transactions.js';
 import { handlePage, getCurrentPage, generatePageNumbers } from './pagination.js';
 import '../scripts/hamburger.js'
+import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js';
 
 const transactionDisplay = document.querySelector('.js-transactions-list-view');
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 const currentPageNoDisplay = document.querySelector('.js-page-number-display')
 
-
+let pendingDeleteId = null;
 
 pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
@@ -19,6 +20,15 @@ if (transactionDisplay) {
         pendingDeleteId = handleDelete(event)
     })
 }
+
+document.querySelector('.js-btn-confirm').addEventListener('click', () => {
+    confirmDelete(pendingDeleteId);
+    updateTransactionPage();
+
+})
+document.querySelector('.js-btn-cancel').addEventListener('click', () => {
+    cancelDelete();
+})
 
 
 updateTransactionPage();
@@ -38,7 +48,7 @@ function renderTransactions(data) {
               <td >${t.categoryType}</td>
               <td>${formatDate(t.date)}</td>
               <td class="${className}">$${t.amount}</td>
-              <td><i class="js-delete-btn ph ph-trash delete-btn"></i></td>
+              <td class="js-transaction-id" data-transaction-id="${t.id}"><i class="js-delete-btn ph ph-trash delete-btn"></i></td>
             </tr>
           `;
         });
@@ -62,6 +72,7 @@ function currentPageNumber() {
     const pageSize = 5;
     let firstNumber = (currentPage - 1) * pageSize + 1;
     let lastNumber = currentPage * pageSize
+
     const allTransactions = getTransactions()
 
 
@@ -69,7 +80,9 @@ function currentPageNumber() {
         lastNumber = allTransactions.length
     }
 
-
+    if (!allTransactions.length) {
+        return pageCurrentPageDisplay = 'No transactions found'
+    }
 
     const displayedTransaction = transactionPagination(allTransactions, getCurrentPage())
 
