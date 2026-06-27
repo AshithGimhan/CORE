@@ -57,8 +57,6 @@ const pageNumberDisplay = document.querySelector('.js-page-numbers');
 //FILTER DOM
 const sortOption = document.querySelector('.js-sort');
 const filterOption = document.querySelectorAll('.js-filter-btn');
-const arrowElement = document.querySelector('.js-arrow');
-const closeElement = document.querySelector('.js-close')
 const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
 
 
@@ -106,7 +104,7 @@ sortOption.addEventListener('change', (option) => {
 
 clearFilterBtn.addEventListener('click', () => {
     currentSort = 'default';
-    currentFilter = 'All';
+    transactionFilter = 'all';
     sortOption.value = 'default';
     clearFilterBtn.classList.remove('visible');
     resetPage();
@@ -115,18 +113,24 @@ clearFilterBtn.addEventListener('click', () => {
 
 filterOption.forEach((button) => {
     button.addEventListener('click', () => {
-        currentFilter = button.innerHTML;
+        transactionFilter = button.dataset.filter;
         resetPage();
         clearFilterBtn.classList.add('visible');
         updateDashboard();
+
+        if (transactionFilter === 'all') {
+            clearFilterBtn.classList.remove('visible');
+        }
     })
+
 });
 
 
 
 //STATE
 let currentSort = 'default';
-let currentFilter = 'All';
+let transactionFilter = 'all';
+let categoryFilter = 'all'
 let pendingDeleteId = null;
 
 
@@ -248,7 +252,8 @@ function updateDashboard() {
     const transactions = getTransactions();
     const processedTransactions = getProcessedTransactions({
         transactions,
-        filter: currentFilter,
+        transactionFilter,
+        categoryFilter,
         sort: currentSort
     });
 

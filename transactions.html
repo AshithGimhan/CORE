@@ -94,9 +94,9 @@
             </header>
 
             <div class="transaction-filter-options-middle filter-options">
-              <span class="js-filter-btn">All</span>
-              <span class="js-filter-btn">Income</span>
-              <span class="js-filter-btn">Expense</span>
+              <span class="js-filter-btn" data-filter="all">All</span>
+              <span class="js-filter-btn" data-filter="income">Income</span>
+              <span class="js-filter-btn" data-filter="expense">Expense</span>
             </div>
 
             <form
@@ -104,11 +104,11 @@
               aria-label="Transaction filters"
             >
               <select
-                class="js-category-dropdown food-dropdown"
+                class="food-dropdown"
                 id="category-type"
                 name="category-type"
               >
-                <option value="default">Category</option>
+                <option value="all">Category</option>
                 <option value="food">Food</option>
                 <option value="transport">Transport</option>
                 <option value="bills">Bills</option>
@@ -162,9 +162,9 @@
                   <th></th>
                 </tr>
               </thead>
-
               <tbody class="js-transactions-list-view"></tbody>
             </table>
+            <div class="js-empty-transactions"></div>
           </div>
           <div class="page-numbers-container">
             <div class="js-page-numbers page-numbers"></div>

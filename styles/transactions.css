@@ -127,3 +127,7 @@
 .display-page-numbers {
   font-size: 13px;
 }
+
+.empty-state {
+  color: var(--SECONDARY-TEXT-COLOR);
+}

@@ -28,11 +28,18 @@ export function deleteTransactionById(transactionId) {
     return transactions;
 }
 
-export function getFilteredTransactions(data, filter = 'All') {
-    if (filter === 'All') return data;
-    if (filter === 'Income') return data.filter((item) => item.transactionType === 'income');
-    if (filter === 'Expense') return data.filter((item) => item.transactionType === 'expense');
-    return data;
+export function getFilteredTransactions(data, transactionFilter = 'all', categoryFilter = 'default') {
+    let filtered = data
+
+    if (transactionFilter !== 'all') {
+        filtered = filtered.filter(item => item.transactionType === transactionFilter)
+    }
+
+    if (categoryFilter !== 'all') {
+        filtered = filtered.filter(item => item.categoryType === categoryFilter)
+    }
+
+    return filtered;
 }
 
 export function getSortedTransactions(data, sort = 'default') {
@@ -65,11 +72,13 @@ export function getSortedTransactions(data, sort = 'default') {
     return copy;
 }
 
-export function getProcessedTransactions({ transactions = [], filter = 'All', sort = 'default' } = {}) {
+export function getProcessedTransactions({ transactions = [], transactionFilter = 'all', categoryFilter = 'default', sort = 'default' } = {}) {
     let data = [...transactions];
-    data = getFilteredTransactions(data, filter);
+    data = getFilteredTransactions(data, transactionFilter, categoryFilter);
     data = getSortedTransactions(data, sort);
     return data;
+
+
 }
 
 export function transactionPagination(data, currentPage, transactionPerPage = 5) {
@@ -97,3 +106,4 @@ export function getNewBalance(transactions) {
 export function getTransactionCount(transactions) {
     return transactions.length;
 }
+
