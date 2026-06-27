@@ -72,10 +72,24 @@ export function getSortedTransactions(data, sort = 'default') {
     return copy;
 }
 
-export function getProcessedTransactions({ transactions = [], transactionFilter = 'all', categoryFilter = 'default', sort = 'default' } = {}) {
+export function getSearchedTransaction(data, search = '') {
+    let copy = [...data];
+
+    if (search) {
+        copy = copy.filter((item) => item.description.toLowerCase().includes(search))
+    }
+
+    return copy;
+
+}
+
+export function getProcessedTransactions({ transactions = [], transactionFilter = 'all', categoryFilter = 'default', sort = 'default', search = '' } = {}) {
     let data = [...transactions];
+
     data = getFilteredTransactions(data, transactionFilter, categoryFilter);
     data = getSortedTransactions(data, sort);
+    data = getSearchedTransaction(data, search);
+    
     return data;
 
 

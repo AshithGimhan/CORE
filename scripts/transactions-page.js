@@ -4,6 +4,8 @@ import { handlePage, getCurrentPage, generatePageNumbers, resetPage } from './pa
 import '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js';
 
+
+/* DOM ELEMENTS */
 const transactionDisplay = document.querySelector('.js-transactions-list-view');
 const emptyTransactionMsg = document.querySelector('.js-empty-transactions')
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
@@ -15,13 +17,23 @@ const sortOption = document.querySelector('.js-sort');
 const transactionFilterButtons = document.querySelectorAll('.js-filter-btn[data-filter]');
 const categorySelect = document.querySelector('#category-type');
 const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
+const searchInput = document.querySelector('.js-search-input')
 
 
+/* STATE */
 let currentSort = 'default';
 let transactionFilter = 'all';
 let categoryFilter = 'all';
 let pendingDeleteId = null;
+let currentSearch = '';
 
+
+
+/* INITIALIZE */
+updateTransactionPage();
+
+
+/* EVENT LISTENERS */
 pageNumberDisplay.addEventListener('click', (event) => {
     handlePage(event);
     updateTransactionPage();
@@ -55,7 +67,9 @@ clearFilterBtn.addEventListener('click', () => {
     currentSort = 'default';
     transactionFilter = 'all';
     categoryFilter = 'all';
+    currentSearch = ''
     sortOption.value = 'default';
+    searchInput.value = '';
     if (categorySelect) categorySelect.value = 'all';
     clearFilterBtn.classList.remove('visible');
     resetPage();
@@ -92,9 +106,24 @@ if (categorySelect) {
     });
 }
 
+searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value.trim().toLowerCase();
 
-updateTransactionPage();
+    clearFilterBtn.classList.add('visible');
 
+    console.log(currentSearch)
+
+    resetPage();
+    updateTransactionPage();
+
+});
+
+
+
+
+
+
+/* FUNCTIONS */
 function renderTransactions(data) {
     let transactionHTML = '';
 
@@ -159,24 +188,19 @@ function currentPageNumber() {
     return pageCurrentPageDisplay;
 }
 
-
-
 function updateTransactionPage() {
     const transactions = getTransactions();
+
     const processedTransactions = getProcessedTransactions({
         transactions,
         transactionFilter,
         categoryFilter,
-        sort: currentSort
+        sort: currentSort,
+        search: currentSearch
     });
 
-    renderPageTransactions(
-        processedTransactions
-    )
+    renderPageTransactions(processedTransactions);
+
     currentPageNoDisplay.innerHTML = currentPageNumber();
 
-
-
 }
-
-
