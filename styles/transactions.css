@@ -69,7 +69,7 @@
   padding: 8px 12px;
   font-size: var(--font-size-xxs);
   border: var(--BORDER);
-  
+
   background-color: var(--CARD-PANELS);
   color: var(--SECONDARY-TEXT-COLOR);
   cursor: pointer;
@@ -175,20 +175,37 @@
 }
 
 @media (min-width: 768px) {
-  .desktop-section {
-    margin-top: 32px;
-  }
-
-  .filter-options {
+  .transaction-filter-options {
     margin-top: 12px;
   }
+}
 
-  .transaction-filter-form {
-    grid-template-columns: 1fr 1fr;
+@media (min-width: 1024px) {
+  .desktop-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .transaction-list-view {
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .desktop-section {
+    display: grid;
+    grid-template-columns: 1.2 1.8fr;
+    gap: 12px;
+  }
+
+  .transaction-list-view {
+    margin-top: 12px;
+    height: fit-content;
   }
 
   .transaction-list-view th,
   .transaction-list-view td {
-    padding: 16px;
+    padding: 32px;
   }
 }
