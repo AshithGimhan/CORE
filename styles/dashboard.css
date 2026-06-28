@@ -36,10 +36,9 @@ body {
 
 body {
   font-size: var(--font-size-md);
-}
-
-body {
   min-height: 100vh;
+  color: var(--MAIN-TEXT-COLOR);
+  background-color: var(--BACKGROUND);
 }
 
 .top-layout {
@@ -48,27 +47,28 @@ body {
   min-height: 100vh;
   color: var(--MAIN-TEXT-COLOR);
   background-color: var(--BACKGROUND);
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
-
-/* NAV STYLES */
 
 .nav-top {
   display: flex;
   justify-content: space-between;
-  padding: 24px 24px 8px 24px;
+  align-items: center;
+  padding: 20px 20px;
   border-bottom: var(--BORDER);
 }
 
 .main-title {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .main-title h1 {
   font-size: var(--font-size-lg);
   text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 500;
 }
 
 .main-title i {
@@ -78,11 +78,17 @@ body {
 .icons {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .icons i {
   font-size: var(--font-size-xl);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.icons i:hover {
+  color: var(--PRIMARY-ACCENT);
 }
 
 .hamburger-menu-hidden {
@@ -91,17 +97,12 @@ body {
   right: 0;
   height: 100vh;
   width: 200px;
-
   background-color: var(--CARD-PANELS);
   padding: 24px;
-
   transform: translateX(100%);
   pointer-events: none;
   z-index: 1;
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .hamburger-menu-visible {
@@ -114,15 +115,15 @@ nav {
 }
 
 nav ul {
-  line-height: 42px;
-  margin-top: 10px;
+  line-height: 1.6;
+  margin-top: 8px;
 }
 
 nav ul li {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 0;
+  gap: 8px;
+  padding: 8px 0;
 }
 
 nav ul li i {
@@ -133,24 +134,21 @@ nav ul li i {
 nav ul li a {
   text-decoration: none;
   text-transform: uppercase;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   color: var(--SECONDARY-TEXT-COLOR);
   cursor: pointer;
+  transition: color 0.25s ease;
 }
 
-nav ul li a:hover {
-  color: var(--PRIMARY-ACCENT);
-}
-
+nav ul li a:hover,
 nav ul li a.nav-active {
   color: var(--PRIMARY-ACCENT);
 }
 
-/* HERO SECTION STYLES */
 .hero-top {
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 20px;
   background: var(--CARD-PANELS);
 }
 
@@ -158,7 +156,7 @@ nav ul li a.nav-active {
   background: var(--CARD-PANELS);
   border: var(--BORDER);
   margin: 12px;
-  padding: 16px 0;
+  padding: 20px;
 }
 
 .cards-section {
@@ -170,12 +168,17 @@ nav ul li a.nav-active {
   font-size: var(--font-size-sm);
   text-transform: uppercase;
   color: var(--SECONDARY-TEXT-COLOR);
+  letter-spacing: 0.2px;
+  margin-bottom: 8px;
 }
 
 .net-balance p {
   font-size: var(--font-size-4xl);
   text-transform: uppercase;
   color: var(--MAIN-TEXT-COLOR);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 16px;
 }
 
 .date-count-stats {
@@ -204,7 +207,8 @@ nav ul li a.nav-active {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
 }
 
 .stat-cards {
@@ -212,22 +216,26 @@ nav ul li a.nav-active {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .stat-cards p {
   color: var(--SECONDARY-TEXT-COLOR);
   font-size: var(--font-size-xxs);
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
 }
 
 .stat-cards span {
   color: var(--MAIN-TEXT-COLOR);
   font-size: var(--font-size-lg);
+  font-weight: 500;
 }
 
 .stat-cards .income {
   color: var(--GREEN);
 }
+
 .stat-cards .expense {
   color: var(--RED);
 }
@@ -238,14 +246,13 @@ nav ul li a.nav-active {
   margin-right: 2px;
 }
 
-/* TRANSACTION LIST STYLES */
 .desktop-section {
   color: var(--SECONDARY-TEXT-COLOR);
   margin: 12px;
 }
 
 .transaction-list-section {
-  padding: 16px;
+  padding: 20px;
   gap: 12px;
   border: var(--BORDER);
   background: var(--CARD-PANELS);
@@ -255,20 +262,23 @@ nav ul li a.nav-active {
 .transaction-list-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 16px;
 }
 
 .transaction-list-section h2,
 .transaction-form-section h2 {
   font-size: var(--font-size-lg);
   color: var(--MAIN-TEXT-COLOR);
+  letter-spacing: 0.2px;
 }
 
 .filter-options {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .filter-options span.active {
@@ -282,15 +292,15 @@ nav ul li a.nav-active {
   padding: 8px 14px;
   font-size: var(--font-size-xxs);
   border: var(--BORDER);
-  border-radius: 100px;
   background-color: #fff;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .filter-options span:hover {
   background-color: var(--BACKGROUND);
   color: var(--PRIMARY-ACCENT);
-  border: 1px solid var(--PRIMARY-ACCENT);
+  border-color: var(--PRIMARY-ACCENT);
 }
 
 .dropdown select:focus {
@@ -305,7 +315,8 @@ nav ul li a.nav-active {
 .clear-filter-btn {
   display: none;
 }
-.visible {
+
+.clear-filter-btn.visible {
   display: flex;
 }
 
@@ -316,51 +327,63 @@ nav ul li a.nav-active {
 .transaction-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .transaction-list-container {
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .transaction-card {
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  align-items: center;
+  padding: 16px 0;
   border-bottom: var(--BORDER);
+  transition: background-color 0.2s ease;
+}
+
+.transaction-card:hover {
+  background-color: #fafbfc;
 }
 
 .transaction-left {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
+  flex: 1;
 }
 
 .transaction-left h3 {
   font-size: var(--font-size-sm);
+  color: var(--MAIN-TEXT-COLOR);
+  font-weight: 500;
 }
 
 .date-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .date-section p {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   color: #a09b95;
 }
 
 .transaction-right {
   display: flex;
   flex-direction: column;
-  align-items: end;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 6px;
+  margin-left: 16px;
 }
+
 .transaction-right h3 {
   font-size: var(--font-size-md);
+  font-weight: 500;
 }
 
 .income,
@@ -375,18 +398,28 @@ nav ul li a.nav-active {
 
 .delete-btn {
   color: var(--RED);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: opacity 0.2s ease;
+}
+
+.delete-btn:hover {
+  opacity: 0.7;
 }
 
 .page-numbers {
   display: flex;
   gap: 8px;
+  margin-top: 16px;
 }
 
 .page-number-btn {
   padding: 8px 12px;
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
-  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .active-page-number,
@@ -416,13 +449,12 @@ nav ul li a.nav-active {
 
 .pop-up-container {
   border: var(--BORDER);
-
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 18px;
+  gap: 16px;
   padding: 24px;
-  width: 250px;
+  width: 280px;
   height: fit-content;
   background-color: var(--CARD-PANELS);
 }
@@ -431,6 +463,7 @@ nav ul li a.nav-active {
   text-transform: uppercase;
   font-size: var(--font-size-md);
   color: var(--RED);
+  letter-spacing: 0.2px;
 }
 
 .pop-up-buttons {
@@ -442,9 +475,11 @@ nav ul li a.nav-active {
 .pop-up-buttons button {
   border: var(--BORDER);
   font-size: var(--font-size-sm);
-  padding: 12px 24px;
+  padding: 10px 24px;
   text-transform: uppercase;
   background-color: var(--CARD-PANELS);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .pop-up-buttons button:hover:first-child {
@@ -460,24 +495,31 @@ nav ul li a.nav-active {
 .empty-state {
   text-align: center;
   color: var(--LIGHT-GRAY);
+  padding: 20px;
 }
 
-/* FORM STYLES */
 .transaction-form-section {
-  margin-bottom: 24px;
-  padding: 18px;
+  margin-bottom: 20px;
+  padding: 20px;
   border: var(--BORDER);
   background: var(--CARD-PANELS);
 }
 
+.transaction-form-section h2 {
+  font-size: var(--font-size-lg);
+  color: var(--MAIN-TEXT-COLOR);
+  letter-spacing: 0.2px;
+  margin-bottom: 16px;
+}
+
 .transaction-form {
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .form-input-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin-top: 12px;
 }
 
@@ -486,13 +528,14 @@ nav ul li a.nav-active {
   font-size: var(--font-size-xxs);
   text-transform: uppercase;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
 }
 
 .form-input-container input,
 .form-input-container select {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border: var(--BORDER);
   background: #fff;
   font-size: var(--font-size-sm);
@@ -500,6 +543,7 @@ nav ul li a.nav-active {
   font-family: inherit;
   -webkit-appearance: none;
   appearance: none;
+  transition: border-color 0.2s ease, outline-color 0.2s ease;
 }
 
 .form-input-container input:focus,
@@ -527,11 +571,15 @@ nav ul li a.nav-active {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  transition: background 0.2s ease;
 }
 
 .add-transaction-btn:hover {
-  background: black;
-  color: #fff;
+  opacity: 0.9;
+}
+
+.add-transaction-btn.added {
+  background: var(--GREEN);
 }
 
 .error {
@@ -551,9 +599,9 @@ footer {
 footer p {
   font-size: var(--font-size-xxs);
   text-align: center;
+  color: var(--SECONDARY-TEXT-COLOR);
 }
 
-/* TABLET STYLES */
 @media (min-width: 768px) {
   .top-layout {
     display: grid;
@@ -566,22 +614,20 @@ footer p {
   .sidebar-navigation {
     grid-column: 1 / 2;
     grid-row: 1 / 3;
-
     display: flex;
     flex-direction: column;
     height: 100vh;
     position: fixed;
     width: 250px;
     top: 0;
-
     border-right: var(--BORDER);
     background: var(--CARD-PANELS);
   }
 
   .nav-top {
-    padding: 24px 16px;
+    padding: 20px 16px;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
 
   .main-title h1 {
@@ -609,15 +655,18 @@ footer p {
   }
 
   nav ul {
-    line-height: 1.2;
+    line-height: 1.4;
     margin-top: 0;
+  }
+
+  nav ul li {
+    padding: 6px 0;
   }
 
   nav ul li a {
     font-size: var(--font-size-sm);
     color: var(--SECONDARY-TEXT-COLOR);
-    border-radius: 8px;
-    padding: 6px 10px;
+    padding: 6px 8px;
   }
 
   nav ul li a:hover {
@@ -626,14 +675,14 @@ footer p {
 
   .hero-top {
     background: var(--CARD-PANELS);
-    padding: 24px;
+    padding: 20px;
   }
 
   .hero-section {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
     margin: 16px;
-    padding: 16px;
+    padding: 20px;
   }
 
   .desktop-section {
@@ -660,7 +709,7 @@ footer p {
   .transaction-list-section,
   .transaction-form-section {
     background: var(--CARD-PANELS);
-    padding: 24px;
+    padding: 20px;
     margin: 4px 4px 16px 4px;
   }
 
@@ -679,7 +728,7 @@ footer p {
   .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 16px;
   }
 
   .cards-section {
@@ -698,14 +747,13 @@ footer p {
 
   .desktop-section {
     display: grid;
-    grid-template-columns: 1.6fr 1.4fr;
-    gap: 12px;
+    grid-template-columns: 1.5fr 1.5fr;
+    gap: 16px;
   }
 
   .transaction-list-top {
     justify-content: space-between;
     gap: 12px;
-    flex-wrap: wrap;
   }
 }
 
@@ -714,8 +762,8 @@ footer p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px;
-    padding: 24px 32px;
-    margin: 32px 32px 24px 32px;
+    padding: 28px;
+    margin: 28px 28px 20px 28px;
   }
 
   .cards-section {
@@ -724,11 +772,16 @@ footer p {
   }
 
   .cards-container {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
   }
 
   .stat-cards {
-    padding: 32px;
+    padding: 24px;
+  }
+
+  .stat-cards span {
+    font-size: var(--font-size-xl);
   }
 
   .desktop-section {
@@ -740,10 +793,12 @@ footer p {
 
   .transaction-list-section {
     grid-column: 1 / 2;
+    padding: 24px;
   }
 
   .transaction-form-section {
     grid-column: 2 / 3;
+    padding: 24px;
   }
 
   .transaction-list-section h2,
@@ -759,58 +814,54 @@ footer p {
   .dropdown select,
   .clear-filter-btn {
     font-size: var(--font-size-xs);
-    padding: 8px 16px;
+    padding: 10px 16px;
   }
 
   .transaction-list {
-    gap: 18px;
+    gap: 0;
   }
 
   .transaction-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: var(--BORDER);
+    padding: 18px 0;
   }
 
   .transaction-left {
-    gap: 10px;
+    gap: 6px;
   }
 
   .date-section {
-    gap: 10px;
+    gap: 8px;
   }
 
   .date-section p {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
   }
 
   .transaction-right {
-    gap: 12px;
+    gap: 6px;
   }
 
   .form-input-container {
-    gap: 14px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 12px;
   }
 
   .form-input-container input,
   .form-input-container select {
-    padding: 14px 16px;
+    padding: 12px 14px;
     font-size: var(--font-size-sm);
   }
 
   .add-transaction-btn {
-    padding: 14px 18px;
-    font-size: var(--font-size-xl);
+    padding: 12px 16px;
+    font-size: var(--font-size-md);
   }
 
   .page-number-btn {
-    padding: 8px 14px;
+    padding: 8px 12px;
   }
 
   footer {
-    padding: 18px 32px;
+    padding: 18px 28px;
   }
 }

@@ -188,6 +188,14 @@ function handleAddTransaction() {
 
     addTransaction(transactionData);
 
+    addTransactionBtn.innerText = 'Transaction added'
+    addTransactionBtn.classList.add('added');
+
+    setTimeout(() => {
+        addTransactionBtn.innerText = 'Add transaction'
+        addTransactionBtn.classList.remove('added');
+    }, 3000);
+
     updateDashboard();
 
     clearForm();
