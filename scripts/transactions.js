@@ -1,4 +1,6 @@
-﻿const STORAGE_KEY = 'transaction';
+﻿import { formatDate } from "./utils.js";
+
+const STORAGE_KEY = 'transaction';
 
 export function getTransactions() {
     return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -83,15 +85,31 @@ export function getSearchedTransaction(data, search = '') {
 
 }
 
-export function getProcessedTransactions({ transactions = [], transactionFilter = 'all', categoryFilter = 'default', sort = 'default', search = '' } = {}) {
+export function getTransactionByDate(data, dateFilter = '') {
+    let copy = [...data];
+
+
+    if (dateFilter) {
+        copy = copy.filter((item) => {
+            const date = formatDate(item.date)
+            return date === dateFilter
+        })
+    }
+
+    return copy;
+}
+
+export function getProcessedTransactions({ transactions = [], transactionFilter = 'all', categoryFilter = 'default', sort = 'default', search = '', dateFilter = '' } = {}) {
     let data = [...transactions];
 
     data = getFilteredTransactions(data, transactionFilter, categoryFilter);
     data = getSortedTransactions(data, sort);
     data = getSearchedTransaction(data, search);
-    
-    return data;
+    data = getTransactionByDate(data, dateFilter);
 
+    console.log()
+
+    return data;
 
 }
 

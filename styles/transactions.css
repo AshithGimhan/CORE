@@ -131,3 +131,8 @@
 .empty-state {
   color: var(--SECONDARY-TEXT-COLOR);
 }
+
+.filter-options span.active {
+  border-color: var(--PRIMARY-ACCENT);
+  color: var(--PRIMARY-ACCENT);
+}

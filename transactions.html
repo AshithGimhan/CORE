@@ -27,6 +27,9 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
     />
+
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+
   </head>
 
   <body>
@@ -85,11 +88,11 @@
             <header class="transaction-filter-options-top">
               <div>
                 <h2>Transactions</h2>
-                <p>14 records found</p>
+                <p class="js-transaction-count"></p>
               </div>
               <div class="download-button">
                 <i class="ph ph-export"></i>
-                <a type="button">Export</a>
+                <a class="js-export-button" type="button">Export</a>
               </div>
             </header>
 

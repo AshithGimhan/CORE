@@ -10,15 +10,14 @@ const transactionDisplay = document.querySelector('.js-transactions-list-view');
 const emptyTransactionMsg = document.querySelector('.js-empty-transactions')
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 const currentPageNoDisplay = document.querySelector('.js-page-number-display')
-
-
-//FILTER DOM
 const sortOption = document.querySelector('.js-sort');
 const transactionFilterButtons = document.querySelectorAll('.js-filter-btn[data-filter]');
 const categorySelect = document.querySelector('#category-type');
 const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
 const searchInput = document.querySelector('.js-search-input')
-
+const dateInput = document.querySelector('.js-date-input');
+const transactionCount = document.querySelector('.js-transaction-count');
+const exportBtn = document.querySelector('.js-export-button');
 
 /* STATE */
 let currentSort = 'default';
@@ -26,7 +25,7 @@ let transactionFilter = 'all';
 let categoryFilter = 'all';
 let pendingDeleteId = null;
 let currentSearch = '';
-
+let currentDate = '';
 
 
 /* INITIALIZE */
@@ -68,6 +67,8 @@ clearFilterBtn.addEventListener('click', () => {
     transactionFilter = 'all';
     categoryFilter = 'all';
     currentSearch = ''
+    currentDate = '';
+    dateInput.value = ''
     sortOption.value = 'default';
     searchInput.value = '';
     if (categorySelect) categorySelect.value = 'all';
@@ -86,6 +87,8 @@ transactionFilterButtons.forEach((button) => {
             clearFilterBtn.classList.add('visible');
         }
 
+        button.classList.add('active');
+        button.classList.remove('active');
         resetPage();
         updateTransactionPage();
     })
@@ -118,9 +121,37 @@ searchInput.addEventListener('input', (e) => {
 
 });
 
+dateInput.addEventListener('input', e => {
+    currentDate = formatDate(e.target.value.trim())
 
+    if (currentDate === 'Invalid Date') {
+        currentDate = '';
+        clearFilterBtn.classList.remove('visible');
+        updateTransactionPage();
+        return
+    }
 
+    clearFilterBtn.classList.add('visible');
 
+    resetPage();
+    updateTransactionPage();
+})
+
+exportBtn.addEventListener('click', () => {
+    const transactions = getTransactions();
+
+    const processedTransactions = getProcessedTransactions({
+        transactions,
+        transactionFilter,
+        categoryFilter,
+        sort: currentSort,
+        search: currentSearch,
+        dateFilter: currentDate
+    });
+
+    generatePDF(processedTransactions);
+
+});
 
 
 /* FUNCTIONS */
@@ -162,14 +193,14 @@ function renderPageTransactions(data) {
     pageNumberDisplay.innerHTML = generatePageNumbers(data);
 }
 
-function currentPageNumber() {
+function currentPageNumber(processedTransactions) {
     let pageCurrentPageDisplay = ''
     const currentPage = getCurrentPage()
     const pageSize = 5;
     let firstNumber = (currentPage - 1) * pageSize + 1;
     let lastNumber = currentPage * pageSize
 
-    const allTransactions = getTransactions()
+    const allTransactions = processedTransactions;
 
 
     if (lastNumber > allTransactions.length) {
@@ -196,11 +227,83 @@ function updateTransactionPage() {
         transactionFilter,
         categoryFilter,
         sort: currentSort,
-        search: currentSearch
+        search: currentSearch,
+        dateFilter: currentDate
     });
 
     renderPageTransactions(processedTransactions);
 
-    currentPageNoDisplay.innerHTML = currentPageNumber();
+    if (processedTransactions.length === 0) {
+        currentPageNoDisplay.innerHTML = '';
+        transactionCount.innerHTML = 'No records found'
+
+    } else {
+        transactionCount.innerHTML = `${processedTransactions.length} records found`
+        currentPageNoDisplay.innerHTML = currentPageNumber(processedTransactions);
+    }
+
+}
+
+function generatePDF(transactions) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const x = {
+        desc: 15,
+        category: 65,
+        date: 90,
+        amount: 135,
+        transaction: 165
+    }
+
+    let y = 25
+    const rowHeight = 10;
+
+    doc.setFont("courier");
+    doc.setFontSize(14);
+    doc.text(10, 10, 'CORE TRANSACTION REPORT');
+
+    doc.setFontSize(10);
+    doc.text(x.desc, y, 'DESCRIPTION')
+    doc.text(x.category, y, 'CATEGORY')
+    doc.text(x.date, y, 'DATE')
+    doc.text(x.amount, y, 'AMOUNT')
+    doc.text(x.transaction, y, 'TRANSACTION')
+
+    y += rowHeight;
+
+    doc.line(10, y - 7, 200, y - 7)
+
+    transactions.forEach(t => {
+        const amount = Number(t.amount).toFixed(2);
+        const sign = t.transactionType === 'income' ? '+' : '-'
+
+        if (t.transactionType === 'income') {
+            doc.setFillColor(220, 255, 230);
+            doc.rect(10, y - 6, 190, 9, 'F')
+        } else if (t.transactionType === 'expense') {
+            doc.setFillColor(255, 225, 225);
+            doc.rect(10, y - 6, 190, 9, 'F')
+        }
+
+
+        doc.text(t.description, x.desc, y);
+
+        doc.text(t.categoryType, x.category, y);
+        doc.text(formatDate(t.date), x.date, y);
+
+        doc.text(`${sign}$${amount}`, x.amount, y, { align: 'left' });
+        doc.text(t.transactionType, x.transaction, y);
+
+
+        y += 15
+
+        if (y > 280) {
+            doc.addPage();
+            y = 20;
+        }
+    });
+
+    doc.save('CORE_TRANSACTIONS.pdf')
 
 }
