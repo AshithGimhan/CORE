@@ -11,10 +11,26 @@
   --BORDER: 1px solid var(--LIGHT-GRAY);
 }
 
+.transaction-filter-options,
+.transaction-list-view {
+  background: var(--CARD-PANELS);
+  border: var(--BORDER);
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+}
+
+.transaction-filter-options {
+  margin-bottom: 16px;
+}
+
 .transaction-filter-options-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   padding-bottom: 12px;
+  border-bottom: var(--BORDER);
+  margin-bottom: 12px;
 }
 
 .transaction-filter-options-top h2 {
@@ -36,16 +52,34 @@
 
 .download-button {
   border: var(--BORDER);
-  background-color: #fff;
+  background-color: var(--CARD-PANELS);
   color: var(--MAIN-TEXT-COLOR);
-  padding: 8px;
-  display: flex;
-  gap: 4px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   cursor: pointer;
 }
 
 .transaction-filter-options-middle {
   padding-bottom: 12px;
+}
+
+.filter-options span {
+  padding: 8px 12px;
+  font-size: var(--font-size-xxs);
+  border: var(--BORDER);
+  
+  background-color: var(--CARD-PANELS);
+  color: var(--SECONDARY-TEXT-COLOR);
+  cursor: pointer;
+}
+
+.filter-options span:hover,
+.filter-options span.active {
+  background-color: var(--BACKGROUND);
+  color: var(--PRIMARY-ACCENT);
+  border-color: var(--PRIMARY-ACCENT);
 }
 
 .transaction-filter-form {
@@ -57,10 +91,14 @@
 
 .transaction-filter-form select,
 .transaction-filter-form input {
-  padding: 8px;
+  padding: 10px 12px;
   border: none;
   -webkit-appearance: none;
+  appearance: none;
   border: var(--BORDER);
+  background-color: var(--CARD-PANELS);
+  font-size: var(--font-size-sm);
+  color: var(--MAIN-TEXT-COLOR);
 }
 
 .transaction-filter-form select:focus,
@@ -79,19 +117,17 @@
   border-collapse: collapse;
   background: var(--CARD-PANELS);
   overflow: hidden;
-  border-radius: 6px;
-  box-shadow: 0 2px 14px rgba(15, 23, 42, 0.05);
   margin-bottom: 12px;
 }
 
 .transaction-list-view thead {
-  background: #f8fafc;
+  background: var(--BACKGROUND);
   padding: 0 12px;
 }
 
 .transaction-list-view th,
 .transaction-list-view td {
-  padding: 4px 8px;
+  padding: 10px 12px;
   text-align: left;
   border-bottom: var(--BORDER);
   line-height: 1.5rem;
@@ -120,7 +156,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 12px 0 4px;
+  border-top: var(--BORDER);
+  margin-top: 8px;
 }
 
 .display-page-numbers {
@@ -153,4 +191,6 @@
   .transaction-list-view td {
     padding: 16px;
   }
+
+
 }
