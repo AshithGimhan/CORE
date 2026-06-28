@@ -238,7 +238,7 @@ function updateTransactionPage() {
         transactionCount.innerHTML = 'No records found'
 
     } else {
-        transactionCount.innerHTML = `${processedTransactions.length} records found`
+        transactionCount.innerHTML = `${transactions.length} records found`
         currentPageNoDisplay.innerHTML = currentPageNumber(processedTransactions);
     }
 

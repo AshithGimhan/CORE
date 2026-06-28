@@ -18,17 +18,17 @@
 }
 
 .transaction-filter-options-top h2 {
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   color: var(--MAIN-TEXT-COLOR);
 }
 
 .transaction-filter-options-top p {
-  font-size: 12px;
+  font-size: var(--font-size-xxs);
   color: var(--SECONDARY-TEXT-COLOR);
 }
 
 .transaction-filter-options-top a {
-  font-size: 13px;
+  font-size: var(--font-size-xs);
   border: none;
   padding: 0;
   color: var(--SECONDARY-TEXT-COLOR);
@@ -69,7 +69,7 @@
 }
 
 /* TRANSACTION LIST VIEW STYLES */
-.table-wrapper{
+.table-wrapper {
   width: 100%;
   overflow-x: auto;
 }
@@ -95,15 +95,14 @@
   text-align: left;
   border-bottom: var(--BORDER);
   line-height: 1.5rem;
-  
 }
 
 .transaction-list-view td {
-  font-size: 12px;
+  font-size: var(--font-size-xxs);
 }
 
 .transaction-list-view th {
-  font-size: 11px;
+  font-size: var(--font-size-xxs);
   text-transform: uppercase;
   color: var(--SECONDARY-TEXT-COLOR);
 }
@@ -125,7 +124,7 @@
 }
 
 .display-page-numbers {
-  font-size: 13px;
+  font-size: var(--font-size-xs);
 }
 
 .empty-state {
@@ -135,4 +134,23 @@
 .filter-options span.active {
   border-color: var(--PRIMARY-ACCENT);
   color: var(--PRIMARY-ACCENT);
+}
+
+@media (min-width: 768px) {
+  .desktop-section {
+    margin-top: 32px;
+  }
+
+  .filter-options {
+    margin-top: 12px;
+  }
+
+  .transaction-filter-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .transaction-list-view th,
+  .transaction-list-view td {
+    padding: 16px;
+  }
 }
