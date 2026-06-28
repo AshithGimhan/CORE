@@ -1,7 +1,7 @@
 ﻿import { formatDate } from './utils.js';
 import { getTransactions, getProcessedTransactions, transactionPagination } from './transactions.js';
 import { handlePage, getCurrentPage, generatePageNumbers, resetPage } from './pagination.js';
-import '../scripts/hamburger.js'
+import { activeNavLinks } from '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js';
 
 
@@ -30,6 +30,7 @@ let currentDate = '';
 
 /* INITIALIZE */
 updateTransactionPage();
+activeNavLinks();
 
 
 /* EVENT LISTENERS */
@@ -71,6 +72,9 @@ clearFilterBtn.addEventListener('click', () => {
     dateInput.value = ''
     sortOption.value = 'default';
     searchInput.value = '';
+    transactionFilterButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
     if (categorySelect) categorySelect.value = 'all';
     clearFilterBtn.classList.remove('visible');
     resetPage();
@@ -81,18 +85,20 @@ transactionFilterButtons.forEach((button) => {
     button.addEventListener('click', () => {
         transactionFilter = button.dataset.filter || 'all';
 
-        if (transactionFilter === 'all' && categoryFilter === 'all') {
-            clearFilterBtn.classList.remove('visible');
-        } else {
-            clearFilterBtn.classList.add('visible');
-        }
+        clearFilterBtn.classList.add('visible');
+
+        transactionFilterButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
 
         button.classList.add('active');
-        button.classList.remove('active');
+
         resetPage();
         updateTransactionPage();
     })
 });
+
+
 
 if (categorySelect) {
     categorySelect.addEventListener('change', (event) => {

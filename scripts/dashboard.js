@@ -11,7 +11,7 @@ import {
     getTransactionCount
 } from "./transactions.js";
 import { handlePage, resetPage, getCurrentPage, generatePageNumbers } from "./pagination.js";
-import '../scripts/hamburger.js'
+import { activeNavLinks } from '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js'
 
 
@@ -49,7 +49,6 @@ const transactionDisplay = document.querySelector('.js-transaction-list');
 
 //PAGINATION DOM
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
-
 
 
 
@@ -107,6 +106,10 @@ clearFilterBtn.addEventListener('click', () => {
     transactionFilter = 'all';
     sortOption.value = 'default';
     clearFilterBtn.classList.remove('visible');
+    filterOption.forEach(btn => {
+        btn.classList.remove('active')
+    });
+
     resetPage();
     updateDashboard();
 });
@@ -116,11 +119,16 @@ filterOption.forEach((button) => {
         transactionFilter = button.dataset.filter;
         resetPage();
         clearFilterBtn.classList.add('visible');
+
+
+        filterOption.forEach(btn => {
+            btn.classList.remove('active')
+        });
+
+        button.classList.add('active');
+
         updateDashboard();
 
-        if (transactionFilter === 'all') {
-            clearFilterBtn.classList.remove('visible');
-        }
     })
 
 });
@@ -133,12 +141,12 @@ let transactionFilter = 'all';
 let categoryFilter = 'all'
 let pendingDeleteId = null;
 
-
 const dashboardPage = Boolean(addTransactionBtn)
 
 //INITIALIZE RENDER
 if (dashboardPage) {
     updateDashboard();
+    activeNavLinks();
 }
 
 

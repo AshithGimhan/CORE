@@ -10,15 +10,15 @@
   --ORANGE: #f59e0b;
   --BORDER: 1px solid var(--LIGHT-GRAY);
 
-  --font-size-xxs: 0.75rem; 
-  --font-size-xs: 0.8125rem; 
-  --font-size-sm: 0.875rem; 
-  --font-size-md: 1rem; 
-  --font-size-lg: 1.125rem; 
-  --font-size-xl: 1.25rem; 
-  --font-size-2xl: 1.375rem; 
-  --font-size-3xl: 1.75rem; 
-  --font-size-4xl: 2.375rem; 
+  --font-size-xxs: 0.75rem;
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.375rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2.375rem;
 }
 
 * {
@@ -139,6 +139,10 @@ nav ul li a {
 }
 
 nav ul li a:hover {
+  color: var(--PRIMARY-ACCENT);
+}
+
+nav ul li a.nav-active {
   color: var(--PRIMARY-ACCENT);
 }
 
@@ -267,6 +271,11 @@ nav ul li a:hover {
   gap: 6px;
 }
 
+.filter-options span.active {
+  color: var(--PRIMARY-ACCENT);
+  border-color: var(--PRIMARY-ACCENT);
+}
+
 .filter-options span,
 .dropdown select,
 .clear-filter-btn {
@@ -275,6 +284,7 @@ nav ul li a:hover {
   border: var(--BORDER);
   border-radius: 100px;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .filter-options span:hover {
@@ -431,7 +441,6 @@ nav ul li a:hover {
 
 .pop-up-buttons button {
   border: var(--BORDER);
-  border-radius: 100px;
   font-size: var(--font-size-sm);
   padding: 12px 24px;
   text-transform: uppercase;
