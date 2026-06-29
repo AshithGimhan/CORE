@@ -22,10 +22,10 @@ export function resetPage() {
 
 
 
-export function generatePageNumbers(data) {
+export function generatePageNumbers(data, pageNumber) {
     if (!data || data.length === 0) return '';
 
-    const pageNumbers = Math.ceil(data.length / 5);
+    const pageNumbers = Math.ceil(data.length / pageNumber);
     let pageNumberHTML = '';
 
     for (let i = 1; i <= pageNumbers; i++) {

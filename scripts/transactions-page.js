@@ -193,16 +193,16 @@ function renderPageTransactions(data) {
         return;
     }
 
-    const paginated = transactionPagination(data, getCurrentPage());
+    const paginated = transactionPagination(data, getCurrentPage(), 10);
     transactionDisplay.innerHTML = renderTransactions(paginated);
     emptyTransactionMsg.innerHTML = ''
-    pageNumberDisplay.innerHTML = generatePageNumbers(data);
+    pageNumberDisplay.innerHTML = generatePageNumbers(data, 10);
 }
 
 function currentPageNumber(processedTransactions) {
     let pageCurrentPageDisplay = ''
     const currentPage = getCurrentPage()
-    const pageSize = 5;
+    const pageSize = 10;
     let firstNumber = (currentPage - 1) * pageSize + 1;
     let lastNumber = currentPage * pageSize
 
