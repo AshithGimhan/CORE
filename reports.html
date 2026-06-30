@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CORE</title>
+
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="styles/dashboard.css" />
+    <link rel="stylesheet" href="styles/report.css" />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="top-layout">
+      <!-- HAMBURGER ON MOBILE -->
+      <aside class="sidebar-navigation">
+        <div class="nav-top">
+          <div class="main-title">
+            <i class="ph ph-wallet"></i>
+            <h1>Core</h1>
+          </div>
+
+          <div class="icons">
+            <i class="ph ph-bell"></i>
+            <i class="ph ph-moon"></i>
+            <div class="js-hamburger-btn hamburger">
+              <i class="ph ph-list"></i>
+            </div>
+          </div>
+        </div>
+
+        <nav>
+          <div class="js-hamburger-display hamburger-menu-hidden">
+            <!-- CLOSE BUTTON -->
+            <div class="hamburger-icons">
+              <div class="js-ham-close-btn hamburger">
+                <i class="ph ph-x"></i>
+              </div>
+            </div>
+
+            <!-- NAV LINKS -->
+            <ul>
+              <li>
+                <a href="index.html" class="js-nav-links">Dashboard</a>
+              </li>
+              <li>
+                <a href="transactions.html" class="js-nav-links">Transaction</a>
+              </li>
+              <li>
+                <a href="reports.html" class="js-nav-links">Reports</a>
+              </li>
+              <li>
+                <a href="#" class="js-nav-links">Categories</a>
+              </li>
+              <li>
+                <a href="#" class="js-nav-links">Settings</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="desktop-section">
+        <section class="report-hero-section">
+          <div class="report-hero-container">
+            <div class="report-hero-title">
+              <h2>Reports</h2>
+              <p>Last 30 days overview</p>
+            </div>
+            <div class="report-hero-filter">
+              <select name="overview-timeline" id="overview-timeline">
+                <option value="thirty-days">Last 30 days</option>
+                <option value="ninety-days">Last 90 days</option>
+                <option value="six-months">Last 6 months</option>
+                <option value="twelve-months">Last 12 months</option>
+                <option value="all-time">All time</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="graph-section">
+          <div class="graph-title">
+            <h2>Income vs Expense</h2>
+            <div class="graph-labels">
+              <p><span></span>Income</p>
+              <p><span></span>Expense</p>
+            </div>
+          </div>
+          <div class="graph-body">
+            <canvas id="income-vs-expense-line-graph"></canvas>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer>
+        <p>© 2026 Core, Inc. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script type="module" src="scripts/report-page.js"></script>
+  </body>
+</html>

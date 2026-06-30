@@ -1,16 +1,3 @@
-:root {
-  --BACKGROUND: #f8fafc;
-  --LIGHT-GRAY: #e2e8f0;
-  --CARD-PANELS: #ffffff;
-  --MAIN-TEXT-COLOR: #0f172a;
-  --SECONDARY-TEXT-COLOR: #64748b;
-  --PRIMARY-ACCENT: #2563eb;
-  --GREEN: #16a34a;
-  --RED: #dc2626;
-  --ORANGE: #f59e0b;
-  --BORDER: 1px solid var(--LIGHT-GRAY);
-}
-
 .transaction-filter-options,
 .transaction-list-view {
   background: var(--CARD-PANELS);
@@ -70,7 +57,9 @@
   gap: 6px;
   cursor: pointer;
   font-size: var(--font-size-xs);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .download-button:hover {
@@ -90,7 +79,10 @@
   background-color: var(--CARD-PANELS);
   color: var(--SECONDARY-TEXT-COLOR);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .filter-options span:hover,
@@ -117,12 +109,12 @@
   font-size: var(--font-size-sm);
   color: var(--MAIN-TEXT-COLOR);
   font-family: inherit;
-  transition: border-color 0.2s ease, outline-color 0.2s ease;
+
 }
 
 .transaction-filter-form select:focus,
 .transaction-filter-form input:focus {
-  outline-color: var(--PRIMARY-ACCENT);
+  outline: 1px solid var(--PRIMARY-ACCENT);
 }
 
 .table-wrapper {

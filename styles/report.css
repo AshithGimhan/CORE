@@ -1,0 +1,42 @@
+.report-hero-container {
+  background: var(--CARD-PANELS);
+  border: var(--BORDER);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.report-hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+
+  border-bottom: var(--BORDER);
+}
+
+.report-hero-title h2 {
+  font-size: var(--font-size-lg);
+  color: var(--MAIN-TEXT-COLOR);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+.report-hero-title p {
+  font-size: var(--font-size-xxs);
+  color: var(--SECONDARY-TEXT-COLOR);
+}
+
+.report-hero-filter select {
+  width: 100%;
+  padding: 12px;
+  border: var(--BORDER);
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.report-hero-filter select:focus {
+  outline: 1px solid var(--PRIMARY-ACCENT);
+}
