@@ -31,7 +31,7 @@
 
 .report-hero-filter select {
   width: 100%;
-  padding: 12px;
+  padding: 12px; 
   border: var(--BORDER);
   -webkit-appearance: none;
   cursor: pointer;
