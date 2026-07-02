@@ -89,12 +89,12 @@
               <p>Last 30 days overview</p>
             </div>
             <div class="report-hero-filter">
-              <select name="overview-timeline" id="overview-timeline">
-                <option value="thirty-days">Last 30 days</option>
-                <option value="ninety-days">Last 90 days</option>
-                <option value="six-months">Last 6 months</option>
-                <option value="twelve-months">Last 12 months</option>
-                <option value="all-time">All time</option>
+              <select name="overview-timeline" class="js-overview-timeline">
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+                <option value="180">Last 6 months</option>
+                <option value="360">Last 12 months</option>
+                <option value="all">All time</option>
               </select>
             </div>
           </div>
@@ -103,9 +103,15 @@
         <section class="graph-section">
           <div class="graph-title">
             <h2>Income vs Expense</h2>
-            <div class="graph-labels">
-              <p><span></span>Income</p>
-              <p><span></span>Expense</p>
+          </div>
+          <div class="graph-labels">
+            <div class="label">
+              <span class="box green"></span>
+              <p>Income</p>
+            </div>
+            <div class="label">
+              <span class="box red"></span>
+              <p>Expense</p>
             </div>
           </div>
           <div class="graph-body">
