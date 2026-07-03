@@ -8,9 +8,9 @@ activeNavLinks()
 
 
 //DOMS
-const lineGraph = document.getElementById('income-vs-expense-line-graph')
+const lineGraphElement = document.getElementById('income-vs-expense-line-graph')
 const timelineDropdown = document.querySelector('.js-overview-timeline');
-
+const pieChartElement = document.getElementById('category-pie-chart');
 
 //EVENT LISTENERS
 timelineDropdown.addEventListener('change', e => {
@@ -25,9 +25,8 @@ const today = new Date();
 let timeMode = 30;
 
 
-
 //LINE GRAPH
-const chart = new Chart(lineGraph, {
+const lineGraph = new Chart(lineGraphElement, {
 
     type: 'line',
 
@@ -97,7 +96,9 @@ const chart = new Chart(lineGraph, {
                 },
 
                 ticks: {
-                    color: '#9ca3af'
+                    color: '#9ca3af',
+                    autoSkip: true,
+                    maxTicksLimit: 12
                 }
             },
 
@@ -113,10 +114,53 @@ const chart = new Chart(lineGraph, {
     }
 });
 
+
+const pieChart = new Chart(pieChartElement, {
+    type: 'pie',
+
+    data: {
+        labels: [],
+        datasets: [{
+            data: [],
+            backgroundColor: [
+                '#22c55e',
+                '#3b82f6',
+                '#f59e0b',
+                '#ef4444',
+                '#8b5cf6',
+                '#06b6d4',
+                '#84cc16',
+                '#f97316'
+            ]
+        }]
+    },
+
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#9ca3af',
+                    boxWidth: 12,
+                    font: {
+                        size: 13
+                    }
+                }
+            },
+
+            tooltip: {
+                backgroundColor: '#111827',
+                titleColor: '#ffffff',
+                bodyColor: '#d1d5db'
+            }
+        }
+    }
+});
+
 updateChart(timeMode)
-
-
-
 //FUNCTIONS
 function getTransactionsForNumberDays(days) {
     const cutOffDay = new Date();
@@ -152,7 +196,6 @@ function getDailyTransactions(transactions) {
         return new Date(a.date) - new Date(b.date);
     })
 }
-
 
 function getMonthlyTransactions(transactions) {
     const map = new Map();
@@ -199,21 +242,56 @@ function updateChart(mode) {
 
     if (!isAll && days < 180) {
         chartData = getDailyTransactions(filteredTransactions)
-        chart.data.labels = chartData.map(item => new Date(item.date).toLocaleDateString('en-US', {
+        lineGraph.data.labels = chartData.map(item => new Date(item.date).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'short',
         }))
     } else {
         chartData = getMonthlyTransactions(filteredTransactions)
-        chart.data.labels = chartData.map(item => new Date(item.date).toLocaleDateString('en-US', {
+        lineGraph.data.labels = chartData.map(item => new Date(item.date).toLocaleDateString('en-US', {
             month: 'short',
             year: 'numeric'
         }))
     }
 
 
-    chart.data.datasets[0].data = chartData.map(item => item.income)
-    chart.data.datasets[1].data = chartData.map(item => item.expense)
+    lineGraph.data.datasets[0].data = chartData.map(item => item.income)
+    lineGraph.data.datasets[1].data = chartData.map(item => item.expense)
 
-    chart.update()
+    lineGraph.update()
+
+    updatePieChart(filteredTransactions)
 }
+
+function updatePieChart(transactions) {
+    const totalSpending = getSpendingByCategories(transactions)
+
+    pieChart.data.labels = totalSpending.map(item => item.category)
+    pieChart.data.datasets[0].data = totalSpending.map(item => item.expense)
+
+
+    pieChart.update()
+}
+
+function getSpendingByCategories(transactions) {
+    const map = new Map();
+
+    transactions.forEach(transaction => {
+        if (transaction.transactionType !== 'expense') {
+            return
+        }
+
+        const category = transaction.categoryType
+
+        if (!map.has(category)) {
+            map.set(category, { category, expense: 0 })
+        }
+
+        const item = map.get(category);
+        item.expense += transaction.amount
+    });
+
+    return Array.from(map.values())
+}
+
+console.log(getSpendingByCategories(transactions))
