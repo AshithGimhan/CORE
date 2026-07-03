@@ -116,7 +116,7 @@ const lineGraph = new Chart(lineGraphElement, {
 
 
 const pieChart = new Chart(pieChartElement, {
-    type: 'pie',
+    type: 'doughnut',
 
     data: {
         labels: [],
@@ -294,4 +294,3 @@ function getSpendingByCategories(transactions) {
     return Array.from(map.values())
 }
 
-console.log(getSpendingByCategories(transactions))
