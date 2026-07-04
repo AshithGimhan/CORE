@@ -17,6 +17,20 @@ hamburgerCloseBtn.addEventListener('click', () => {
 })
 
 
+document.addEventListener('click', e => {
+    if (!hamburgerToggled) {
+        return
+    }
+
+    const clickedMenu = hamburgerDisplay.contains(e.target)
+    const clickedBtn = hamburgerBtn.contains(e.target)
+
+    if (!clickedMenu && !clickedBtn) {
+        hamburgerDisplay.classList.remove('hamburger-menu-visible');
+        hamburgerToggled = false
+    }
+})
+
 
 export function activeNavLinks() {
     const navLinks = document.querySelectorAll('.js-nav-links');

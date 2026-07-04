@@ -36,6 +36,7 @@
   width: 100%;
   padding: 12px;
   border: var(--BORDER);
+  appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
 }
@@ -109,4 +110,9 @@
   height: 100%;
   border-radius: inherit;
   transition: width .3s ease;
+}
+
+@media (min-width: 768px) {
+
+  
 }
