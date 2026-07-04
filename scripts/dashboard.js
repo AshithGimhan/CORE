@@ -278,7 +278,7 @@ function renderPageTransactions(data) {
 
     const paginated = transactionPagination(data, getCurrentPage());
     transactionDisplay.innerHTML = renderTransactions(paginated);
-    pageNumberDisplay.innerHTML = generatePageNumbers(data, 5);
+    pageNumberDisplay.innerHTML = generatePageNumbers(data);
 }
 
 function renderTransactions(data) {
