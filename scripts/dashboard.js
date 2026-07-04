@@ -17,10 +17,6 @@ import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js'
 
 
 //DOM ELEMENTS
-//HAMBURGER DOM 
-const hamburgerBtn = document.querySelector('.js-hamburger-btn');
-const hamburgerDisplay = document.querySelector('.js-hamburger-display');
-const hamburgerCloseBtn = document.querySelector('.js-ham-close-btn');
 
 //FORM DOM 
 const addTransactionBtn = document.querySelector('.js-add-transaction');
@@ -60,14 +56,6 @@ const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
 
 
 //EVENT LISTENERS
-hamburgerBtn.addEventListener('click', () => {
-    hamburgerDisplay.classList.add('hamburger-menu-visible');
-})
-
-hamburgerCloseBtn.addEventListener('click', () => {
-    hamburgerDisplay.classList.remove('hamburger-menu-visible');
-})
-
 if (addTransactionBtn) {
     addTransactionBtn.addEventListener('click', () => {
         handleAddTransaction();
@@ -79,6 +67,7 @@ if (transactionDisplay) {
         pendingDeleteId = handleDelete(event)
     })
 }
+
 
 document.querySelector('.js-btn-confirm').addEventListener('click', () => {
     confirmDelete(pendingDeleteId);

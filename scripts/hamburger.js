@@ -2,13 +2,18 @@ const hamburgerBtn = document.querySelector('.js-hamburger-btn');
 const hamburgerDisplay = document.querySelector('.js-hamburger-display');
 const hamburgerCloseBtn = document.querySelector('.js-ham-close-btn');
 
+let hamburgerToggled = false;
 
 hamburgerBtn.addEventListener('click', () => {
     hamburgerDisplay.classList.add('hamburger-menu-visible');
+
+    hamburgerToggled = true;
 })
 
 hamburgerCloseBtn.addEventListener('click', () => {
     hamburgerDisplay.classList.remove('hamburger-menu-visible');
+
+    hamburgerToggled = false;
 })
 
 

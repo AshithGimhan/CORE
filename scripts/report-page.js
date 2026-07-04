@@ -23,7 +23,27 @@ timelineDropdown.addEventListener('change', e => {
 const transactions = getTransactions();
 const today = new Date();
 let timeMode = 30;
-
+const colors = [
+    {
+        category: 'food',
+        color: '#D95D39'
+    },
+    {
+        category: 'transport',
+        color: '#4A6FA5'
+    },
+    {
+        category: 'bills',
+        color: '#3A4A52'
+    },
+    {
+        category: 'other',
+        color: '#9B7B94'
+    }
+]
+const colorMap = Object.fromEntries(
+    colors.map(item => [item.category, item.color])
+)
 
 //LINE GRAPH
 const lineGraph = new Chart(lineGraphElement, {
@@ -114,7 +134,7 @@ const lineGraph = new Chart(lineGraphElement, {
     }
 });
 
-
+//PIE CHART
 const pieChart = new Chart(pieChartElement, {
     type: 'doughnut',
 
@@ -122,16 +142,7 @@ const pieChart = new Chart(pieChartElement, {
         labels: [],
         datasets: [{
             data: [],
-            backgroundColor: [
-                '#22c55e',
-                '#3b82f6',
-                '#f59e0b',
-                '#ef4444',
-                '#8b5cf6',
-                '#06b6d4',
-                '#84cc16',
-                '#f97316'
-            ]
+            backgroundColor: []
         }]
     },
 
@@ -255,12 +266,14 @@ function updateChart(mode) {
     }
 
 
+
     lineGraph.data.datasets[0].data = chartData.map(item => item.income)
     lineGraph.data.datasets[1].data = chartData.map(item => item.expense)
 
     lineGraph.update()
 
     updatePieChart(filteredTransactions)
+    renderCategoryList(getSpendingByCategories(filteredTransactions))
 }
 
 function updatePieChart(transactions) {
@@ -268,7 +281,7 @@ function updatePieChart(transactions) {
 
     pieChart.data.labels = totalSpending.map(item => item.category)
     pieChart.data.datasets[0].data = totalSpending.map(item => item.expense)
-
+    pieChart.data.datasets[0].backgroundColor = totalSpending.map(item => colorMap[item.category])
 
     pieChart.update()
 }
@@ -293,4 +306,34 @@ function getSpendingByCategories(transactions) {
 
     return Array.from(map.values())
 }
+
+function renderCategoryList(categories) {
+    const categoryContainer = document.querySelector('.js-category-list')
+    categories.sort((a, b) => {
+        return b.expense - a.expense
+    })
+
+    const maxExpense = categories[0]?.expense ?? 1;
+
+    categoryContainer.innerHTML = categories.map((item, index) => {
+        return `<div class="category">
+              <div class="category-header">
+                <span>${item.category}</span>
+                <span>$${item.expense}</span>
+              </div>
+
+              <div class="progress">
+                <div class="progress-fill" style="
+                width:${(item.expense / maxExpense) * 100}%;
+                background:${colorMap[item.category]};
+                ">
+                </div>
+              </div>
+
+            </div>`
+    }
+    ).join('')
+
+}
+
 
