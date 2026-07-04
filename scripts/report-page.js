@@ -12,6 +12,7 @@ const lineGraphElement = document.getElementById('income-vs-expense-line-graph')
 const timelineDropdown = document.querySelector('.js-overview-timeline');
 const pieChartElement = document.getElementById('category-pie-chart');
 
+
 //EVENT LISTENERS
 timelineDropdown.addEventListener('change', e => {
     timeMode = e.target.value;

@@ -124,32 +124,19 @@
   letter-spacing: 0.2px;
 }
 
-.filter-options {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .filter-options span.active {
   color: var(--PRIMARY-ACCENT);
   border-color: var(--PRIMARY-ACCENT);
 }
 
-.filter-options span,
 .dropdown select,
-.clear-filter-btn {
+.filter-options .dropdown select {
   padding: 8px 14px;
   font-size: var(--font-size-xxs);
   border: var(--BORDER);
   background-color: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.filter-options span:hover {
-  background-color: var(--BACKGROUND);
-  color: var(--PRIMARY-ACCENT);
-  border-color: var(--PRIMARY-ACCENT);
 }
 
 .dropdown select:focus {
@@ -159,18 +146,6 @@
 .dropdown select {
   -webkit-appearance: none;
   appearance: none;
-}
-
-.clear-filter-btn {
-  display: none;
-}
-
-.clear-filter-btn.visible {
-  display: flex;
-}
-
-.clear-filter-container {
-  margin: 16px 0;
 }
 
 .transaction-list {
@@ -235,116 +210,12 @@
   font-weight: 500;
 }
 
-.income,
 .stat-cards .income {
   color: var(--GREEN);
 }
 
-.expense,
 .stat-cards .expense {
   color: var(--RED);
-}
-
-.delete-btn {
-  color: var(--RED);
-  cursor: pointer;
-  font-size: var(--font-size-sm);
-  transition: opacity 0.2s ease;
-}
-
-.delete-btn:hover {
-  opacity: 0.7;
-}
-
-.page-numbers {
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.page-number-btn {
-  padding: 8px 12px;
-  border: var(--BORDER);
-  background-color: var(--CARD-PANELS);
-  cursor: pointer;
-  font-size: var(--font-size-xs);
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.active-page-number,
-.active {
-  border-color: var(--PRIMARY-ACCENT);
-  color: var(--PRIMARY-ACCENT);
-}
-
-.pop-up {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  inset: 0;
-  top: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  background-color: #ff060613;
-  height: 100%;
-}
-
-.pop-up.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.pop-up-container {
-  border: var(--BORDER);
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 16px;
-  padding: 24px;
-  width: 280px;
-  height: fit-content;
-  background-color: var(--CARD-PANELS);
-}
-
-.pop-up h3 {
-  text-transform: uppercase;
-  font-size: var(--font-size-md);
-  color: var(--RED);
-  letter-spacing: 0.2px;
-}
-
-.pop-up-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-
-.pop-up-buttons button {
-  border: var(--BORDER);
-  font-size: var(--font-size-sm);
-  padding: 10px 24px;
-  text-transform: uppercase;
-  background-color: var(--CARD-PANELS);
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.pop-up-buttons button:hover:first-child {
-  color: var(--RED);
-  border-color: var(--RED);
-}
-
-.pop-up-buttons button:hover:last-child {
-  color: var(--PRIMARY-ACCENT);
-  border-color: var(--PRIMARY-ACCENT);
-}
-
-.empty-state {
-  text-align: center;
-  color: var(--LIGHT-GRAY);
-  padding: 20px;
 }
 
 .transaction-form-section {
@@ -469,7 +340,7 @@
   .transaction-form-section {
     background: var(--CARD-PANELS);
     padding: 20px;
-    margin: 4px 4px 16px 4px;
+    margin: 0 0 16px 0;
   }
 
   .side-by-side {
@@ -499,9 +370,7 @@
   }
 
   .desktop-section {
-    display: grid;
     grid-template-columns: 1.5fr 1.5fr;
-    gap: 16px;
   }
 
   .transaction-list-top {
@@ -538,10 +407,7 @@
   }
 
   .desktop-section {
-    display: grid;
     grid-template-columns: 1.7fr 1fr;
-    gap: 28px;
-    padding: 0 16px;
   }
 
   .transaction-list-section {
@@ -552,22 +418,6 @@
   .transaction-form-section {
     grid-column: 2 / 3;
     padding: 24px;
-  }
-
-  .transaction-list-section h2,
-  .transaction-form-section h2 {
-    font-size: var(--font-size-2xl);
-  }
-
-  .filter-options {
-    gap: 12px;
-  }
-
-  .filter-options span,
-  .dropdown select,
-  .clear-filter-btn {
-    font-size: var(--font-size-xs);
-    padding: 10px 16px;
   }
 
   .transaction-list {
@@ -610,11 +460,8 @@
     font-size: var(--font-size-md);
   }
 
-  .page-number-btn {
-    padding: 8px 12px;
-  }
-
-  footer {
-    padding: 18px 28px;
+  .dropdown select {
+    font-size: var(--font-size-xs);
+    padding: 10px 16px;
   }
 }

@@ -51,7 +51,7 @@
   border: var(--BORDER);
   background-color: var(--CARD-PANELS);
   color: var(--MAIN-TEXT-COLOR);
-  padding: 8px 12px;
+  padding: 8px 14px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -72,26 +72,6 @@
   margin-bottom: 12px;
 }
 
-.filter-options span {
-  padding: 8px 12px;
-  font-size: var(--font-size-xxs);
-  border: var(--BORDER);
-  background-color: var(--CARD-PANELS);
-  color: var(--SECONDARY-TEXT-COLOR);
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.filter-options span:hover,
-.filter-options span.active {
-  background-color: var(--BACKGROUND);
-  color: var(--PRIMARY-ACCENT);
-  border-color: var(--PRIMARY-ACCENT);
-}
-
 .transaction-filter-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -101,7 +81,7 @@
 
 .transaction-filter-form select,
 .transaction-filter-form input {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: var(--BORDER);
   -webkit-appearance: none;
   appearance: none;
@@ -185,13 +165,6 @@
   color: var(--SECONDARY-TEXT-COLOR);
 }
 
-.empty-state {
-  color: var(--SECONDARY-TEXT-COLOR);
-  font-size: var(--font-size-sm);
-  padding: 20px;
-  text-align: center;
-}
-
 @media (min-width: 768px) {
   .transaction-filter-options {
     margin-top: 0;
@@ -214,9 +187,7 @@
 
 @media (min-width: 1024px) {
   .desktop-section {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
   }
 
   .transaction-list-view {
@@ -231,26 +202,22 @@
   .transaction-list-view td {
     padding: 14px 18px;
   }
+
 }
 
 @media (min-width: 1440px) {
   .desktop-section {
-    display: grid;
     grid-template-columns: 1.2fr 1.8fr;
-    gap: 20px;
   }
 
   .transaction-list-view {
     margin-top: 0;
     height: fit-content;
+    padding: 24px;
   }
 
   .transaction-filter-options {
     padding: 24px;
-  }
-
-  .transaction-filter-options-top h2 {
-    font-size: var(--font-size-xl);
   }
 
   .transaction-list-view th,
@@ -269,9 +236,5 @@
   .transaction-filter-form select,
   .transaction-filter-form input {
     padding: 12px 14px;
-  }
-
-  .filter-options span {
-    padding: 10px 16px;
   }
 }

@@ -34,11 +34,15 @@
 
 .report-hero-filter select {
   width: 100%;
-  padding: 12px;
+  padding: 12px 14px;
   border: var(--BORDER);
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--MAIN-TEXT-COLOR);
+  background-color: var(--CARD-PANELS);
 }
 
 .report-hero-filter select:focus {
@@ -63,7 +67,7 @@
 }
 
 .graph-labels p {
-  font-size: 12px;
+  font-size: var(--font-size-xxs);
 }
 
 .graph-labels span {
@@ -84,7 +88,7 @@
 .category-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .category-header {
@@ -94,7 +98,7 @@
 }
 
 .category-header span {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 500;
 }
 
@@ -109,10 +113,35 @@
 .progress-fill {
   height: 100%;
   border-radius: inherit;
-  transition: width .3s ease;
+  transition: width 0.3s ease;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
+  .desktop-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-  
+  .report-hero-section {
+    grid-column: span 2;
+  }
+
+  .span {
+    grid-column: span 2;
+  }
+
+  .graph-body canvas {
+    width: 100%;
+    height: 250px;
+  }
+
+  .graph-section {
+    margin: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .report-hero-container,
+  .graph-section {
+    padding: 24px;
+  }
 }
