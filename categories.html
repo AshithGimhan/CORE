@@ -27,7 +27,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
     />
-
   </head>
 
   <body>
@@ -81,7 +80,88 @@
       </aside>
 
       <main class="desktop-section">
+        <section class="add-category-section">
+          <div class="add-category-title">
+            <h2>Categories</h2>
+            <p>5 categories</p>
+          </div>
+          <div class="add-category-form-container">
+            <div class="form-top">
+              <h2>Add categories</h2>
+              <button>Add</button>
+            </div>
+            <div class="form-input">
+              <div class="category-name-container">
+                <label for="category-name">Category</label>
+                <input
+                  type="text"
+                  id="category-name"
+                  placeholder="category name"
+                />
+              </div>
+              <div class="transaction-type-container">
+                <label for="transaction-type">Transaction</label>
+                <select
+                  class="js-transaction-dropdown expense-dropdown"
+                  id="transaction-type"
+                >
+                  <option value="default">Transaction</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        <section class="category-cards-section">
+          <div class="category-cards-container">
+            <div class="category-cards">
+              <div class="category-cards-left">
+                <h3>Food</h3>
+                <span>$120.00 spent</span>
+                <p>6 transactions</p>
+              </div>
+              <div class="category-cards-right">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </div>
+            </div>
+            <div class="category-cards">
+              <div class="category-cards-left">
+                <h3>Food</h3>
+                <span>$120.00 spent</span>
+                <p>6 transactions</p>
+              </div>
+              <div class="category-cards-right">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </div>
+            </div>
+            <div class="category-cards">
+              <div class="category-cards-left">
+                <h3>Food</h3>
+                <span>$120.00 spent</span>
+                <p>6 transactions</p>
+              </div>
+              <div class="category-cards-right">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </div>
+            </div>
+            <div class="category-cards">
+              <div class="category-cards-left">
+                <h3>Food</h3>
+                <span>$120.00 spent</span>
+                <p>6 transactions</p>
+              </div>
+              <div class="category-cards-right">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <!-- FOOTER -->

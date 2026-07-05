@@ -1,0 +1,112 @@
+.add-category-title {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+.add-category-title h2,
+.form-top h2 {
+  font-size: var(--font-size-lg);
+  color: var(--MAIN-TEXT-COLOR);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+.add-category-title p {
+  font-size: var(--font-size-xxs);
+}
+
+.add-category-form-container {
+  border: var(--BORDER);
+  background: var(--CARD-PANELS);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  padding: 12px;
+}
+
+.form-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.form-top button {
+  border: none;
+  background: var(--PRIMARY-ACCENT);
+  padding: 8px 12px;
+  color: white;
+}
+
+.form-top button:hover {
+  background: #000000;
+  padding: 8px 12px;
+  color: white;
+}
+
+.form-input {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 8px;
+}
+.category-name-container,
+.transaction-type-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.category-name-container label,
+.transaction-type-container label {
+  font-size: var(--font-size-sm);
+}
+.category-name-container input {
+  padding: 8px;
+  border: var(--BORDER);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--MAIN-TEXT-COLOR);
+}
+
+.transaction-type-container select {
+  -webkit-appearance: none;
+  border: var(--BORDER);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  color: var(--MAIN-TEXT-COLOR);
+  padding: 9px;
+}
+
+.category-cards-section {
+  margin-top: 16px;
+}
+
+.category-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.category-cards {
+  border: var(--BORDER);
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--CARD-PANELS);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.category-cards h3 {
+  font-size: var(--font-size-md);
+  color: var(--MAIN-TEXT-COLOR);
+}
+
+.category-cards p {
+  font-size: var(--font-size-sm);
+}
+
+.category-cards span {
+  font-size: var(--font-size-md);
+}
+.category-cards-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

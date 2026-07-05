@@ -89,7 +89,6 @@
   font-size: var(--font-size-sm);
   color: var(--MAIN-TEXT-COLOR);
   font-family: inherit;
-
 }
 
 .transaction-filter-form select:focus,
@@ -165,6 +164,23 @@
   color: var(--SECONDARY-TEXT-COLOR);
 }
 
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-transaction-btn {
+  border: var(--BORDER);
+  padding: 12px;
+  background: var(--CARD-PANELS);
+  cursor: pointer;
+  width: 150px;
+  color: var(--MAIN-TEXT-COLOR);
+  text-decoration: none;
+}
+
 @media (min-width: 768px) {
   .transaction-filter-options {
     margin-top: 0;
@@ -202,7 +218,6 @@
   .transaction-list-view td {
     padding: 14px 18px;
   }
-
 }
 
 @media (min-width: 1440px) {

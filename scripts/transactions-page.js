@@ -188,7 +188,10 @@ function renderTransactions(data) {
 function renderPageTransactions(data) {
     if (data.length === 0) {
         transactionDisplay.innerHTML = ''
-        emptyTransactionMsg.innerHTML = `<div class="empty-state">No transactions found.</div>`;
+                emptyTransactionMsg.innerHTML = `<div class="empty-state">
+        <p>No records found.</p>
+         <a href="index.html#add-transactions" class="add-transaction-btn">Add transactions</a>
+        </div>`;
         pageNumberDisplay.innerHTML = '';
         return;
     }
