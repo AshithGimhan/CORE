@@ -216,6 +216,7 @@ nav ul li a.nav-active {
   display: flex;
   gap: 8px;
   margin-top: 16px;
+  
 }
 
 .page-number-btn {

@@ -16,7 +16,7 @@
 
     <!-- STYLES -->
     <link rel="stylesheet" href="styles/layout.css" />
-    <link rel="stylesheet" href="styles/report.css" />
+    <link rel="stylesheet" href="styles/categories.css" />
 
     <!-- ICONS -->
     <link
@@ -28,7 +28,6 @@
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
     />
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
@@ -82,58 +81,7 @@
       </aside>
 
       <main class="desktop-section">
-        <section class="report-hero-section">
-          <div class="report-hero-container">
-            <div class="report-hero-title">
-              <h2>Reports</h2>
-              <p class="js-overview">Last 30 days overview</p>
-            </div>
-            <div class="report-hero-filter">
-              <select name="overview-timeline" class="js-overview-timeline">
-                <option value="30">Last 30 days</option>
-                <option value="90">Last 90 days</option>
-                <option value="180">Last 6 months</option>
-                <option value="360">Last 12 months</option>
-                <option value="all">All time</option>
-              </select>
-            </div>
-          </div>
-        </section>
 
-        <section class="graph-section">
-          <div class="graph-title">
-            <h2>Income vs Expense</h2>
-          </div>
-          <div class="graph-labels">
-            <div class="label">
-              <span class="box green"></span>
-              <p>Income</p>
-            </div>
-            <div class="label">
-              <span class="box red"></span>
-              <p>Expense</p>
-            </div>
-          </div>
-          <div class="graph-body">
-            <canvas id="income-vs-expense-line-graph"></canvas>
-          </div>
-        </section>
-
-        <section class="graph-section">
-          <div class="graph-title">
-            <h2>Spending by category</h2>
-          </div>
-          <div class="pie-chart-body">
-            <canvas id="category-pie-chart"></canvas>
-          </div>
-        </section>
-
-        <section class="graph-section span">
-          <div class="graph-title">
-            <h2>Top Categories</h2>
-          </div>
-          <div class="js-category-list category-list"></div>
-        </section>
       </main>
 
       <!-- FOOTER -->
@@ -142,6 +90,6 @@
       </footer>
     </div>
 
-    <script type="module" src="scripts/report-page.js"></script>
+    <script type="module" src="scripts/categories-page.js"></script>
   </body>
 </html>

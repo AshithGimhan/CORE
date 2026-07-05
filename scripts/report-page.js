@@ -11,12 +11,18 @@ activeNavLinks()
 const lineGraphElement = document.getElementById('income-vs-expense-line-graph')
 const timelineDropdown = document.querySelector('.js-overview-timeline');
 const pieChartElement = document.getElementById('category-pie-chart');
-
+const overviewElement = document.querySelector('.js-overview');
 
 //EVENT LISTENERS
 timelineDropdown.addEventListener('change', e => {
     timeMode = e.target.value;
     updateChart(timeMode);
+
+    if (timeMode === 'all') {
+        overviewElement.innerHTML = `All time overview`
+    } else {
+        overviewElement.innerHTML = `Last ${timeMode} days overview`
+    }
 });
 
 
