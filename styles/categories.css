@@ -63,7 +63,7 @@
 
 .category-name-container label,
 .transaction-type-container label,
-.color-picker-container label {
+.color-picker-container p {
   font-size: var(--font-size-sm);
 }
 
@@ -80,11 +80,16 @@
 
 .color-picker-container {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
   grid-column: span 2;
+}
+
+.color-picker-container i {
+  font-size: var(--font-size-lg);
 }
 
 .color-picker-container label {
@@ -99,7 +104,9 @@ input[type='color'] {
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--BORDER);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 input[type='color']:hover {
@@ -128,7 +135,17 @@ input[type='color']::-moz-color-swatch {
   border-radius: 50%;
 }
 
-
+.popup {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 12px;
+}
+.swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #000;
+}
 
 /* CATEGORY CARDS STYLING */
 .category-cards-section {
