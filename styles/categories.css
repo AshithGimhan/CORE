@@ -1,3 +1,4 @@
+/* CATEGORY HERO STYLING */
 .add-category-title {
   display: flex;
   flex-direction: column;
@@ -48,6 +49,11 @@
   gap: 8px;
 }
 
+.error-msg {
+  font-size: var(--font-size-xxxs);
+  color: var(--RED);
+}
+
 .category-name-container,
 .transaction-type-container {
   display: flex;
@@ -56,11 +62,13 @@
 }
 
 .category-name-container label,
-.transaction-type-container label {
+.transaction-type-container label,
+.color-picker-container label {
   font-size: var(--font-size-sm);
 }
 
-.category-name-container input, .transaction-type-container select  {
+.category-name-container input,
+.transaction-type-container select {
   padding: 8px;
   border: var(--BORDER);
   font-size: var(--font-size-sm);
@@ -70,7 +78,59 @@
   -webkit-appearance: none;
 }
 
+.color-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  grid-column: span 2;
+}
 
+.color-picker-container label {
+  font-size: var(--font-size-sm);
+}
+
+input[type='color'] {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid var(--CARD-PANELS);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--BORDER);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type='color']:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 1px var(--PRIMARY-ACCENT);
+}
+
+input[type='color']:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--PRIMARY-ACCENT);
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+input[type='color']::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+
+
+/* CATEGORY CARDS STYLING */
 .category-cards-section {
   margin-top: 16px;
 }
@@ -106,9 +166,4 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.error-msg {
-  font-size: var(--font-size-xxxs);
-  color: var(--RED);
 }
