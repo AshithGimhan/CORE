@@ -88,7 +88,7 @@
           <div class="add-category-form-container">
             <div class="form-top">
               <h2>Add categories</h2>
-              <button>Add</button>
+              <button class="js-add-category-btn">Add</button>
             </div>
             <div class="form-input">
               <div class="category-name-container">
@@ -97,7 +97,9 @@
                   type="text"
                   id="category-name"
                   placeholder="category name"
+                  class="js-category-name"
                 />
+                <p class="js-category-error-msg error-msg"></p>
               </div>
               <div class="transaction-type-container">
                 <label for="transaction-type">Transaction</label>
@@ -109,6 +111,7 @@
                   <option value="income">Income</option>
                   <option value="expense">Expense</option>
                 </select>
+                <p class="js-type-error-msg error-msg"></p>
               </div>
             </div>
           </div>
