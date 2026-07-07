@@ -3,7 +3,7 @@ import { getTransactions, getProcessedTransactions, transactionPagination } from
 import { handlePage, getCurrentPage, generatePageNumbers, resetPage } from './pagination.js';
 import { activeNavLinks } from '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js';
-
+import { getCategories } from './categories.js';
 
 /* DOM ELEMENTS */
 const transactionDisplay = document.querySelector('.js-transactions-list-view');
@@ -161,6 +161,20 @@ exportBtn.addEventListener('click', () => {
 
 
 /* FUNCTIONS */
+function getCategoriesData() {
+    let categoriesHTML = '<option value="default">Category</option>'
+    const category = getCategories();
+
+
+    category.forEach(c => {
+        const categoryName = c.category.charAt(0).toUpperCase() + c.category.slice(1)
+
+        categoriesHTML += `<option value="${categoryName.toLowerCase()}">${categoryName}</option>`
+    });
+
+    return categoriesHTML
+}
+
 function renderTransactions(data) {
     let transactionHTML = '';
 
@@ -188,7 +202,7 @@ function renderTransactions(data) {
 function renderPageTransactions(data) {
     if (data.length === 0) {
         transactionDisplay.innerHTML = ''
-                emptyTransactionMsg.innerHTML = `<div class="empty-state">
+        emptyTransactionMsg.innerHTML = `<div class="empty-state">
         <p>No records found.</p>
          <a href="index.html#add-transactions" class="add-transaction-btn">Add transactions</a>
         </div>`;
@@ -241,6 +255,8 @@ function updateTransactionPage() {
     });
 
     renderPageTransactions(processedTransactions);
+
+    categorySelect.innerHTML = getCategoriesData()
 
     if (processedTransactions.length === 0) {
         currentPageNoDisplay.innerHTML = '';

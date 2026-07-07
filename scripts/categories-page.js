@@ -96,8 +96,6 @@ let categoriesList = getCategories();
 let swatchColor = '#000000';
 
 
-
-
 //INITIALIZE
 updateCategoryPage()
 activeNavLinks();
