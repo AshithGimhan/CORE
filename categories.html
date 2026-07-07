@@ -116,6 +116,7 @@
               <div class="color-picker-container">
                 <p>Pick a color</p>
                 <i class="ph ph-palette" id="openBtn"></i>
+                <button class="js-remove-color remove-color ">Remove color</button>
               </div>
             </div>
           </div>
@@ -172,17 +173,35 @@
       </main>
 
       <!-- POP UP FOR COLORS -->
-      <div class="popup hidden" id="pop-up">
-        <div class="swatch" data-color="#FF6B6B"></div>
-        <div class="swatch" data-color="#4D96FF"></div>
-        <div class="swatch" data-color="#6BCB77"></div>
-        <div class="swatch" data-color="#FFD93D"></div>
-        <div class="swatch" data-color="#845EC2"></div>
-        <div class="swatch" data-color="#FF9671"></div>
-        <div class="swatch" data-color="#00C9A7"></div>
-        <div class="swatch" data-color="#C34A36"></div>
-        <div class="swatch" data-color="#A66DD4"></div>
-        <div class="swatch" data-color="#2D82B7"></div>
+      <div class="js-popup popup" id="pop-up">
+        <div class="pop-up-wrapper">
+          <div class="popup-top">
+            <div class="popup-left">
+              <i class="ph ph-palette"></i>
+              <p>Pick a color</p>
+            </div>
+            <div class="popup-right">
+              <i class="ph ph-x" id="closeBtn"></i>
+            </div>
+          </div>
+
+          <div class="pop-up-body">
+            <div class="swatch" data-color="#FF6B6B"></div>
+            <div class="swatch" data-color="#4D96FF"></div>
+            <div class="swatch" data-color="#6BCB77"></div>
+            <div class="swatch" data-color="#FFD93D"></div>
+            <div class="swatch" data-color="#845EC2"></div>
+            <div class="swatch" data-color="#FF9671"></div>
+            <div class="swatch" data-color="#00C9A7"></div>
+            <div class="swatch" data-color="#C34A36"></div>
+            <div class="swatch" data-color="#A66DD4"></div>
+            <div class="swatch" data-color="#2D82B7"></div>
+          </div>
+
+          <button class="js-swatch-confirm-btn swatch-confirm-btn">
+            Confirm
+          </button>
+        </div>
       </div>
 
       <!-- FOOTER -->
