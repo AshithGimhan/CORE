@@ -1,3 +1,4 @@
+import { addCategory, createCategory, getCategories } from "./categories.js";
 import { activeNavLinks } from "./hamburger.js";
 import { getTransactions } from "./transactions.js";
 import { hasErrors } from "./utils.js";
@@ -9,7 +10,7 @@ const categoryNameElement = document.querySelector('.js-category-name');
 const transactionDropdownElement = document.querySelector('.js-transaction-dropdown');
 const categoryErrorMsgElement = document.querySelector('.js-category-error-msg');
 const typeErrorMsgElement = document.querySelector('.js-type-error-msg');
-const colorPickerOpenBtn = document.getElementById('openBtn');
+const colorPickerOpenBtn = document.querySelectorAll('.js-open-btn');
 const colorPickerCloseBtn = document.getElementById('closeBtn');
 const popUpElement = document.querySelector('.js-popup')
 const swatches = document.querySelectorAll('.swatch')
@@ -21,13 +22,21 @@ const removeColorBtn = document.querySelector('.js-remove-color')
 //EVENT LISTENERS
 addCategoryBtn.addEventListener('click', e => {
     handleAddCategories();
+
+    updateCategoryPage();
+    removeColorBtn.classList.remove('remove-color-visible')
+    colorChangeElemet.style.color = ''
+
+
     console.log(categoriesList)
 
 })
 
-colorPickerOpenBtn.addEventListener('click', e => {
-    popUpElement.classList.add('visible')
-});
+colorPickerOpenBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+        popUpElement.classList.add('visible')
+    });
+})
 
 colorPickerCloseBtn.addEventListener('click', e => {
     popUpElement.classList.remove('visible')
@@ -52,7 +61,6 @@ swatches.forEach(swatch => {
         swatch.classList.add('active');
         colorChangeElemet.style.color = swatchColor
 
-        confirmBtnChange(swatchColor)
     });
 })
 
@@ -74,74 +82,50 @@ removeColorBtn.addEventListener('click', event => {
 
 });
 
-function confirmBtnChange(swatchColor) {
-    swatchConfirmBtn.addEventListener('mouseover', e => {
-        const datasetColor = swatchColor
+swatchConfirmBtn.addEventListener('mouseover', e => {
+    e.target.style.backgroundColor = swatchColor;
+})
 
-        e.target.style.backgroundColor = datasetColor;
-    })
-
-    swatchConfirmBtn.addEventListener('mouseout', e => {
-        e.target.style.backgroundColor = '#fff';
-    })
-
-}
-
+swatchConfirmBtn.addEventListener('mouseout', e => {
+    e.target.style.backgroundColor = '#fff';
+})
 
 //DATA
 const transactions = getTransactions();
-let categoriesList = JSON.parse(localStorage.getItem('categories'))
+let categoriesList = getCategories();
 let swatchColor = '#000000';
 
+
+
+
 //INITIALIZE
+updateCategoryPage()
 activeNavLinks();
-if (!localStorage.getItem("categories")) {
-    localStorage.setItem("categories", JSON.stringify(categoriesList))
-}
+
+
 
 
 //FUNCTIONS
-function getCategoryData() {
-    const nextId = categoriesList.length === 0 ? 1 : categoriesList[categoriesList.length - 1].id + 1
-
-    let categoryName = categoryNameElement.value;
-
-    return {
-        id: nextId,
-        category: categoryNameElement.value.toLowerCase(),
-        type: transactionDropdownElement.value,
-        transactions: getTransactionCountByCategory(categoryName),
-        color: swatchColor
-    }
-}
-
 function clearInputs() {
     categoryNameElement.value = '';
     transactionDropdownElement.value = 'default';
 }
 
-function getTransactionCountByCategory(category) {
-    let count = 0
-
-    transactions.forEach(t => {
-        if (t.categoryType === category) {
-            count++
-        }
-    });
-
-    return count
-}
-
 function handleAddCategories() {
-    const categories = getCategoryData();
+    const categories = createCategory(
+        categoryNameElement.value,
+        transactionDropdownElement.value,
+        swatchColor
+    );
+
     const errors = handleValidation(categories);
 
     showErrors(errors)
     if (hasErrors(errors)) return;
 
-    categoriesList.push(categories)
+    addCategory(category)
 
-    localStorage.setItem("categories", JSON.stringify(categoriesList))
+    categoriesList = getCategories()
 
     clearInputs()
 }
@@ -160,12 +144,9 @@ function handleValidation(categories) {
         errors.type = 'Transaction type is required'
     }
 
-    if(categories.category === 'food') {
-        errors.category = 'Category already exists'
-    }
 
-    categoriesList.forEach(category => {
-        if (categoriesList.category === categories.category) {
+    categoriesList.forEach(c => {
+        if (c.category === categories.category.trim()) {
             errors.category = 'Category already exists'
         }
     })
@@ -185,4 +166,32 @@ function errorMsgTimeout() {
         categoryErrorMsgElement.innerHTML = ''
         typeErrorMsgElement.innerHTML = ''
     }, 3000)
+}
+
+function renderCategoryList() {
+    let categoryHTML = '';
+
+    categoriesList.forEach(category => {
+        const sign = category.type === 'income' ? 'earned' : 'spent'
+        const transactionColor = category.type === 'income' ? 'green' : 'red';
+        const categoryName = category.category.charAt(0).toUpperCase() + category.category.slice(1)
+
+        categoryHTML += `<div class="category-cards" style="border-left: 4px solid ${category.color};">
+              <div class="category-cards-left">
+                <h3>${categoryName}</h3>
+                <span class="${transactionColor}">$${category.amount} ${sign}</span>
+                <p>${category.transactions} transactions</p>
+              </div>
+              <div class="category-cards-right">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </div>
+            </div>`
+    });
+
+    return categoryHTML;
+}
+
+function updateCategoryPage() {
+    document.querySelector('.js-category-list').innerHTML = renderCategoryList();
 }

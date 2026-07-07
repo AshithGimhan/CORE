@@ -241,3 +241,11 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.green {
+  color: var(--GREEN);
+}
+
+.red {
+  color: var(--RED);
+}
