@@ -1,4 +1,4 @@
-import { addCategory, createCategory, getCategories } from "./categories.js";
+import { addCategory, createCategory, getCategories, getTotalAmountByCategory, getTransactionCountByCategory } from "./categories.js";
 import { activeNavLinks } from "./hamburger.js";
 import { getTransactions } from "./transactions.js";
 import { hasErrors } from "./utils.js";
@@ -103,8 +103,6 @@ updateCategoryPage()
 activeNavLinks();
 
 
-
-
 //FUNCTIONS
 function clearInputs() {
     categoryNameElement.value = '';
@@ -123,7 +121,7 @@ function handleAddCategories() {
     showErrors(errors)
     if (hasErrors(errors)) return;
 
-    addCategory(category)
+    addCategory(categories)
 
     categoriesList = getCategories()
 
@@ -176,11 +174,14 @@ function renderCategoryList() {
         const transactionColor = category.type === 'income' ? 'green' : 'red';
         const categoryName = category.category.charAt(0).toUpperCase() + category.category.slice(1)
 
+        const count = getTransactionCountByCategory(category.category)
+        const amount = getTotalAmountByCategory(category.category)
+
         categoryHTML += `<div class="category-cards" style="border-left: 4px solid ${category.color};">
               <div class="category-cards-left">
                 <h3>${categoryName}</h3>
-                <span class="${transactionColor}">$${category.amount} ${sign}</span>
-                <p>${category.transactions} transactions</p>
+                <span class="${transactionColor}">$${amount} ${sign}</span>
+                <p>${count} transactions</p>
               </div>
               <div class="category-cards-right">
                 <i class="fa-regular fa-pen-to-square"></i>
@@ -194,4 +195,8 @@ function renderCategoryList() {
 
 function updateCategoryPage() {
     document.querySelector('.js-category-list').innerHTML = renderCategoryList();
+}
+
+function updateCategoryInformation() {
+    
 }

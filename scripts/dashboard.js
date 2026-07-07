@@ -13,12 +13,10 @@ import {
 import { handlePage, resetPage, getCurrentPage, generatePageNumbers } from "./pagination.js";
 import { activeNavLinks } from '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js'
-
+import { getCategories } from "./categories.js";
 
 
 //DOM ELEMENTS
-
-//FORM DOM 
 const addTransactionBtn = document.querySelector('.js-add-transaction');
 const descriptionInput = document.querySelector('.js-description-input');
 const amountInput = document.querySelector('.js-amount-input');
@@ -26,30 +24,21 @@ const transactionDropdown = document.querySelector('.js-transaction-dropdown');
 const categoryDropdown = document.querySelector('.js-category-dropdown');
 const dateInput = document.querySelector('.js-date-input');
 
-//ERROR DOM
 const descriptionErrorMsg = document.querySelector('.js-description-error');
 const amountErrorMsg = document.querySelector('.js-amount-error');
 const transactionTypeErrorMsg = document.querySelector('.js-transaction-type-error');
 const categoryErrorMsg = document.querySelector('.js-category-error');
 const dateErrorMsg = document.querySelector('.js-date-error');
 
-/* DISPLAY DOM */
 const totalIncomeDisplay = document.querySelector('.js-income-value');
 const totalExpenseDisplay = document.querySelector('.js-expense-value')
 const newBalanceDisplay = document.querySelector('.js-balance-value')
 const transactionCountDisplay = document.querySelector('.js-transaction-count');
 
-//TRANSACTION DOM
 const transactionDisplay = document.querySelector('.js-transaction-list');
 
-
-//PAGINATION DOM
 const pageNumberDisplay = document.querySelector('.js-page-numbers');
 
-
-
-
-//FILTER DOM
 const sortOption = document.querySelector('.js-sort');
 const filterOption = document.querySelectorAll('.js-filter-btn');
 const clearFilterBtn = document.querySelector('.js-clear-filter-sort')
@@ -140,6 +129,20 @@ if (dashboardPage) {
 
 
 //FORM FUNCTIONS
+function getCategoriesData() {
+    let categoriesHTML = '<option value="default">Category</option>'
+    const category = getCategories();
+
+
+    category.forEach(c => {
+        const categoryName = c.category.charAt(0).toUpperCase() + c.category.slice(1)
+
+        categoriesHTML += `<option value="${categoryName.toLowerCase()}">${categoryName}</option>`
+    });
+
+    return categoriesHTML
+}
+
 function getTransactionData() {
     return {
         id: crypto.randomUUID(),
@@ -262,6 +265,7 @@ function updateDashboard() {
         sort: currentSort
     });
 
+    categoryDropdown.innerHTML = getCategoriesData();
     renderPageTransactions(processedTransactions);
     totalIncomeDisplay.innerHTML = `$${getTotalIncome(transactions)}`;
     totalExpenseDisplay.innerHTML = `$${getTotalExpense(transactions)}`;
