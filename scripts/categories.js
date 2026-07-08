@@ -13,15 +13,10 @@ export function saveCategories(categories) {
 }
 
 export function getTransactionCountByCategory(category) {
-    let count = 0
+    return transactions.filter(t => {
+        return t.categoryType === category
+    }).length;
 
-    transactions.forEach(t => {
-        if (t.categoryType === category) {
-            count++
-        }
-    });
-
-    return count
 }
 
 export function getTotalAmountByCategory(category) {
@@ -41,7 +36,7 @@ export function createCategory(name, type, color) {
 
     const nextId = categories.length === 0 ? 1 : categories[categories.length - 1].id + 1
 
-    let categoryName = name.value;
+    let categoryName = name;
 
     return {
         id: nextId,
@@ -56,6 +51,7 @@ export function createCategory(name, type, color) {
 export function addCategory(category) {
     const categories = getCategories()
     categories.push(category);
+    updateCategories(categories)
 
     localStorage.setItem("categories", JSON.stringify(categories))
 }
@@ -63,9 +59,9 @@ export function addCategory(category) {
 
 export function deleteCategoryById(categoryId) {
     const categories = getCategories();
-    const index = categories.findIndex(c => c.id === categoryId);
+    const index = categories.findIndex(c => c.id === Number(categoryId));
 
-    console.log(categories)
+    console.log(index)
     if (index === -1) {
         return categories
     }
@@ -82,4 +78,6 @@ export function updateCategories(categories) {
     });
 
     localStorage.setItem('categories', JSON.stringify(categories));
+
+    return categories
 }

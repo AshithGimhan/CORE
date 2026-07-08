@@ -1,4 +1,4 @@
-import { addCategory, createCategory, getCategories, getTotalAmountByCategory, getTransactionCountByCategory } from "./categories.js";
+import { addCategory, createCategory, getCategories, updateCategories } from "./categories.js";
 import { activeNavLinks } from "./hamburger.js";
 import { getTransactions } from "./transactions.js";
 import { hasErrors } from "./utils.js";
@@ -26,10 +26,6 @@ addCategoryBtn.addEventListener('click', e => {
     updateCategoryPage();
     removeColorBtn.classList.remove('remove-color-visible')
     colorChangeElemet.style.color = ''
-
-
-    console.log(categoriesList)
-
 })
 
 colorPickerOpenBtn.forEach(btn => {
@@ -42,15 +38,16 @@ colorPickerCloseBtn.addEventListener('click', e => {
     popUpElement.classList.remove('visible')
 
     swatches.forEach(btn => {
+        colorChangeElemet.style.color = ''
+
         btn.classList.remove('active');
     });
 });
 
-swatches.forEach(swatch => {
-    swatch.style.backgroundColor = swatch.dataset.color
-});
 
 swatches.forEach(swatch => {
+    swatch.style.backgroundColor = swatch.dataset.color
+
     swatch.addEventListener('click', () => {
         swatchColor = swatch.dataset.color
 
@@ -96,6 +93,9 @@ categoryListDisplay.addEventListener('click', (event) => {
 
 document.querySelector('.js-btn-confirm').addEventListener('click', () => {
     confirmDeleteForCategory(pendingCategoryDeleteid);
+
+    categoriesList = updateCategories(getCategories())
+
     updateCategoryPage();
 })
 document.querySelector('.js-btn-cancel').addEventListener('click', () => {
@@ -184,14 +184,11 @@ function renderCategoryList() {
         const transactionColor = category.type === 'income' ? 'green' : 'red';
         const categoryName = category.category.charAt(0).toUpperCase() + category.category.slice(1)
 
-        const count = getTransactionCountByCategory(category.category)
-        const amount = getTotalAmountByCategory(category.category)
-
         categoryHTML += `<div class="category-cards" style="border-left: 4px solid ${category.color};">
               <div class="category-cards-left">
                 <h3>${categoryName}</h3>
-                <span class="${transactionColor}">$${amount} ${sign}</span>
-                <p>${count} transactions</p>
+                <span class="${transactionColor}">$${category.amount} ${sign}</span>
+                <p>${category.transactions} transactions</p>
               </div>
               <div class="js-category-id category-cards-right" data-category-id="${category.id}">
                 <i class="fa-regular fa-pen-to-square"></i>
@@ -204,6 +201,7 @@ function renderCategoryList() {
 }
 
 function updateCategoryPage() {
-    document.querySelector('.js-category-list').innerHTML = renderCategoryList();
+
+    categoryListDisplay.innerHTML = renderCategoryList();
 }
 
