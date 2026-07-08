@@ -2,8 +2,7 @@ import { addCategory, createCategory, getCategories, getTotalAmountByCategory, g
 import { activeNavLinks } from "./hamburger.js";
 import { getTransactions } from "./transactions.js";
 import { hasErrors } from "./utils.js";
-import { cancelDeleteForCategory, handleDeleteForCategory } from "./deleteService.js";
-
+import { cancelDeleteForCategory, confirmDeleteForCategory, handleDeleteForCategory } from "./deleteService.js";
 
 //DOM
 const addCategoryBtn = document.querySelector('.js-add-category-btn');
@@ -92,18 +91,22 @@ swatchConfirmBtn.addEventListener('mouseout', e => {
 })
 
 categoryListDisplay.addEventListener('click', (event) => {
-    handleDeleteForCategory(event)
+    pendingCategoryDeleteid = handleDeleteForCategory(event)
 });
 
+document.querySelector('.js-btn-confirm').addEventListener('click', () => {
+    confirmDeleteForCategory(pendingCategoryDeleteid);
+    updateCategoryPage();
+})
 document.querySelector('.js-btn-cancel').addEventListener('click', () => {
     cancelDeleteForCategory();
 })
 
 //DATA
 const transactions = getTransactions();
-let categoriesList = getCategories();
+let categoriesList = getCategories()
 let swatchColor = '#000000';
-
+let pendingCategoryDeleteid;
 
 //INITIALIZE
 updateCategoryPage()
@@ -204,6 +207,3 @@ function updateCategoryPage() {
     document.querySelector('.js-category-list').innerHTML = renderCategoryList();
 }
 
-function updateCategoryInformation() {
-    
-}
