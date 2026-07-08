@@ -1,7 +1,8 @@
 import { deleteTransactionById } from "./transactions.js";
 
 //POP UP DOM
-const popUpDisplay = document.querySelector('.js-pop-up')
+const TransactionDeletePopUp  = document.querySelector('.js-pop-up-transaction');
+const categoryDeletePopUp = document.querySelector('.js-pop-up-category')
 
 let pendingDeleteId = null;
 
@@ -16,7 +17,7 @@ export function handleDelete(event) {
 
     const transactionId = card.dataset.transactionId
 
-    popUpDisplay.classList.add('active')
+    TransactionDeletePopUp.classList.add('active')
 
     return transactionId
 
@@ -27,15 +28,39 @@ export function confirmDelete(pendingDeleteId) {
 
     deleteTransaction(pendingDeleteId);
     pendingDeleteId = null;
-    popUpDisplay.classList.remove('active');
+    TransactionDeletePopUp.classList.remove('active');
 }
 
 export function cancelDelete() {
     pendingDeleteId = null;
-    popUpDisplay.classList.remove('active')
+    TransactionDeletePopUp.classList.remove('active')
 
 }
 
 export function deleteTransaction(transactionId) {
     deleteTransactionById(transactionId);
+}
+
+
+
+export function handleDeleteForCategory(event) {
+    if(!event.target.classList.contains('js-delete-btn')) {
+        return
+    }
+
+    const categoryCard = event.target.closest('.js-category-id')
+
+    const categoryId = categoryCard.dataset.categoryId
+
+    categoryDeletePopUp.classList.add('active');
+
+    return categoryId
+}
+
+export function cancelDeleteForCategory() {
+    categoryDeletePopUp.classList.remove('active');
+}
+
+export function confirmDeleteForCategory() {
+    
 }

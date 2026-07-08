@@ -10,6 +10,10 @@ export function getCategories() {
     return categoriesList
 }
 
+export function saveCategories(categories) {
+    localStorage.setItem("categories", JSON.stringify(categories))
+}
+
 export function getTransactionCountByCategory(category) {
     let count = 0
 
@@ -53,4 +57,18 @@ export function addCategory(category) {
     categoriesList.push(category);
 
     localStorage.setItem("categories", JSON.stringify(categoriesList))
+}
+
+
+export function deleteCategoryById(categoryId) {
+    const categories = getCategories();
+    const index = categories.findIndex(c => {c.id === categoryId});
+
+    if(index === -1) {
+        return categories
+    }
+
+    categories.splice(index, 1)
+    saveCategories(categories)
+    return categories
 }

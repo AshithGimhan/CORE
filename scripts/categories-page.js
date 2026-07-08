@@ -2,6 +2,7 @@ import { addCategory, createCategory, getCategories, getTotalAmountByCategory, g
 import { activeNavLinks } from "./hamburger.js";
 import { getTransactions } from "./transactions.js";
 import { hasErrors } from "./utils.js";
+import { cancelDeleteForCategory, handleDeleteForCategory } from "./deleteService.js";
 
 
 //DOM
@@ -17,7 +18,7 @@ const swatches = document.querySelectorAll('.swatch')
 const swatchConfirmBtn = document.querySelector('.js-swatch-confirm-btn')
 const colorChangeElemet = document.querySelector('.color-picker-container')
 const removeColorBtn = document.querySelector('.js-remove-color')
-
+const categoryListDisplay = document.querySelector('.js-category-list');
 
 //EVENT LISTENERS
 addCategoryBtn.addEventListener('click', e => {
@@ -88,6 +89,14 @@ swatchConfirmBtn.addEventListener('mouseover', e => {
 
 swatchConfirmBtn.addEventListener('mouseout', e => {
     e.target.style.backgroundColor = '#fff';
+})
+
+categoryListDisplay.addEventListener('click', (event) => {
+    handleDeleteForCategory(event)
+});
+
+document.querySelector('.js-btn-cancel').addEventListener('click', () => {
+    cancelDeleteForCategory();
 })
 
 //DATA
@@ -181,7 +190,7 @@ function renderCategoryList() {
                 <span class="${transactionColor}">$${amount} ${sign}</span>
                 <p>${count} transactions</p>
               </div>
-              <div class="category-cards-right">
+              <div class="js-category-id category-cards-right" data-category-id="${category.id}">
                 <i class="fa-regular fa-pen-to-square"></i>
                 <i class="js-delete-btn ph ph-trash delete-btn"></i>
               </div>
