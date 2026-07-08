@@ -83,7 +83,6 @@
 .transaction-filter-form input {
   padding: 12px 14px;
   border: var(--BORDER);
-  -webkit-appearance: none;
   appearance: none;
   background-color: var(--CARD-PANELS);
   font-size: var(--font-size-sm);
