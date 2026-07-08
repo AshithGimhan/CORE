@@ -1,4 +1,4 @@
-﻿import { formatDate, hasErrors } from "./utils.js";
+﻿import { capitalize, formatDate, hasErrors } from "./utils.js";
 import {
     getTransactions,
     addTransaction,
@@ -295,7 +295,7 @@ function renderTransactions(data) {
 
         transactionsHTML += `<div class="transaction-card">
           <div class="transaction-left">
-            <h3>${t.description}</h3>
+            <h3>${capitalize(t.description)}</h3>
             <div class="date-section">
                 <p>${formatDate(t.date)}</p>
                 <span class="divide-tag"></span>

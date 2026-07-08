@@ -1,6 +1,7 @@
+import { getCategories } from "./categories.js";
 import { activeNavLinks } from "./hamburger.js";
 import { getTotalIncome, getTotalExpense, getTransactions } from "./transactions.js";
-import { formatDate } from "./utils.js";
+import { capitalize, formatDate } from "./utils.js";
 
 
 //INITIALIZE
@@ -9,9 +10,12 @@ activeNavLinks()
 
 //DOMS
 const lineGraphElement = document.getElementById('income-vs-expense-line-graph')
+const lineGraphBodyElement = document.querySelector('.graph-body')
 const timelineDropdown = document.querySelector('.js-overview-timeline');
 const pieChartElement = document.getElementById('category-pie-chart');
+const pieChartBodyElemet = document.querySelector('.pie-chart-body')
 const overviewElement = document.querySelector('.js-overview');
+const categoryContainer = document.querySelector('.js-category-list')
 
 //EVENT LISTENERS
 timelineDropdown.addEventListener('change', e => {
@@ -30,26 +34,10 @@ timelineDropdown.addEventListener('change', e => {
 const transactions = getTransactions();
 const today = new Date();
 let timeMode = 30;
-const colors = [
-    {
-        category: 'food',
-        color: '#D95D39'
-    },
-    {
-        category: 'transport',
-        color: '#4A6FA5'
-    },
-    {
-        category: 'bills',
-        color: '#3A4A52'
-    },
-    {
-        category: 'other',
-        color: '#9B7B94'
-    }
-]
+const categories = getCategories()
+
 const colorMap = Object.fromEntries(
-    colors.map(item => [item.category, item.color])
+    categories.map(item => [item.category, item.color])
 )
 
 //LINE GRAPH
@@ -257,6 +245,9 @@ function updateChart(mode) {
 
     let chartData;
 
+    if (filteredTransactions.length === 0) {
+        lineGraphBodyElement.innerHTML = '<h3>No transaction history yet</h3> <p>Add income and expense transactions to view your financial trends over time.</p>'
+    }
 
     if (!isAll && days < 180) {
         chartData = getDailyTransactions(filteredTransactions)
@@ -286,7 +277,12 @@ function updateChart(mode) {
 function updatePieChart(transactions) {
     const totalSpending = getSpendingByCategories(transactions)
 
-    pieChart.data.labels = totalSpending.map(item => item.category)
+    if (totalSpending.length === 0) {
+        pieChartBodyElemet.innerHTML = `<h3>Nothing to compare
+</h3> <p>Add transactions to see your spending breakdown.</p>`
+    }
+    pieChart.data.labels = totalSpending.map(item => capitalize(item.category))
+
     pieChart.data.datasets[0].data = totalSpending.map(item => item.expense)
     pieChart.data.datasets[0].backgroundColor = totalSpending.map(item => colorMap[item.category])
 
@@ -314,18 +310,27 @@ function getSpendingByCategories(transactions) {
     return Array.from(map.values())
 }
 
+
+
 function renderCategoryList(categories) {
-    const categoryContainer = document.querySelector('.js-category-list')
     categories.sort((a, b) => {
         return b.expense - a.expense
     })
 
+
+    if (categories.length === 0) {
+        categoryContainer.innerHTML = '<h3>Nothing to compare</h3> <p>Add transactions to see your spending breakdown.</p>'
+
+    }
+
     const maxExpense = categories[0]?.expense ?? 1;
 
-    categoryContainer.innerHTML = categories.map((item, index) => {
-        return `<div class="category">
+
+    if (categories.length >= 1) {
+        categoryContainer.innerHTML = categories.map((item, index) => {
+            return `<div class="category">
               <div class="category-header">
-                <span>${item.category}</span>
+                <span>${capitalize(item.category)}</span>
                 <span>$${item.expense}</span>
               </div>
 
@@ -338,8 +343,9 @@ function renderCategoryList(categories) {
               </div>
 
             </div>`
+        }
+        ).join('')
     }
-    ).join('')
 
 }
 
