@@ -83,10 +83,19 @@
 .transaction-filter-form input {
   padding: 12px 14px;
   border: var(--BORDER);
+  -webkit-appearance: none;
+  appearance: none;
   background-color: var(--CARD-PANELS);
   font-size: var(--font-size-sm);
   color: var(--MAIN-TEXT-COLOR);
   font-family: inherit;
+}
+
+input[type='date'] {
+  padding: 12px 14px;
+  border: var(--BORDER);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
 }
 
 .transaction-filter-form select:focus,
