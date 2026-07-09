@@ -1,6 +1,6 @@
 # CORE
 
-A personal finance dashboard for tracking where your money goes. No accounts, no backend, no setup — just open it in a browser and start adding transactions.
+A personal finance dashboard for tracking where your money goes. 
 
 ## What it does
 
@@ -23,7 +23,7 @@ A personal finance dashboard for tracking where your money goes. No accounts, no
 
 1. Download or clone this repo
 2. Open `index.html` in your browser
-3. Start adding transactions — no build step or server needed
+3. Start adding transactions
 
 ## Tech used
 
@@ -41,9 +41,6 @@ core/
 ├── reports.html
 ├── categories.html
 ├── styles/
-│   └── (page-specific CSS files)
 ├── scripts/
-│   └── (JS modules per feature)
 └── images/
-    └── (icons and assets)
 ```
