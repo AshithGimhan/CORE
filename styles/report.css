@@ -33,20 +33,7 @@
 }
 
 .report-hero-filter select {
-  width: 100%;
-  padding: 12px 14px;
-  border: var(--BORDER);
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
   font-size: var(--font-size-sm);
-  font-family: inherit;
-  color: var(--MAIN-TEXT-COLOR);
-  background-color: var(--CARD-PANELS);
-}
-
-.report-hero-filter select:focus {
-  outline: 1px solid var(--PRIMARY-ACCENT);
 }
 
 /* GRAPH STYLES */

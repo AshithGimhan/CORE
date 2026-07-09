@@ -129,23 +129,9 @@
   border-color: var(--PRIMARY-ACCENT);
 }
 
-.dropdown select,
-.filter-options .dropdown select {
+.dropdown select {
   padding: 8px 14px;
   font-size: var(--font-size-xxs);
-  border: var(--BORDER);
-  background-color: #fff;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.dropdown select:focus {
-  outline: 1px solid var(--PRIMARY-ACCENT);
-}
-
-.dropdown select {
-  -webkit-appearance: none;
-  appearance: none;
 }
 
 .transaction-list {
@@ -252,8 +238,7 @@
   letter-spacing: 0.2px;
 }
 
-.form-input-container input,
-.form-input-container select {
+.form-input-container input{
   width: 100%;
   padding: 12px 14px;
   border: var(--BORDER);
@@ -266,8 +251,11 @@
   transition: border-color 0.2s ease, outline-color 0.2s ease;
 }
 
-.form-input-container input:focus,
-.form-input-container select:focus {
+.form-input-container select {
+  font-size: var(--font-size-sm);
+}
+
+.form-input-container input:focus {
   outline-color: var(--PRIMARY-ACCENT);
 }
 
@@ -275,7 +263,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
-  margin: 12px 0;
+  margin-bottom: 12px;
+}
+.side-by-side label {
+  margin-bottom: 12px;
 }
 
 .add-transaction-btn {
@@ -449,8 +440,7 @@
     margin-top: 12px;
   }
 
-  .form-input-container input,
-  .form-input-container select {
+  .form-input-container input{
     padding: 12px 14px;
     font-size: var(--font-size-sm);
   }
@@ -460,8 +450,4 @@
     font-size: var(--font-size-md);
   }
 
-  .dropdown select {
-    font-size: var(--font-size-xs);
-    padding: 10px 16px;
-  }
 }

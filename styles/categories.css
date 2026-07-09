@@ -67,8 +67,7 @@
   font-size: var(--font-size-sm);
 }
 
-.category-name-container input,
-.transaction-type-container select {
+.category-name-container input{
   padding: 8px;
   border: var(--BORDER);
   font-size: var(--font-size-sm);
@@ -77,6 +76,13 @@
   height: 35px;
   -webkit-appearance: none;
 }
+
+.transaction-type-container select {
+  padding: 8px;
+  font-size: var(--font-size-sm);
+  height: 35px;
+}
+
 
 .color-picker-container {
   display: flex;

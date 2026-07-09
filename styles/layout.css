@@ -30,6 +30,16 @@
   font-family: 'Outfit', sans-serif;
 }
 
+button,
+i,
+.icon,
+.nav-link,
+.card,
+.category-cards {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 html,
 body {
   min-height: 100%;
@@ -40,6 +50,23 @@ body {
   min-height: 100vh;
   color: var(--MAIN-TEXT-COLOR);
   background-color: var(--BACKGROUND);
+}
+
+select {
+  appearance: base-select;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 0;
+  background: var(--CARD-PANELS);
+  border: var(--BORDER);
+}
+
+select::picker-icon {
+  transition: 150ms ease;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
 }
 
 .top-layout {

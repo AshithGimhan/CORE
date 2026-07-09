@@ -79,26 +79,23 @@
   padding: 0;
 }
 
-.transaction-filter-form select,
 .transaction-filter-form input {
-  padding: 12px 14px;
-  border: var(--BORDER);
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: var(--CARD-PANELS);
-  font-size: var(--font-size-sm);
-  color: var(--MAIN-TEXT-COLOR);
-  font-family: inherit;
+    width: 100%;
+    padding: 12px 14px;
+    border: var(--BORDER);
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--CARD-PANELS);
+    font-size: var(--font-size-sm);
+    color: var(--MAIN-TEXT-COLOR);
+    font-family: inherit;
+    box-sizing: border-box;
 }
 
-input[type='date'] {
-  padding: 12px 14px;
-  border: var(--BORDER);
-  font-family: inherit;
+.transaction-filter-form select {
   font-size: var(--font-size-sm);
 }
 
-.transaction-filter-form select:focus,
 .transaction-filter-form input:focus {
   outline: 1px solid var(--PRIMARY-ACCENT);
 }
@@ -255,7 +252,6 @@ input[type='date'] {
     gap: 16px;
   }
 
-  .transaction-filter-form select,
   .transaction-filter-form input {
     padding: 12px 14px;
   }
