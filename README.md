@@ -38,7 +38,3 @@ CORE is a static personal finance dashboard built with HTML, CSS, and JavaScript
 - The app uses third-party icons from Font Awesome and Phosphor Icons.
 - Chart rendering on `reports.html` uses Chart.js.
 - Export functionality on `transactions.html` uses `jspdf` for PDF export.
-
-## License
-
-This project does not include a license file. Add one as needed.
