@@ -21,18 +21,26 @@ A personal finance dashboard for tracking where your money goes.
 
 ## Getting started
 
-1. Clone or download the repository.
-2. Open the project folder in your browser or using a local development server.
-3. Open `index.html` to start using the app.
+1. Download or clone this repo
+2. Open `index.html` in your browser
+3. Start adding transactions
 
-> The app is built as a static frontend and does not require a backend or build step.
+## Tech used
 
-## Notes
+- Vanilla HTML, CSS, and JavaScript
+- [Chart.js](https://www.chartjs.org/) for charts on the reports page
+- [jsPDF](https://github.com/parallax/jsPDF) for PDF export
+- [Font Awesome](https://fontawesome.com/) and [Phosphor Icons](https://phosphoricons.com/) for icons
 
-- The app uses third-party icons from Font Awesome and Phosphor Icons.
-- Chart rendering on `reports.html` uses Chart.js.
-- Export functionality on `transactions.html` uses `jspdf` for PDF export.
+## Project structure
 
-## License
-
-This project does not include a license file. Add one as needed.
+```
+core/
+├── index.html
+├── transactions.html
+├── reports.html
+├── categories.html
+├── styles/
+├── scripts/
+└── images/
+```
