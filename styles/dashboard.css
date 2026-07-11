@@ -2,19 +2,17 @@
 .hero-top {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: var(--SPACE-4);
   background: var(--CARD-PANELS);
 }
 
 .hero-section {
-  background: var(--CARD-PANELS);
-  border: var(--BORDER);
-  margin: 12px;
-  padding: 20px;
+  margin: var(--SPACE-2);
+  padding: var(--SPACE-4);
 }
 
 .cards-section {
-  padding: 0 12px;
+  padding: 0 var(--SPACE-2);
   border-top: var(--BORDER);
 }
 
@@ -23,7 +21,7 @@
   text-transform: uppercase;
   color: var(--SECONDARY-TEXT-COLOR);
   letter-spacing: 0.2px;
-  margin-bottom: 8px;
+  margin-bottom: var(--SPACE-1);
 }
 
 .net-balance p {
@@ -32,13 +30,13 @@
   color: var(--MAIN-TEXT-COLOR);
   font-weight: 600;
   letter-spacing: -0.3px;
-  margin-bottom: 16px;
+  margin-bottom: var(--SPACE-3);
 }
 
 .date-count-stats {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--SPACE-2);
   color: var(--SECONDARY-TEXT-COLOR);
   font-size: var(--font-size-sm);
 }
@@ -62,15 +60,16 @@
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 12px;
+  gap: var(--SPACE-2);
 }
 
 .stat-cards {
   background-color: var(--CARD-PANELS);
-  padding: 16px;
+  padding: var(--SPACE-3);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--SPACE-1);
+  box-shadow: none;
 }
 
 .stat-cards p {
@@ -86,14 +85,6 @@
   font-weight: 500;
 }
 
-.stat-cards .income {
-  color: var(--GREEN);
-}
-
-.stat-cards .expense {
-  color: var(--RED);
-}
-
 .dollar-tag {
   font-size: var(--font-size-lg);
   vertical-align: super;
@@ -101,37 +92,43 @@
 }
 
 .transaction-list-section {
-  padding: 20px;
-  gap: 12px;
-  border: var(--BORDER);
-  background: var(--CARD-PANELS);
-  margin-bottom: 16px;
+  padding: var(--SPACE-4);
+  gap: var(--SPACE-2);
+  margin-bottom: var(--SPACE-3);
 }
 
 .transaction-list-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: var(--SPACE-2);
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin-bottom: var(--SPACE-3);
 }
 
-.transaction-list-section h2,
+.transaction-form-section {
+  margin-bottom: var(--SPACE-4);
+  padding: var(--SPACE-4);
+}
+
 .transaction-form-section h2 {
-  font-size: var(--font-size-lg);
-  color: var(--MAIN-TEXT-COLOR);
-  letter-spacing: 0.2px;
+  margin-bottom: var(--SPACE-3);
 }
 
-.filter-options span.active {
-  color: var(--PRIMARY-ACCENT);
-  border-color: var(--PRIMARY-ACCENT);
+.transaction-form {
+  margin-top: 0;
 }
 
-.dropdown select {
-  padding: 8px 14px;
-  font-size: var(--font-size-xxs);
+.form-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--SPACE-1);
+  margin-top: var(--SPACE-2);
+}
+
+.form-input-container label {
+  display: block;
+  margin-bottom: 4px;
 }
 
 .transaction-list {
@@ -150,13 +147,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
+  padding: var(--SPACE-3) 0;
   border-bottom: var(--BORDER);
-  transition: background-color 0.2s ease;
+  transition: background-color var(--TRANSITION-FAST);
 }
 
 .transaction-card:hover {
-  background-color: #fafbfc;
+  background-color: var(--ROW-HOVER);
 }
 
 .transaction-left {
@@ -175,12 +172,12 @@
 .date-section {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--SPACE-1);
 }
 
 .date-section p {
   font-size: var(--font-size-xs);
-  color: #a09b95;
+  color: var(--SECONDARY-TEXT-COLOR);
 }
 
 .transaction-right {
@@ -188,7 +185,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 6px;
-  margin-left: 16px;
+  margin-left: var(--SPACE-3);
 }
 
 .transaction-right h3 {
@@ -196,142 +193,62 @@
   font-weight: 500;
 }
 
-.stat-cards .income {
-  color: var(--GREEN);
-}
-
-.stat-cards .expense {
-  color: var(--RED);
-}
-
-.transaction-form-section {
-  margin-bottom: 20px;
-  padding: 20px;
-  border: var(--BORDER);
-  background: var(--CARD-PANELS);
-}
-
-.transaction-form-section h2 {
-  font-size: var(--font-size-lg);
-  color: var(--MAIN-TEXT-COLOR);
-  letter-spacing: 0.2px;
-  margin-bottom: 16px;
-}
-
-.transaction-form {
-  margin-top: 0;
-}
-
-.form-input-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.form-input-container label {
-  color: #a09b95;
-  font-size: var(--font-size-xxs);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 4px;
-  letter-spacing: 0.2px;
-}
-
-.form-input-container input{
-  width: 100%;
-  padding: 12px 14px;
-  border: var(--BORDER);
-  background: #fff;
-  font-size: var(--font-size-sm);
-  color: var(--MAIN-TEXT-COLOR);
-  font-family: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-  transition: border-color 0.2s ease, outline-color 0.2s ease;
-}
-
-.form-input-container select {
-  font-size: var(--font-size-sm);
-}
-
-.form-input-container input:focus {
-  outline-color: var(--PRIMARY-ACCENT);
-}
-
 .side-by-side {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: var(--SPACE-2);
+  margin-bottom: var(--SPACE-2);
 }
+
 .side-by-side label {
-  margin-bottom: 12px;
+  margin-bottom: var(--SPACE-2);
 }
 
 .add-transaction-btn {
   width: 100%;
-  margin-top: 8px;
-  padding: 11px 13px;
-  background: var(--PRIMARY-ACCENT);
-  color: #fff;
-  border: none;
-  font-size: var(--font-size-md);
-  cursor: pointer;
+  margin-top: var(--SPACE-1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: background 0.2s ease;
-}
-
-.add-transaction-btn:hover {
-  opacity: 0.9;
+  gap: var(--SPACE-1);
 }
 
 .add-transaction-btn.added {
   background: var(--GREEN);
 }
 
-.error {
-  font-size: var(--font-size-xxs);
-  color: red;
-}
-
 @media (min-width: 768px) {
   .hero-top {
-    background: var(--CARD-PANELS);
-    padding: 20px;
+    padding: var(--SPACE-4);
   }
 
   .hero-section {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    margin: 16px;
-    padding: 20px;
+    margin: var(--SPACE-3);
+    padding: var(--SPACE-4);
   }
 
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: var(--SPACE-3);
     padding: 0;
   }
 
   .stat-cards {
-    padding: 16px;
+    padding: var(--SPACE-3);
   }
 
   .cards-section {
     margin-top: auto;
-    padding-top: 16px;
+    padding-top: var(--SPACE-3);
     border-top: var(--BORDER);
   }
 
   .transaction-list-section,
   .transaction-form-section {
-    background: var(--CARD-PANELS);
-    padding: 20px;
-    margin: 0 0 16px 0;
+    padding: var(--SPACE-4);
+    margin: 0 0 var(--SPACE-3) 0;
   }
 
   .side-by-side {
@@ -343,7 +260,7 @@
   .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: var(--SPACE-3);
   }
 
   .cards-section {
@@ -357,7 +274,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 16px;
+    gap: var(--SPACE-3);
   }
 
   .desktop-section {
@@ -366,7 +283,7 @@
 
   .transaction-list-top {
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--SPACE-2);
   }
 }
 
@@ -374,9 +291,9 @@
   .hero-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    padding: 28px;
-    margin: 28px 28px 20px 28px;
+    gap: var(--SPACE-6);
+    padding: var(--SPACE-6);
+    margin: var(--SPACE-6) var(--SPACE-6) var(--SPACE-4) var(--SPACE-6);
   }
 
   .cards-section {
@@ -386,11 +303,11 @@
 
   .cards-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    gap: var(--SPACE-4);
   }
 
   .stat-cards {
-    padding: 24px;
+    padding: var(--SPACE-5);
   }
 
   .stat-cards span {
@@ -403,51 +320,19 @@
 
   .transaction-list-section {
     grid-column: 1 / 2;
-    padding: 24px;
+    padding: var(--SPACE-5);
   }
 
   .transaction-form-section {
     grid-column: 2 / 3;
-    padding: 24px;
-  }
-
-  .transaction-list {
-    gap: 0;
+    padding: var(--SPACE-5);
   }
 
   .transaction-card {
     padding: 18px 0;
   }
 
-  .transaction-left {
-    gap: 6px;
-  }
-
-  .date-section {
-    gap: 8px;
-  }
-
-  .date-section p {
-    font-size: var(--font-size-xs);
-  }
-
-  .transaction-right {
-    gap: 6px;
-  }
-
-  .form-input-container {
-    gap: 8px;
-    margin-top: 12px;
-  }
-
-  .form-input-container input{
-    padding: 12px 14px;
-    font-size: var(--font-size-sm);
-  }
-
   .add-transaction-btn {
     padding: 12px 16px;
-    font-size: var(--font-size-md);
   }
-
 }

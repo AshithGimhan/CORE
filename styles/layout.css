@@ -9,6 +9,17 @@
   --RED: #dc2626;
   --ORANGE: #f59e0b;
   --BORDER: 1px solid var(--LIGHT-GRAY);
+  --SHADOW-SM: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --OVERLAY: rgba(15, 23, 42, 0.07);
+  --ROW-HOVER: #fafbfc;
+  --SPACE-1: 8px;
+  --SPACE-2: 12px;
+  --SPACE-3: 16px;
+  --SPACE-4: 20px;
+  --SPACE-5: 24px;
+  --SPACE-6: 28px;
+  --TRANSITION-FAST: 0.2s ease;
+  --TRANSITION-MED: 0.25s ease;
 
   --font-size-xxxs: 0.6rem;
   --font-size-xxs: 0.75rem;
@@ -52,13 +63,32 @@ body {
   background-color: var(--BACKGROUND);
 }
 
+button {
+  font-family: inherit;
+}
+
+input[type='text'],
+input[type='date'],
+input[type='number'],
+input[type='search'],
 select {
-  appearance: base-select;
   width: 100%;
   padding: 12px 14px;
   border-radius: 0;
-  background: var(--CARD-PANELS);
   border: var(--BORDER);
+  background: var(--CARD-PANELS);
+  font-size: var(--font-size-sm);
+  color: var(--MAIN-TEXT-COLOR);
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    border-color var(--TRANSITION-FAST),
+    outline-color var(--TRANSITION-FAST);
+}
+
+select {
+  appearance: base-select;
 }
 
 select::picker-icon {
@@ -67,6 +97,113 @@ select::picker-icon {
 
 select:open::picker-icon {
   rotate: 180deg;
+}
+
+input:focus,
+select:focus {
+  outline: 1px solid var(--PRIMARY-ACCENT);
+}
+
+button:focus-visible,
+.filter-options span:focus-visible,
+.page-number-btn:focus-visible {
+  outline: 1px solid var(--PRIMARY-ACCENT);
+  outline-offset: 1px;
+}
+
+button:disabled,
+input:disabled,
+select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.panel,
+.hero-section,
+.transaction-list-section,
+.transaction-form-section,
+.transaction-filter-options,
+.transaction-list-view,
+.report-hero-container,
+.graph-section,
+.add-category-form-container,
+.category-cards {
+  background: var(--CARD-PANELS);
+  border: var(--BORDER);
+  box-shadow: var(--SHADOW-SM);
+}
+
+.section-heading h2,
+.transaction-list-section h2,
+.transaction-form-section h2,
+.report-hero-title h2,
+.graph-title h2,
+.transaction-filter-options-top h2,
+.add-category-title h2,
+.form-top h2 {
+  font-size: var(--font-size-lg);
+  color: var(--MAIN-TEXT-COLOR);
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+.section-heading p,
+.report-hero-title p,
+.transaction-filter-options-top p,
+.add-category-title p {
+  font-size: var(--font-size-xxs);
+  color: var(--SECONDARY-TEXT-COLOR);
+}
+
+.form-input-container label,
+.category-name-container label,
+.transaction-type-container label {
+  color: var(--SECONDARY-TEXT-COLOR);
+  font-size: var(--font-size-xxs);
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.error,
+.error-msg {
+  font-size: var(--font-size-xxs);
+  color: var(--RED);
+}
+
+.btn-primary,
+.add-transaction-btn,
+.form-top button,
+.js-add-category-btn {
+  padding: 11px 13px;
+  background: var(--PRIMARY-ACCENT);
+  color: var(--CARD-PANELS);
+  border: none;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: opacity var(--TRANSITION-FAST);
+}
+
+.btn-primary:hover,
+.add-transaction-btn:hover,
+.form-top button:hover,
+.js-add-category-btn:hover {
+  opacity: 0.9;
+}
+
+.btn-outline,
+.download-button,
+.pop-up-buttons button,
+.swatch-confirm-btn,
+.remove-color,
+.page-number-btn {
+  border: var(--BORDER);
+  background-color: var(--CARD-PANELS);
+  cursor: pointer;
+  transition:
+    color var(--TRANSITION-FAST),
+    border-color var(--TRANSITION-FAST),
+    background-color var(--TRANSITION-FAST);
+  box-shadow: var(--SHADOW-SM);
 }
 
 .top-layout {
@@ -227,11 +364,13 @@ nav ul li a.nav-active {
   padding: 20px;
 }
 
-.income {
+.income,
+.green {
   color: var(--GREEN);
 }
 
-.expense {
+.expense,
+.red {
   color: var(--RED);
 }
 
@@ -254,14 +393,9 @@ nav ul li a.nav-active {
 
 .page-number-btn {
   padding: 8px 12px;
-  border: var(--BORDER);
-  background-color: var(--CARD-PANELS);
-  cursor: pointer;
   font-size: var(--font-size-xs);
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
 }
+
 
 .active-page-number,
 .active {
@@ -269,35 +403,39 @@ nav ul li a.nav-active {
   color: var(--PRIMARY-ACCENT);
 }
 
-.pop-up {
+.pop-up,
+.popup {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   inset: 0;
-  top: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
-  background-color: #ff060613;
+  background-color: var(--OVERLAY);
   height: 100%;
+  z-index: 10;
 }
 
-.pop-up.active {
+.pop-up.active,
+.popup.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-.pop-up-container {
+.pop-up-container,
+.pop-up-wrapper {
   border: var(--BORDER);
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 16px;
-  padding: 24px;
+  gap: var(--SPACE-3);
+  padding: var(--SPACE-5);
   width: 280px;
   height: fit-content;
   background-color: var(--CARD-PANELS);
+  box-shadow: var(--SHADOW-SM);
 }
 
 .pop-up h3 {
@@ -314,16 +452,9 @@ nav ul li a.nav-active {
 }
 
 .pop-up-buttons button {
-  border: var(--BORDER);
   font-size: var(--font-size-sm);
   padding: 10px 24px;
   text-transform: capitalize;
-  background-color: var(--CARD-PANELS);
-  cursor: pointer;
-  transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
 }
 
 .pop-up-buttons button:hover:first-child {
@@ -337,9 +468,9 @@ nav ul li a.nav-active {
 }
 
 footer {
-  padding: 16px;
+  padding: var(--SPACE-3);
   border-top: var(--BORDER);
-  background: #fff;
+  background: var(--CARD-PANELS);
   width: 100%;
   position: static;
   margin-top: auto;
@@ -448,8 +579,22 @@ footer p {
   .transaction-form-section h2,
   .report-hero-title h2,
   .graph-title h2,
-  .transaction-filter-options-top h2 {
+  .transaction-filter-options-top h2,
+  .add-category-title h2,
+  .form-top h2 {
     font-size: var(--font-size-2xl);
+  }
+
+  .panel,
+  .hero-section,
+  .transaction-list-section,
+  .transaction-form-section,
+  .transaction-filter-options,
+  .transaction-list-view,
+  .report-hero-container,
+  .graph-section,
+  .add-category-form-container {
+    padding: var(--SPACE-5);
   }
 
   .filter-options {
