@@ -104,7 +104,7 @@ document.querySelector('.js-btn-cancel').addEventListener('click', () => {
 
 //DATA
 const transactions = getTransactions();
-let categoriesList = getCategories()
+let categoriesList = getCategories() 
 let swatchColor = '#000000';
 let pendingCategoryDeleteid;
 

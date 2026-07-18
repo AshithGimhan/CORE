@@ -3,11 +3,49 @@ import { getTransactions } from "./transactions.js";
 const transactions = getTransactions();
 updateCategories(getCategories())
 
+
+const defaultCategories = [
+  {
+    id: 1,
+    category: "food",
+    type: "expense",
+    transactions: 0,
+    amount: 0,
+    color: "#E76F51"
+  },
+  {
+    id: 2,
+    category: "transport",
+    type: "expense",
+    transactions: 0,
+    amount: 0,
+    color: "#457B9D"
+  },
+  {
+    id: 3,
+    category: "bills",
+    type: "expense",
+    transactions: 0,
+    amount: 0,
+    color: "#6C757D"
+  },
+  {
+    id: 4,
+    category: "salary",
+    type: "income",
+    transactions: 0,
+    amount: 0,
+    color: "#2A9D8F"
+  }
+]
+
+
 //FUNCTIONS
 export function getCategories() {
     return JSON.parse(localStorage.getItem('categories')) || []
 }
 
+console.log(getCategories())
 export function saveCategories(categories) {
     localStorage.setItem("categories", JSON.stringify(categories))
 }
