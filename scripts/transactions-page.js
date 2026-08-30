@@ -1,5 +1,5 @@
 ﻿import { formatDate } from './utils.js';
-import { getTransactions, getProcessedTransactions, transactionPagination } from './transactions.js';
+import { getTransactions, getProcessedTransactions, transactionPagination, editTransactionById } from './transactions.js';
 import { handlePage, getCurrentPage, generatePageNumbers, resetPage } from './pagination.js';
 import { activeNavLinks } from '../scripts/hamburger.js'
 import { handleDelete, confirmDelete, cancelDelete } from './deleteService.js';
@@ -18,6 +18,7 @@ const searchInput = document.querySelector('.js-search-input')
 const dateInput = document.querySelector('.js-date-input');
 const transactionCount = document.querySelector('.js-transaction-count');
 const exportBtn = document.querySelector('.js-export-button');
+const editBtn = document.querySelectorAll('.js-edit-btn');
 
 /* STATE */
 let currentSort = 'default';
@@ -160,6 +161,10 @@ exportBtn.addEventListener('click', () => {
 });
 
 
+
+
+
+
 /* FUNCTIONS */
 function getCategoriesData() {
     let categoriesHTML = '<option value="default">Category</option>'
@@ -186,11 +191,30 @@ function renderTransactions(data) {
 
             transactionHTML += `
             <tr>
-              <td class="desc-color">${t.description}</td>
-              <td >${t.categoryType}</td>
-              <td>${formatDate(t.date)}</td>
-              <td class="${className}">$${t.amount}</td>
-              <td class="js-transaction-id" data-transaction-id="${t.id}"><i class="js-delete-btn ph ph-trash delete-btn"></i></td>
+              <td class="desc-color">
+                <span class="js-description">
+                    ${t.description}
+                </span>
+              </td>
+              <td>
+                <span class="js-category">
+                    ${t.categoryType}
+                </span>
+              </td>
+              <td>
+                <span class="js-date">
+                    ${formatDate(t.date)}
+                </span>
+              </td>
+              <td class="${className}">
+                <span class="js-amount">
+                    $${t.amount}
+                </span>
+              </td>
+              <td class="js-transaction-id" data-transaction-id="${t.id}">
+                <i class="js-edit-btn ph ph-pencil edit-btn"></i>
+                <i class="js-delete-btn ph ph-trash delete-btn"></i>
+              </td>
             </tr>
           `;
         });

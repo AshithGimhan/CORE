@@ -78,7 +78,7 @@ export function getSearchedTransaction(data, search = '') {
     let copy = [...data];
 
     if (search) {
-        copy = copy.filter((item) => item.description.toLowerCase().includes(search))
+        copy = copy.filter((item) => item.description.toLowerCase().includes(search.toLowerCase()))
     }
 
     return copy;

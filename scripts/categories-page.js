@@ -191,7 +191,6 @@ function renderCategoryList() {
                 <p>${category.transactions} transactions</p>
               </div>
               <div class="js-category-id category-cards-right" data-category-id="${category.id}">
-                <i class="ph ph-pencil-simple"></i>
                 <i class="js-delete-btn ph ph-trash delete-btn"></i>
               </div>
             </div>`

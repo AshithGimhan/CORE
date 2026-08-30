@@ -45,7 +45,6 @@ export function getCategories() {
     return JSON.parse(localStorage.getItem('categories')) || []
 }
 
-console.log(getCategories())
 export function saveCategories(categories) {
     localStorage.setItem("categories", JSON.stringify(categories))
 }
